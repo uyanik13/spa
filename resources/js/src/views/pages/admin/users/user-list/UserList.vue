@@ -137,7 +137,7 @@ import CellRendererActions from "./cell-renderer/CellRendererActions.vue"
 
 //Components
 import DataViewSidebar from '../QuickViewAndAdd.vue'
-
+import i18n from '@/i18n/i18n'
 export default {
   components: {
     AgGridVue,
@@ -167,41 +167,27 @@ export default {
         suppressMenu: true
       },
       columnDefs: [
+
         {
-          headerName: 'ID',
-          field: 'id',
-          width: 125,
-          filter: true,
-          checkboxSelection: true,
-          headerCheckboxSelectionFilteredOnly: true,
-          headerCheckboxSelection: true,
-        },
-        {
-          headerName: 'İsim',
+          headerName: i18n.t('name'),
           field: 'name',
           filter: true,
           width: 200,
         },
         {
-          headerName: 'Email',
+          headerName: i18n.t('email'),
           field: 'email',
           filter: true,
           width: 225,
         },
         {
-          headerName: 'Telefon Numarası',
+          headerName: i18n.t('phone'),
           field: 'phone',
           filter: true,
           width: 210,
         },
         {
-          headerName: 'Rolü',
-          field: 'role',
-          filter: true,
-          width: 150,
-        },
-        {
-          headerName: 'Doğrulanma',
+          headerName: i18n.t('Confirmed'),
           field: 'email_verified_at',
           filter: true,
           width: 125,

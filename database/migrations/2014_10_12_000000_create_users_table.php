@@ -11,9 +11,10 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
+            $table->string('reference_id')->nullable();
             $table->string('email')->unique();
-            $table->string('bill_address','2500')->nullable();
-            $table->string('address','2000')->default('istanbul');
+            $table->text('bill_address')->nullable();
+            $table->text('address')->default('istanbul');
             $table->string('phone')->unique()->nullable();
             $table->string('avatar')->default('https://via.placeholder.com/150');
             $table->string('cv')->nullable();
@@ -23,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->text('notification_data')->nullable();
             $table->datetime('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('subscribed')->default('0');
             $table->integer('token')->nullable();
             $table->enum('role', ['admin','user'])->default('user');
             $table->enum('status', ['1', '0'])->default('1');

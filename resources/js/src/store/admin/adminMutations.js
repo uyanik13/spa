@@ -35,6 +35,30 @@ export default {
   SET_PAYMENTS (state, itemData) {
     state.payments = itemData
   },
+
+  SET_LAST_YEAR_PAYMENTS (state, itemData) {
+    state.lastYearPayments = itemData
+  },
+  SET_LAST_WEEK_PAYMENTS (state, itemData) {
+    state.lastWeekPayments = itemData
+  },
+  SET_LAST_MONTH_PAYMENTS (state, itemData) {
+    state.lastMonthPayments = itemData
+  },
+  SET_THIS_MONTH_PAYMENTS (state, itemData) {
+    state.thisMonthPayments = itemData
+  },
+  SET_COUNTRIES (state, itemData) {
+    state.countries = itemData
+  },
+  SET_PAYMENTS_PAGINATED (state, itemData) {
+    state.paymentsPaginated = itemData
+  },
+
+  SET_AVERAGE_PAYMENTS (state, itemData) {
+    state.averageWeeklySalesRevenue = itemData
+  },
+
   SET_ORDERS (state, itemData) {
     state.orders = itemData
   },

@@ -10,6 +10,13 @@
 export default {
   payments: [],
   orders: [],
+  lastWeekPayments: [],
+  lastMonthPayments: [],
+  lastYearPayments: [],
+  thisMonthPayments: [],
+  paymentsPaginated: [],
+  countries: [],
+  averageWeeklySalesRevenue:'',
   totalAmount: '',
 
 }

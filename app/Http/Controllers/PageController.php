@@ -443,7 +443,7 @@ public  function frontEndRegister (Request $request) {
         'email' => $request->email,
         'phone' => $request->phone,
         'about_data' => json_encode($request->birth_date),
-        'password' => bcrypt($request->password,)
+        'password' => bcrypt($request->password)
     ]);
 
     return redirect('login-register')->with('success', trans('lang.pleaseLoginWithCredentials'));
@@ -470,9 +470,7 @@ public  function frontEndLogin (Request $request) {
 
      if (Auth::attempt($credentials)) {
         $token = Auth::guard()->attempt($credentials);
-        $response = new Response('Set Cookie');
-        $response->withCookie('token', $token, 15);
-
+        setcookie('token', $token, time()+1600,'/');
             return redirect('checkout')->with('success', trans('lang.yourDateSelected'));
         }
 

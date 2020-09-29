@@ -58,133 +58,141 @@ export default [
     //     icon: 'DollarSignIcon',
     //     i18n: 'tokenRequests'
     //   },
-      {
-        url:'/panel/components',
-        slug: '/panel/components',
-        name: 'components',
-        icon: 'CreditCardIcon',
-        i18n: 'Components'
-      },
+
       {
         url: '/panel/users',
         slug: '/panel/users',
         name: 'Users',
         icon: 'UserIcon',
-        i18n: 'Users'
+        i18n: 'clients'
+      },
+      {
+        url: '/panel/giro',
+        slug: '/panel/giro',
+        name: 'giro',
+        icon: 'DollarSignIcon',
+        i18n: 'giro'
+      },
+      {
+        url: '/panel/appointments',
+        slug: '/panel/appointments',
+        name: 'appointments',
+        icon: 'UserIcon',
+        i18n: 'appointments'
       }
 
     ]
   },
 
-  {
-    url: '/panel/file-manager-upload',
-    name: 'FileUpload',
-    icon: 'UploadIcon',
-    i18n: 'FileManager',
-    submenu:[
-      {
-        url:'/panel/file-manager-upload',
-        slug: '/panel/file-manager-upload',
-        name: 'FileUpload',
-        icon: 'UploadIcon',
-        i18n: 'FileUpload'
-      },
-      {
-        url:'/panel/file-manager-list',
-        slug: '/panel/file-manager-list',
-        name: 'FileList',
-        icon: 'UploadIcon',
-        i18n: 'FileList'
-      }
-    ]
-  },
-  //admin
-  {
-    url: '/panel/pages',
-    name: 'pages',
-    icon: 'FileIcon',
-    i18n: 'Content',
-    submenu:[
-      {
-        url:'/panel/pages',
-        slug: '/panel/pages',
-        name: 'pages',
-        icon: 'FileIcon',
-        i18n: 'Pages'
-      },
-      {
-        url:'/panel/posts',
-        slug: '/panel/posts',
-        name: 'posts',
-        icon: 'FileTextIcon',
-        i18n: 'Posts'
-      },
-
-      {
-        url:'/panel/services',
-        slug: '/panel/services',
-        name: 'services',
-        icon: 'FileTextIcon',
-        i18n: 'services'
-      },
-    //   {
-    //     url:'/panel/categories',
-    //     slug: '/panel/categories',
-    //     name: 'Categories',
-    //     icon: 'PauseIcon',
-    //     i18n: 'Categories'
-    //   },
-      {
-        url:'/panel/forms',
-        slug: '/panel/forms',
-        name: 'Forms',
-        icon: 'PauseIcon',
-        i18n: 'Forms'
-      }
-    ]
-  },
-    //user
-  {
-    url: '/panel/blog-posts',
-    name: 'blog-posts',
-    icon: 'FileIcon',
-    i18n: 'Content',
-    submenu:[
-
-
-      {
-        url:'/panel/blog-posts',
-        slug: '/panel/blog-posts',
-        name: 'blog-posts',
-        icon: 'FileTextIcon',
-        i18n: 'Posts'
-      },
-    ]
-  },
-  {
-    url:'/panel/front-side-language',
-    name: 'front-side-language',
-    icon: 'GlobeIcon',
-    i18n: 'language',
-    submenu:[
-      {
-        url:'/panel/front-side-language',
-        slug: '/panel/front-side-language',
-        name: 'front-side-language',
-        icon: 'FileIcon',
-        i18n: 'frontSideLanguage'
-      },
-      {
-        url:'/panel/back-side-language',
-        slug: '/panel/back-side-language',
-        name: 'back-side-language',
-        icon: 'FileTextIcon',
-        i18n: 'backSideLanguage'
-      },
-
-    ]
-  },
 //   {
+//     url: '/panel/file-manager-upload',
+//     name: 'FileUpload',
+//     icon: 'UploadIcon',
+//     i18n: 'FileManager',
+//     submenu:[
+//       {
+//         url:'/panel/file-manager-upload',
+//         slug: '/panel/file-manager-upload',
+//         name: 'FileUpload',
+//         icon: 'UploadIcon',
+//         i18n: 'FileUpload'
+//       },
+//       {
+//         url:'/panel/file-manager-list',
+//         slug: '/panel/file-manager-list',
+//         name: 'FileList',
+//         icon: 'UploadIcon',
+//         i18n: 'FileList'
+//       }
+//     ]
+//   },
+  //admin
+//   {
+//     url: '/panel/pages',
+//     name: 'pages',
+//     icon: 'FileIcon',
+//     i18n: 'Content',
+//     submenu:[
+//       {
+//         url:'/panel/pages',
+//         slug: '/panel/pages',
+//         name: 'pages',
+//         icon: 'FileIcon',
+//         i18n: 'Pages'
+//       },
+//       {
+//         url:'/panel/posts',
+//         slug: '/panel/posts',
+//         name: 'posts',
+//         icon: 'FileTextIcon',
+//         i18n: 'Posts'
+//       },
+
+//       {
+//         url:'/panel/services',
+//         slug: '/panel/services',
+//         name: 'services',
+//         icon: 'FileTextIcon',
+//         i18n: 'services'
+//       },
+//     //   {
+//     //     url:'/panel/categories',
+//     //     slug: '/panel/categories',
+//     //     name: 'Categories',
+//     //     icon: 'PauseIcon',
+//     //     i18n: 'Categories'
+//     //   },
+//       {
+//         url:'/panel/forms',
+//         slug: '/panel/forms',
+//         name: 'Forms',
+//         icon: 'PauseIcon',
+//         i18n: 'Forms'
+//       }
+//     ]
+//   },
+    //user
+//   {
+//     url: '/panel/blog-posts',
+//     name: 'blog-posts',
+//     icon: 'FileIcon',
+//     i18n: 'Content',
+//     submenu:[
+
+
+//       {
+//         url:'/panel/blog-posts',
+//         slug: '/panel/blog-posts',
+//         name: 'blog-posts',
+//         icon: 'FileTextIcon',
+//         i18n: 'Posts'
+//       },
+//     ]
+//   },
+//   {
+//     url:'/panel/front-side-language',
+//     name: 'front-side-language',
+//     icon: 'GlobeIcon',
+//     i18n: 'language',
+//     submenu:[
+//       {
+//         url:'/panel/front-side-language',
+//         slug: '/panel/front-side-language',
+//         name: 'front-side-language',
+//         icon: 'FileIcon',
+//         i18n: 'frontSideLanguage'
+//       },
+//       {
+//         url:'/panel/back-side-language',
+//         slug: '/panel/back-side-language',
+//         name: 'back-side-language',
+//         icon: 'FileTextIcon',
+//         i18n: 'backSideLanguage'
+//       },
+
+//     ]
+//   },
+// //   {
 //     url:'/panel/e-commerce',
 //     name: 'eCommerce',
 //     icon: 'ShoppingCartIcon',
@@ -208,6 +216,12 @@ export default [
 //     ]
 //   }
 
-
+{
+    url:'/panel/components',
+    slug: '/panel/components',
+    name: 'components',
+    icon: 'CreditCardIcon',
+    i18n: 'Components'
+  },
 ]
 

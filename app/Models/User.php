@@ -173,4 +173,9 @@ class User extends Authenticatable implements JWTSubject
     return $this->hasMany('App\Models\TokenRequest');
   }
 
+  public function appointments()
+  {
+    return $this->hasMany('App\Models\Appointment');
+  }
+
 }

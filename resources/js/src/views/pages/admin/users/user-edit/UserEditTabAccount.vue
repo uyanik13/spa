@@ -22,7 +22,6 @@
             <vs-button class="mr-4 sm:mb-0 mb-2" @click="$refs.updateImgInput.click()">{{$t('change_avatar')}}</vs-button>
 
 
-            <vs-button type="border" color="danger">{{$t('remove_avatar')}}</vs-button>
           </div>
         </div>
       </div>

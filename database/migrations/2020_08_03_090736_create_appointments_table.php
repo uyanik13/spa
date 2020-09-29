@@ -16,16 +16,20 @@ class CreateAppointmentsTable extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->foreignUuid('user_id');
+            $table->integer('appointment_id')->nullable();
             $table->string('address')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->string('subject')->nullable();
             $table->string('message')->nullable();
             $table->text('FormData')->nullable();
-            $table->timestamp('appointment_case')->nullable();
             $table->timestamp('appointment_date')->nullable();
             $table->string('form_type')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
         });
     }
 

@@ -27,7 +27,7 @@
                   :statistic="revenueGenerated.analyticsData.revenue | k_formatter"
                   statisticTitle="Revenue Generated"
                   :chartData="revenueGenerated.series"
-                  color="success"
+                  color="#7367F0"
                   type="area" />
             </div>
 

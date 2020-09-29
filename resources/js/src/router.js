@@ -313,6 +313,21 @@ const router = new Router({
           }
         },
         {
+          path: '/panel/appointments',
+          name: 'appointments',
+          component: () => import('@/views/pages/admin/appointment/appointmentList.vue'),
+          meta: {
+            breadcrumb: [
+              {title: 'Home', url: '/'},
+              {title: 'appointments'},
+              {title: 'List', active: true}
+            ],
+            pageTitle: 'appointments',
+            rule: 'admin'
+
+          }
+        },
+        {
           path: '/panel/users/user-view/:userId',
           name: 'app-user-view',
           component: () => import('@/views/pages/admin/users/UserView.vue'),
@@ -343,6 +358,21 @@ const router = new Router({
           }
         },
 
+        {
+            path: '/panel/giro',
+            name: 'giro',
+            component: () => import('@/views/pages/admin/giro/giroList.vue'),
+            meta: {
+              breadcrumb: [
+                {title: 'Home', url: '/'},
+                {title: 'giro'},
+                {title: 'List', active: true}
+              ],
+              pageTitle: 'giro',
+              rule: 'admin'
+
+            }
+          },
         ///////////////////////   ADMIN CONTENT PAGES - END  /////////////////////////////
 
 

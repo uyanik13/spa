@@ -10,83 +10,26 @@
 <template>
   <div id="user-edit-tab-info">
     <div class="vx-row">
+        <div class="vx-col w-full sm:w-1/2 lg:w-1/2 ">
+                  <div class="my-6">
 
-      <!-- Col 1 -->
-      <div class="vx-col w-full md:w-1/2">
-        <vs-input
-          class="w-full"
-          v-model="data_local.social_links.twitter"
-          icon-pack="feather"
-          icon="icon-twitter"
-          label="Twitter"
-          icon-no-border
-          v-validate="'url:require_protocol'"
-          name="twitter" />
-          <span class="text-danger text-sm"  v-show="errors.has('twitter')">{{ errors.first('twitter') }}</span>
+                             <p class="text-grey">QR Code : </p>
+                             <img src="@assets/images/place-holders/qr.png"  height="80px"  width="80px" class="card-img-top" />
+                    </div>
+            </div>
 
-        <vs-input
-          class="w-full mt-4"
-          v-model="data_local.social_links.facebook"
-          icon-pack="feather"
-          icon="icon-facebook"
-          label="Facebook"
-          icon-no-border
-          v-validate="'url:require_protocol'"
-          name="facebook" />
-          <span class="text-danger text-sm"  v-show="errors.has('facebook')">{{ errors.first('facebook') }}</span>
+            <!-- CONTENT CARD - PROGRESS BAR/GOAL -->
+            <div class="vx-col w-full sm:w-1/2 lg:w-1/2 ">
+             <div class="my-6">
+                        <h5 class="mb-2">Ticket/Kundeninformationen</h5>
 
-        <vs-input
-          class="w-full mt-4"
-          v-model="data_local.social_links.instagram"
-          icon-pack="feather"
-          icon="icon-instagram"
-          label="Instagram"
-          icon-no-border
-          v-validate="'url:require_protocol'"
-          name="instagram" />
-          <span class="text-danger text-sm"  v-show="errors.has('instagram')">{{ errors.first('instagram') }}</span>
+                    </div>
+                    <vs-button type="gradient" class="mt-6 mr-5" color="#7367F0" gradient-color-secondary="#BA300B">Kunde einchecken</vs-button>
+            </div>
 
-      </div>
 
-      <!-- Col 2 -->
-      <div class="vx-col w-full md:w-1/2">
-        <vs-input
-          class="w-full mt-4 md:mt-0"
-          v-model="data_local.social_links.github"
-          icon-pack="feather"
-          icon="icon-github"
-          label="GitHub"
-          icon-no-border
-          v-validate="'url:require_protocol'"
-          name="github" />
-          <span class="text-danger text-sm"  v-show="errors.has('github')">{{ errors.first('github') }}</span>
 
-        <vs-input
-          class="w-full mt-4"
-          v-model="data_local.social_links.codepen"
-          icon-pack="feather"
-          icon="icon-codepen"
-          label="CodePen"
-          icon-no-border
-          v-validate="'url:require_protocol'"
-          name="codepen" />
-          <span class="text-danger text-sm"  v-show="errors.has('codepen')">{{ errors.first('codepen') }}</span>
-
-        <vs-input
-          class="w-full mt-4"
-          v-model="data_local.social_links.slack"
-          icon-pack="feather"
-          icon="icon-slack"
-          label="Slack"
-          icon-no-border
-          v-validate="'url:require_protocol'"
-          name="slack" />
-          <span class="text-danger text-sm"  v-show="errors.has('slack')">{{ errors.first('slack') }}</span>
-
-      </div>
     </div>
-
-    <!-- Save & Reset Button -->
     <div class="vx-row">
       <div class="vx-col w-full">
         <div class="mt-8 flex flex-wrap items-center justify-end">

@@ -17,6 +17,13 @@ export default {
         .then((response) => {
           commit('SET_ORDERS', response.data.orders)
           commit('SET_PAYMENTS', response.data.payments)
+          commit('SET_PAYMENTS_PAGINATED', response.data.paymentsPaginated)
+          commit('SET_LAST_YEAR_PAYMENTS', response.data.lastYearPayments)
+          commit('SET_LAST_WEEK_PAYMENTS', response.data.lastWeekPayments)
+          commit('SET_LAST_MONTH_PAYMENTS', response.data.lastMonthPayments)
+          commit('SET_THIS_MONTH_PAYMENTS', response.data.thisMonthPayments)
+          commit('SET_COUNTRIES', response.data.countries)
+          commit('SET_AVERAGE_PAYMENTS', response.data.averageWeeklySalesRevenue)
           resolve(response)
         })
         .catch((error) => { reject(error) })

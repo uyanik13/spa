@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Carbon\Carbon;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Setting;
@@ -36,11 +37,40 @@ class ApiAdminController extends ApiController
       }
 
       $orders = Order::orderBy('created_at','desc')->get();
-      $payments = Payment::orderBy('created_at','desc')->get();
+
+      $payments = Payment::orderBy('created_at','desc')->where('status','completed')->get();
+
+      $paymentsPaginated = Payment::orderBy('created_at','desc')->where('status','completed')->paginate(15);
+
+      $lastYearPayments = Payment::whereDate('created_at','>', Carbon::now()->addYears(-1))->where('status','completed')->get();
+
+      $lastWeekPayments = Payment::whereDate('created_at','>', Carbon::now()->addWeek(-1))->where('status','completed')->get();
+
+      $lastMonthPayments = Payment::whereDate('created_at','>', Carbon::now()->addMonth(-1))->where('status','completed')->get();
+
+      $thisMonthPayments = Payment::orderBy('created_at', 'DESC')->whereDate('created_at','>', Carbon::now()->subMonth())->where('status','completed')->get();
+
+         $countries =[];
+
+        foreach ($payments as $key => $payment) {
+            $countries[$payment->payment_country] =  Payment::where('payment_country', '=', $payment->payment_country)->count();
+        }
+
+
+
+
+      $averageWeeklySalesRevenue = Payment::whereDate('created_at','>', Carbon::now()->addWeek(-1))->avg('amount');
 
       $data = [
           'orders' => $orders,
           'payments' => $payments,
+          'paymentsPaginated' => $paymentsPaginated,
+          'lastYearPayments' => $lastYearPayments,
+          'lastWeekPayments' => $lastWeekPayments,
+          'lastMonthPayments' => $lastMonthPayments,
+          'thisMonthPayments' => $thisMonthPayments,
+          'countries' => $countries,
+          'averageWeeklySalesRevenue' => $averageWeeklySalesRevenue,
       ];
 
       return $data;

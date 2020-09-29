@@ -9,6 +9,7 @@
 
 const colors = {
   primary : '#F93E0B',
+  dashboardGreen : '#319795',
   success : '#28C76F',
   danger  : '#EA5455',
   warning : '#FF9F43',

@@ -31,7 +31,7 @@ class ApiUserController extends ApiController
     if (!$user->role == 'admin') {
       return $this->responseUnauthorized();
     }
-    $collection = User::all();
+    $collection = User::where('role' ,'!=', 'admin')->get();
     return $collection->toJson();
   }
 

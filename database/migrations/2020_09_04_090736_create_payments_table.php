@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
         $table->foreignUuid('user_id');
         $table->integer('payment_id');
         $table->string('payment_method');
+        $table->string('payment_country')->nullable();
         $table->float('amount');
         $table->enum('status', ['pending', 'completed'])->default('pending');
         $table->timestamps();

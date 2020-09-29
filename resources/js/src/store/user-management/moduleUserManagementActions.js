@@ -46,8 +46,8 @@ export default {
     return new Promise((resolve, reject) => {
       axios.get(`/api/users/${userId}`)
         .then((response) => {
-          console.log('user', response)
-          resolve(response)
+         // console.log('user', response)
+          resolve(response.data)
         })
         .catch((error) => { reject(error) })
     })

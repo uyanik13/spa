@@ -11,10 +11,28 @@
 export default {
 
   chartDataForPayments: (state) =>  state.payments.flatMap(payment => payment['amount']),
+  chartDataForLastWeekPayments: (state) =>  state.lastWeekPayments.flatMap(payment => payment['amount']),
+  chartDataForLastMonthPayments: (state) =>  state.lastMonthPayments.flatMap(payment => payment['amount']),
+  chartDataForLastYearPayments: (state) =>  state.lastYearPayments.flatMap(payment => payment['amount']),
+  chartDataForThisMonthPayments: (state) =>  state.thisMonthPayments.flatMap(payment => payment['amount']),
+
+
+
+
+
   pendingPayments:(state) =>  state.payments.filter((payment) => payment.status === 'pending'),
   pendingPaymentsAmount:(state) => state.payments.filter((payment) => payment.status === 'pending').map(o => o.amount).reduce((a, c) => a + c, 0),
   completedPayments: (state) => state.payments.filter((token) => token.status === 'completed'),
-  completedPaymentsAmount: (state) => state.payments.filter((token) => token.status === 'completed').map(o => o.amount).reduce((a, c) => a + c, 0),
+
+
+  completedPaymentsCountries: (state) => state.payments.filter((token) => token.status === 'completed').flatMap(payment => payment['payment_country']),
+
+  lastWeekPaymentsAmount: (state) => state.lastWeekPayments.filter((token) => token.status === 'completed').map(o => o.amount).reduce((a, c) => a + c, 0),
+  lastMonthPaymentsAmount: (state) => state.lastMonthPayments.filter((token) => token.status === 'completed').map(o => o.amount).reduce((a, c) => a + c, 0),
+  thisMonthPaymentsAmount: (state) => state.thisMonthPayments.filter((token) => token.status === 'completed').map(o => o.amount).reduce((a, c) => a + c, 0),
+  lastYearPaymentsAmount: (state) => state.lastYearPayments.filter((token) => token.status === 'completed').map(o => o.amount).reduce((a, c) => a + c, 0),
+
+
 
   chartDataForOrders: (state) =>  state.orders.flatMap(payment => payment['price']),
   pendingOrders:(state) =>  state.orders.filter((payment) => payment.status === 'pending'),

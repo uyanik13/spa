@@ -12,6 +12,7 @@
         name: 'CellRendererActions',
         methods: {
           editRecord() {
+              console.log(this.params.data)
             this.$router.push("/panel/users/edit/" + this.params.data.id).catch(() => {})
 
             /*

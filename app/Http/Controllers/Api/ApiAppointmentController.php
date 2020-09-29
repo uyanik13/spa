@@ -34,7 +34,7 @@ class ApiAppointmentController extends ApiController
       if (!$user->role == 'admin') {
         return $this->responseUnauthorized();
       }
-      $collection = Appointment::orderBy('created_At','desc')->get();
+      $collection = Appointment::orderBy('created_at','desc')->get();
 
       return $collection->toJson();
     }
