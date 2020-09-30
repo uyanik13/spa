@@ -45,6 +45,12 @@ Route::any('panel/{path}', function () {
     Route::post('/calendar/appointment', [PageController::class, 'calendarAppointment'])->name('calendar.appointment');
     Route::post('/calendar/register', [PageController::class, 'frontEndRegister'])->name('calendar.register');
     Route::post('/calendar/login', [PageController::class, 'frontEndLogin'])->name('calendar.login');
+    Route::post('/calendar/checkout', [PageController::class, 'checkoutRegister'])->name('calendar.checkout');
+    Route::post('/calendar/another', [PageController::class, 'anotherPerson'])->name('calendar.anotherPerson');
+    Route::post('/calendar/add-order', [ApiOrderController::class, 'store'])->name('calendar.addOrder');
+    Route::post('/calendar/delete-order', [ApiOrderController::class, 'destroy'])->name('calendar.delete');
+    Route::post('/calendar/reset-order', [ApiOrderController::class, 'resetOrders'])->name('calendar.resetOrders');
+    Route::post('/calendar/set-payment-method', [ApiOrderController::class, 'setPaymentMethod'])->name('calendar.paymentMethod');
 
 
     Route::get('/search/product',[PageController::class, 'search_product'])->name('search_product');

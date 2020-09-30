@@ -1,3 +1,7 @@
+@auth
+    @php
+        $gender = json_decode(App\Models\User::find(Auth::user()->id)->about_data,true)['anrede'];
+    @endphp
 <div class="page_content_wrap page_paddings_no">
 	<div class="content_wrap">
 		<div class="content">
@@ -19,7 +23,8 @@
 												<div class="text_column content_element  mockingbird-text">
 													<div class="wrapper">
 														<p>
-															Sehr geehrter <strong>Herr XXXX,</strong>
+                                                                Sehr geehrter
+                                                                <strong>{{$gender}} {{auth()->user()->name}},</strong>
 														</p>
 														<p>
 															Vielen Dank, dass Sie sich auf unserer Seite
@@ -57,3 +62,9 @@
 		</div>
 	</div>
 </div>
+@endauth
+@guest
+    <script >
+        window.location.href = "/login-register";
+    </script>
+    @endguest

@@ -3,7 +3,7 @@
 @include('sweetalert::alert')
 
 @stack('inline-scripts')
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type='text/javascript' src='/theme/js/vendor/jquery/jquery.js'></script>
 <script type='text/javascript' src='/theme/js/vendor/jquery/jquery-migrate.min.js'></script>
 <script type='text/javascript' src='/theme/js/vendor/modernizr.min.js'></script>

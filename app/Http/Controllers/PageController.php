@@ -478,12 +478,63 @@ public  function frontEndLogin (Request $request) {
 
 
 
+public function checkoutRegister(Request $request){
+      if ($request->checkbox === null){
+          dd("checkbox");
+      }
+    $aboutData = [
+        'anrede'=>$request->anrede,
+        'Titel'=>$request->Titel,
+        'Telefon'=>$request->Telefon,
+        'birth_date'=>$request->Geburtsdatum,
+        'strasse'=>$request->strasse,
+        'Postleitzahl'=>$request->Postleitzahl,
+        'Land'=>$request->Land
+    ];
+      $data = User::find(Auth::user()->id);
+
+      $data->name = $request->name;
+      $data->email = $request->email;
+      $data->phone = $request->Telefon;
+      $data->about_data = json_encode($aboutData);
+      $data->save();
+      return redirect('person-choose');
+}
+public function anotherPerson(Request $request){
+    if ($request->checkbox === null){
+        dd("checkbox");
+    }
+
+    $aboutData = [
+        'anrede'=>$request->anrede,
+        'Titel'=>$request->Titel,
+        'Telefon'=>$request->Telefon,
+        'birth_date'=>$request->Geburtsdatum,
+        'strasse'=>$request->strasse,
+        'Postleitzahl'=>$request->Postleitzahl,
+        'Land'=>$request->Land
+    ];
+        $data = new User();
+        $data->reference_id =$request->ref;
+        $data->name = $request->name;
+        $data->email = $request->email;
+        $data->phone = $request->Telefon;
+        $data->about_data = json_encode($aboutData);
+        $data->password = Hash::make('12345');
+        $data->save();
+        if ($data){
+            return redirect('order-complete');
+        }
+
+}
+
+
+
+
+
 public function testMethod(Request $request){
 
-
-$alert = 'Success Title';
-
- return $alert ;
+ return "alert" ;
 
  }
 

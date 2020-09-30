@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Mail\OrderStatusChanged;
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +26,9 @@ class ApiOrderController  extends ApiController
      */
     public function index()
     {
-         $postAdmin = Order::where('status', 1)->orderBy('created_at', 'desc')->get();
-         $postUser = Order::where('user_id',Auth::user()->id)->where('status', 1)->orderBy('created_at', 'desc')->get();
-         $post = Auth::user()->role === 'admin' ? $postAdmin : $postUser ;
+        $postAdmin = Order::where('status', 1)->orderBy('created_at', 'desc')->get();
+        $postUser = Order::where('user_id',Auth::user()->id)->where('status', 1)->orderBy('created_at', 'desc')->get();
+        $post = Auth::user()->role === 'admin' ? $postAdmin : $postUser ;
 
 
         return $post;
@@ -52,6 +53,28 @@ class ApiOrderController  extends ApiController
      */
     public function store(Request $request)
     {
+        $order_id = Carbon::now()->timestamp;
+        $data = User::find(Auth::user()->id);
+        $new2= new Order();
+        $new2->user_id = $data->id;
+        $new2->order_details = 'paket adı';
+        $new2->price = 17;
+        $new2->order_id = $order_id;
+        $new2->save();
+
+
+        $partners = User::where('reference_id',$data->id)->get();
+        foreach ($partners as $partner){
+            $new= new Order();
+            $new->user_id = $partner->id;
+            $new->order_details = 'paket adı';
+            $new->order_id = $order_id;
+            $new->price = 17;
+            $new->save();
+        }
+        return  redirect('order-summary');
+
+
         // $order = Order::create([
         //     'user_id' => $this->user->id,
         //     'order_details' => $request->all(),
@@ -92,9 +115,9 @@ class ApiOrderController  extends ApiController
     public function update(Request $request, $id)
     {
 
-      if ($this->user->role !== 'admin') {
-        return $this->responseUnauthorized();
-      }
+        if ($this->user->role !== 'admin') {
+            return $this->responseUnauthorized();
+        }
 
         $order = Order::where('id', $id)->first();
         $orderUser = User::where('id', $order->user_id)->first();
@@ -114,8 +137,24 @@ class ApiOrderController  extends ApiController
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy(Request $request)
     {
-        //
+        $data = Order::find($request->id);
+        $forDeleteInUserReference = User::find($data->user_id);
+        $forDeleteInUserReference->reference_id = null;
+        $forDeleteInUserReference->save();
+        $data->delete();
+        return response()->json(['message'=>200]);
+
+    }
+    public function resetOrders(Request $request){
+        $orders = json_decode($request['orders'][0],true)/*[0]['id']*/;
+        foreach ($orders as $order) {
+            $data = Order::find($order['id']);
+            $userId = $data->user_id;
+            $data->delete();
+            User::find('user_id',$userId)->reference_id = null;
+        }
+        return redirect('/');
     }
 }

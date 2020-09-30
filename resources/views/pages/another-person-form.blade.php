@@ -1,3 +1,4 @@
+@auth
 <div class="page_content_wrap page_paddings_yes">
     <div class="content_wrap">
         <div class="content">
@@ -26,7 +27,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                    <form id="sc_form_629_form"
+                                                          data-formtype="form_3" method="post"
+                                                          action="{{route('calendar.anotherPerson')}}">
+                                                        @csrf
                                                 <div class="column sc_col-sm-6">
+                                                        <input type="hidden" name="ref" value="{{auth()->user()->id}}">
                                                     <div id="sc_form_629_wrap" class="sc_form_wrap">
                                                         <h5
                                                             style="margin-bottom: 30px; text-decoration: underline;">
@@ -34,9 +40,7 @@
                                                             Informationen</h5>
                                                         <div id="sc_form_629"
                                                             class="sc_form sc_form_style_form_3">
-                                                            <form id="sc_form_629_form"
-                                                                data-formtype="form_3" method="post"
-                                                                action="#">
+
                                                                 <div
                                                                     class="sc_form_item sc_form_field label_over">
                                                                     <label class="required"
@@ -67,19 +71,11 @@
                                                                 <div
                                                                     class="sc_form_item sc_form_field label_over">
                                                                     <label class="required"
-                                                                        for="sc_form_Vorname">Vorname</label>
+                                                                           for="sc_form_Vorname">Vollständiger
+                                                                        Name</label>
                                                                     <input id="sc_form_Vorname" type="text"
-                                                                        name="Vorname"
-                                                                        placeholder="Vorname">
-                                                                </div>
-
-                                                                <div
-                                                                    class="sc_form_item sc_form_field label_over">
-                                                                    <label class="required"
-                                                                        for="sc_form_Nachname">Nachname</label>
-                                                                    <input id="sc_form_Nachname" type="text"
-                                                                        name="Nachname"
-                                                                        placeholder="Nachname">
+                                                                           name="name"
+                                                                           placeholder="Vollständiger Name">
                                                                 </div>
 
                                                                 <div
@@ -96,11 +92,10 @@
                                                                     <label class="required"
                                                                         for="sc_form_Geburtsdatum">Geburtsdatum</label>
                                                                     <input id="sc_form_Geburtsdatum"
-                                                                        type="text" name="Geburtsdatum"
+                                                                               type="date" name="Geburtsdatum"
                                                                         placeholder="DD / MM / JJJJ"
                                                                         value="01/02/1998">
                                                                 </div>
-                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -112,9 +107,7 @@
                                                             Adresse</h5>
                                                         <div id="sc_form_629"
                                                             class="sc_form sc_form_style_form_3">
-                                                            <form id="sc_form_629_form"
-                                                                data-formtype="form_3" method="post"
-                                                                action="#">
+
 
                                                                 <div
                                                                     class="sc_form_item sc_form_field label_over">
@@ -141,7 +134,7 @@
                                                                 </div>
                                                                 <div style="margin-top: 25px;">
                                                                     <p><input type="checkbox"
-                                                                            style="margin-right: 5px;">
+                                                                                  style="margin-right: 5px;" name="checkbox">
                                                                         Hiermit bestatige ich, die
                                                                         Datenschutzhinweise gelesen und
                                                                         akzeptiert zu haben. *</p>
@@ -149,23 +142,23 @@
                                                                 </div>
                                                                 <div class="sc_form_item sc_form_button"
                                                                     style="text-align: center;">
-                                                                    <a href="/order-complete"
+                                                                        <a onclick="document.getElementById('sc_form_629_form').submit()"
                                                                         class="sc_button sc_button_style_filled sc_button_size_medium blue">
                                                                         <span class="overlay">
                                                                             <span class="first">Speichern <i
                                                                                     class="fa fa-save"></i></span>
-                                                                            <span class="second">Speichern
+                                                                            <span type="submit"  class="second">Speichern
                                                                                 <i
                                                                                     class="fa fa-save"></i></span>
                                                                         </span>
                                                                     </a>
                                                                 </div>
                                                                 <div class="result sc_infobox"></div>
-                                                            </form>
+
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                    </form>
                                             </div>
                                         </div>
                                     </div>
@@ -178,4 +171,16 @@
             <section class="related_wrap related_wrap_empty"></section>
         </div>
     </div>
-</div
+    </div>
+@endauth
+<script>
+    import Button from "../../js/src/views/components/vuesax/button/Button";
+    export default {
+        components: {Button}
+    }
+</script>
+@guest
+    <script >
+        window.location.href = "/login-register";
+    </script>
+    @endguest

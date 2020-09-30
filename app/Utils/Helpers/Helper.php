@@ -584,6 +584,18 @@ class Helper
     public static function getPopularPartners(){
         return User::where('role','user')->withCount('comments')->orderBy('comments_count', 'desc')->get();
     }
-
+    public static function getPartners(){
+         return User::where('reference_id',Auth::user()->id)->get();
+    }
+    public static function getOrders(){
+        $mainUserOrderId = Order::where('user_id',Auth::user()->id)
+            ->where('status','pending')
+            ->orderBy('created_at','desc')
+            ->pluck('order_id')->first();
+        return Order::where('order_id',$mainUserOrderId)->get();
+    }
+public static function getCurrentClientsInSpa(){
+    return "asd";
+}
 
 }

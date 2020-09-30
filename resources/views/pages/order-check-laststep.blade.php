@@ -1,3 +1,26 @@
+@auth
+    @php
+        $orders= Helper::getOrders();
+    @endphp
+    @if(count($orders)>0)
+        <script >
+            var paymethod = getCookie('PayMethod');
+            function getCookie(cname) {
+                var name = cname + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+        </script>
 <div class="page_content_wrap page_paddings_no">
     <div id="contentCart" class="content_wrap">
         <div class="content">
@@ -58,15 +81,18 @@
 
                                                         <div class="paymentInfos">
                                                             <h4>Zahlungsart</h4>
-                                                            <h5>Paypal</h5>
-                                                            <p>Sie werden im nachsten Schritt zu PayPal
+                                                                <h5 id="displayPayMethod"></h5>
+                                                                <p>Sie werden im nachsten Schritt zu <span id="displayPayMethodInDetails"></span>
                                                                 weitergeleitet um die Zahlung zu
                                                                 autorisieren.</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
+                                                <script !src="">
+                                                    document.getElementById('displayPayMethod').innerText = paymethod;
+                                                    document.getElementById('displayPayMethodInDetails').innerText = paymethod;
+                                                </script>
                                             <div class="column-1 sc_column_item">
                                                 <div class="summaryTable lastStep">
                                                     <h3><i class="fa fa-shopping-cart"></i> Ihre Bestellung
@@ -82,7 +108,9 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
+                                                            @isset($orders)
+                                                                @foreach($orders as $order)
+                                                                    <tr id="tr_{{$order->id}}">
                                                                 <td>
                                                                     <div class="produktCart">
                                                                         <span class="produktImage">
@@ -103,12 +131,11 @@
                                                                             <span class="pInfos">
                                                                                 <i
                                                                                     class="fa fa-calendar"></i>
-                                                                                15.09.2020 14:00 -
-                                                                                15:00
+                                                                                {{$order->order_details}}
                                                                             </span>
                                                                             <span class="pInfos">
                                                                                 <i class="fa fa-user"></i>
-                                                                                Savaş Uzun
+                                                                                @if(isset($order->user)){{$order->user->name}}@else {{Auth::user()->name}}@endif
                                                                             </span>
                                                                         </div>
                                                                     </div>
@@ -122,47 +149,33 @@
                                                                 <td>
                                                                     17,-€
                                                                 </td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td>
-                                                                    <div class="produktCart">
-                                                                        <span class="produktImage">
-                                                                            <img src="https://www.placehold.it/450x250"
-                                                                                alt="">
-                                                                        </span>
+                                                                            <a class="pDelete"
+                                                                               onclick="deleteOrder({{$order->id}})">
+                                                                                <i class="fa fa-close"></i>
+                                                                            </a>
+                                                                </td>
+                                                                        <script>
 
-                                                                        <div class="produktInfos">
-                                                                            <span class="pTitle">
-                                                                                Saunatarif Spat
-                                                                            </span>
-                                                                            <span class="pInfos">
-                                                                                <i
-                                                                                    class="fa fa-building"></i>
-                                                                                das
-                                                                                Stadtwerk.Westbad
-                                                                            </span>
-                                                                            <span class="pInfos">
-                                                                                <i
-                                                                                    class="fa fa-calendar"></i>
-                                                                                15.09.2020 14:00 -
-                                                                                15:00
-                                                                            </span>
-                                                                            <span class="pInfos">
-                                                                                <i class="fa fa-user"></i>
-                                                                                Savaş Uzun
-                                                                            </span>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                                <td>
-                                                                    17,-€
-                                                                </td>
-                                                                <td>
-                                                                    1
-                                                                </td>
-                                                                <td>
-                                                                    17,-€
-                                                                </td>
+                                                                            function deleteOrder(id) {
+                                                                                $.ajax({
+                                                                                    url: '/calendar/delete-order',
+                                                                                    method: 'post',
+                                                                                    data: {
+                                                                                        _token: '{{csrf_token()}}',
+                                                                                        'id': id
+                                                                                    },
+                                                                                    success(resp) {
+                                                                                        if (resp.message == 200) {
+                                                                                            document.getElementById('tr_' + id).remove();
+                                                                                        }
+                                                                                    }
+                                                                                })
+
+                                                                            }
+
+                                                                        </script>
+
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -219,3 +232,20 @@
         </div>
     </div>
 </div>
+
+    @endif
+@endauth
+
+
+
+
+
+
+
+
+
+@guest
+<script >
+            window.location.href = "/";
+    </script>
+@endguest

@@ -8,7 +8,15 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel='stylesheet' href='css/main.css' type='text/css' media='all' />
-
+@php
+    $data = Helper::getCurrentClientsInSpa();
+    $calendarInfo = Helper::findCustomData('calendarInfo') ;
+    $price = $calendarInfo['price'] + ($calendarInfo['price']*$calendarInfo['kdv'])
+@endphp
+<div class="visible-print text-center">
+    {!! QrCode::size(100)->generate(Request::url()); !!}
+    <p>Scan me to return to the original page.</p>
+</div>
 <div class="page_content_wrap page_paddings_yes">
 	<div class="content_wrap">
 		<div class="content">
@@ -64,9 +72,17 @@
 					<label for="">Bevorzugter Zeitbereich</label>
 					<select name="timeRange" onchange="this.selected" id="timeRange">
 						<option value="default">Bitte wählen Sie die Option</option>
-						<option value="14-17">14:00 - 17:00</option>
-						<option value="17-20">17:00 - 20:00</option>
-						<option value="20-22">20:00 - 22:00</option>
+                        @isset($fakeData)
+                            @foreach($fakeData as $data)
+                                @if($data['quota']<30)
+                                    <option value="{{$data['hours']}}" class="bg-success text-white ">{{$data['hours']}} <span>letzte {{30-$data['quota']}} Personen</span>
+                                    </option>
+                                @else
+                                    <option value="{{$data['hours']}}"  disabled="disabled" class="bg-danger text-white">{{$data['hours']}}
+                                        <span>FULL</span></option>
+                                @endif
+                            @endforeach
+                        @endisset
 					</select>
 				</div>
 				<div class="input text-center">

@@ -1,4 +1,15 @@
-
+@auth
+    @php
+        $data = json_decode(App\Models\User::find(Auth::user()->id)->about_data,true);
+    @endphp
+    @if(!isset(session()->get('appointment')['dateInput']))
+        <br><br>
+        <div class="danger text-danger text-center text-white">
+            Select date first
+            <a href="/booking" class="btn btn-primary text-white">Go Booking Page</a>
+        </div>
+        <br><br>
+    @else
 <div class="page_content_wrap page_paddings_yes">
 	<div class="content_wrap">
 		<div class="content">
@@ -28,6 +39,10 @@
 													</div>
                                                 </div>
                                                 @auth
+                                                        <form id="sc_form_629_form"
+                                                              data-formtype="form_3" method="post"
+                                                              action="{{route('calendar.checkout')}}">
+                                                            @csrf
                                                 <div class="column sc_col-sm-6">
 													<div id="sc_form_629_wrap" class="sc_form_wrap">
 														<h5
@@ -37,9 +52,8 @@
 
                                                         <div id="sc_form_629"
                                                         class="sc_form sc_form_style_form_3">
-                                                        <form id="sc_form_629_form"
-                                                            data-formtype="form_3" method="post"
-                                                            action="#">
+
+
                                                             <div
                                                                 class="sc_form_item sc_form_field label_over">
                                                                 <label class="required"
@@ -47,82 +61,64 @@
                                                                 <input id="sc_form_email" type="text"
                                                                 name="email"  value="{{$user->email}}" placeholder="E-mail">
                                                             </div>
-
+                                                                        {{--                                                                    @isset($data['anrede'])--}}
                                                             <div class="anredeRadio">
                                                                 <label>
-                                                                    <input type="radio" name="anrede">
+                                                                                <input type="radio" name="anrede"
+                                                                                       value="frau"
+                                                                                       @isset($data['anrede']) @if($data['anrede']=='frau') checked @endif @endisset>
                                                                     <span class="text">Frau</span>
                                                                 </label>
                                                                 <label>
-                                                                    <input type="radio" name="anrede">
+                                                                                <input type="radio" name="anrede"
+                                                                                       value="herr"
+                                                                                       @isset($data['anrede']) @if($data['anrede']=='herr') checked @endif @endisset>
                                                                     <span class="text">Herr</span>
                                                                 </label>
                                                             </div>
+                                                                        {{--                                                                    @endisset--}}
 
                                                             <div
                                                                 class="sc_form_item sc_form_field label_over">
                                                                 <label class="required"
                                                                     for="sc_form_Titel">Titel</label>
                                                                 <input id="sc_form_Titel" type="text"
-                                                                    name="Titel" placeholder="Titel">
+                                                                                   name="Titel" placeholder="Titel"
+                                                                                   @isset($data['Titel']) value="{{$data['Titel']}}" @endisset>
                                                             </div>
 
                                                             <div
                                                                 class="sc_form_item sc_form_field label_over">
                                                                 <label class="required"
-                                                                    for="sc_form_Vorname">Vorname</label>
+                                                                                   for="sc_form_Vorname">Vollständiger
+                                                                                Name</label>
                                                                 <input id="sc_form_Vorname" type="text"
-                                                                    name="Vorname"
-                                                                    placeholder="Vorname">
+                                                                                   name="name"
+                                                                                   placeholder="Vollständiger Name"
+                                                                                   value="{{$user->name}}">
                                                             </div>
-
-                                                            <div
-                                                                class="sc_form_item sc_form_field label_over">
-                                                                <label class="required"
-                                                                    for="sc_form_Nachname">Nachname</label>
-                                                                <input id="sc_form_Nachname" type="text"
-                                                                    name="Nachname"
-                                                                    placeholder="Nachname">
-                                                            </div>
-
                                                             <div
                                                                 class="sc_form_item sc_form_field label_over">
                                                                 <label class="required"
                                                                     for="sc_form_Telefon">Telefon</label>
                                                                 <input id="sc_form_Telefon" type="text"
                                                                     name="Telefon"
-                                                                    placeholder="Telefon">
+                                                                                   placeholder="Telefon"
+                                                                                   value="{{$user->phone}}">
                                                             </div>
 
                                                             <div
                                                                 class="sc_form_item sc_form_field label_over">
                                                                 <label class="required"
-                                                                    for="sc_form_Geburtsdatum">Geburtsdatum</label>
-                                                                <input id="sc_form_Geburtsdatum"
-                                                                    type="text" name="Geburtsdatum"
-                                                                    placeholder="DD / MM / JJJJ">
+                                                                                   for="sc_form_username">Geburtsdatum</label>
+                                                                            <input id="sc_form_username" type="date"
+                                                                                   name="birth_date"
+                                                                                   placeholder="Geburtsdatum *"
+                                                                                   style="background-color: #fff;"
+                                                                                   @isset($data['birth_date']) value="{{$data['birth_date']}}" @endisset>
                                                             </div>
 
-                                                            <div
-                                                                class="sc_form_item sc_form_field label_over">
-                                                                <label class="required"
-                                                                    for="sc_form_Passwort">Passwort</label>
-                                                                <input id="sc_form_Passwort"
-                                                                    type="password" name="Passwort"
-                                                                    placeholder="Passwort">
-                                                            </div>
 
-                                                            <div
-                                                                class="sc_form_item sc_form_field label_over">
-                                                                <label class="required"
-                                                                    for="sc_form_Passwort_wiederholen">Passwort
-                                                                    wiederholen</label>
-                                                                <input id="sc_form_Passwort_wiederholen"
-                                                                    type="password" name="Passwort
-                                                                    wiederholen"
-                                                                    placeholder="Passwort wiederholen">
-                                                            </div>
-                                                        </form>
                                                     </div>
 
 
@@ -137,9 +133,6 @@
 															Adresse</h5>
 														<div id="sc_form_629"
 															class="sc_form sc_form_style_form_3">
-															<form id="sc_form_629_form"
-																data-formtype="form_3" method="post"
-																action="#">
 
 																<div
 																	class="sc_form_item sc_form_field label_over">
@@ -147,7 +140,8 @@
 																		for="sc_form_strasse">Straße/Nr.</label>
 																	<input id="sc_form_strasse" type="text"
 																		name="strasse"
-																		placeholder="Straße/Nr.">
+                                                                                   placeholder="Straße/Nr."
+                                                                                   @isset($data['strasse']) value="{{$data['Titel']}}" @endisset>
 																</div>
 																<div
 																	class="sc_form_item sc_form_field label_over">
@@ -155,17 +149,19 @@
 																		for="sc_form_Postleitzahl">Postleitzahl/Ort</label>
 																	<input id="sc_form_Postleitzahl"
 																		type="text" name="Postleitzahl"
-																		placeholder="Postleitzahl/Ort">
+                                                                                   placeholder="Postleitzahl/Ort"
+                                                                                   @isset($data['Postleitzahl'])value="{{$data['Postleitzahl']}}" @endisset>
 																</div>
 																<div
 																	class="sc_form_item sc_form_field label_over">
 																	<label class="required"
 																		for="sc_form_Land">Land</label>
 																	<input id="sc_form_Land" type="text"
-																		name="Land" placeholder="Land">
+                                                                                   name="Land" placeholder="Land"
+                                                                                   @isset($data['Land']) value="{{$data['Land']}}" @endisset>
 																</div>
 																<div style="margin-top: 25px;">
-																	<p><input type="checkbox"
+                                                                            <p><input name="checkbox" type="checkbox"
 																			style="margin-right: 5px;">
 																		Hiermit bestatige ich, die
 																		Datenschutzhinweise gelesen und
@@ -174,22 +170,28 @@
 																</div>
 																<div class="sc_form_item sc_form_button"
 																	style="text-align: center;">
-																	<a href="/person-choose"
+                                                                            <a onclick="document.getElementById('sc_form_629_form').submit()"
 																		class="sc_button sc_button_style_filled sc_button_size_medium blue">
 																		<span class="overlay">
 																			<span class="first">Speichern <i
 																					class="fa fa-save"></i></span>
-																			<span class="second">Speichern
-																				<i
-																					class="fa fa-save"></i></span>
+																			<span type="submit"
+                                                                                onclick="document.getElementById('sc_form_629_form').submit();"
+                                                                                class="second">
+                                                                                <i class="fa fa-save"></i>
+                                                                                Speichern
 																		</span>
+																		</span>
+
+
 																	</a>
 																</div>
 																<div class="result sc_infobox"></div>
-															</form>
+
 														</div>
 													</div>
 												</div>
+                                                        </form>
                                                 @endauth
 
 
@@ -206,3 +208,17 @@
 		</div>
 	</div>
 </div>
+    <script>
+        import Button from "../../js/src/views/components/vuesax/button/Button";
+
+        export default {
+            components: {Button}
+        }
+    </script>
+        @endif
+@endauth
+@guest
+    <script >
+        window.location.href = "/login-register";
+    </script>
+    @endguest

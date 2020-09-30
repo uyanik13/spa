@@ -145,7 +145,7 @@
 																		<span class="first">Registrieren</span>
 																		<span class="second">Registrieren</span>
 																	</div>
-																</a>
+                                                                </button>
 															</div>
 															<div class="result sc_infobox"></div>
 														</form>
