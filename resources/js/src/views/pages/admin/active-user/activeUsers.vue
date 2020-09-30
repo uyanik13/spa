@@ -9,36 +9,7 @@
 
 <template>
       <div class="vx-row">
-                <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 mb-base">
-                <statistics-card-line
-                  v-if="lastWeekPaymentsStatisticData()"
-                  icon="DollarSignIcon"
-                  :statistic="lastWeekPaymentsAmount | k_formatter"
-                  :statisticTitle="$t('lastWeekPayments')"
-                  :chartData="lastWeekPaymentsStatisticData()"
-                   color="danger"
-                  type="area" />
-            </div>
-            <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 mb-base">
-                <statistics-card-line
-                  v-if="lasMonthPaymentsStatisticData()"
-                  icon="DollarSignIcon"
-                  :statistic="lastMonthPaymentsAmount | k_formatter"
-                  :statisticTitle="$t('lastMonthPayments')"
-                  :chartData="lasMonthPaymentsStatisticData()"
-                  color="warning"
-                  type="area" />
-            </div>
-             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 mb-base">
-                <statistics-card-line
-                  v-if="lastYearPaymentsStatisticData()"
-                  icon="DollarSignIcon"
-                  :statistic="lastYearPaymentsAmount | k_formatter"
-                  :statisticTitle="$t('lastYearPayments')"
-                  :chartData="lastYearPaymentsStatisticData()"
-                  color="success"
-                  type="area" />
-            </div>
+
 
 <vx-card>
 
@@ -49,7 +20,7 @@
         <div class="mb-4 md:mb-0 mr-4 ag-grid-table-actions-left">
           <vs-dropdown vs-trigger-click class="cursor-pointer">
             <div class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium">
-              <span class="mr-2">{{ currentPage * paginationPageSize - (paginationPageSize - 1) }} - {{ paymentsPaginated.length - currentPage * paginationPageSize > 0 ? currentPage * paginationPageSize : paymentsPaginated.length }} of {{ paymentsPaginated.length }}</span>
+              <span class="mr-2">{{ currentPage * paginationPageSize - (paginationPageSize - 1) }} - {{ activeUsers.length - currentPage * paginationPageSize > 0 ? currentPage * paginationPageSize : activeUsers.length }} of {{ activeUsers.length }}</span>
               <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
             </div>
             <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
@@ -83,7 +54,7 @@
         class="ag-theme-material w-100 my-4 ag-grid-table"
         :columnDefs="columnDefs"
         :defaultColDef="defaultColDef"
-        :rowData="paymentsPaginated"
+        :rowData="activeUsers"
         rowSelection="multiple"
         colResizeDefault="shift"
         :animateRows="true"
@@ -111,7 +82,7 @@ import i18n from '@/i18n/i18n'
 import StatisticsCardLine from '@/components/statistics-cards/StatisticsCardLine.vue'
 import { AgGridVue } from 'ag-grid-vue'
 import '@sass/vuexy/extraComponents/agGridStyleOverride.scss'
-
+import Cookies from 'js-cookie'
 export default {
   components: {
     StatisticsCardLine,
@@ -133,8 +104,8 @@ export default {
       columnDefs: [
         {
           headerName: i18n.t('name'),
-          field: 'user.name',
-          width: 175,
+          field: 'name',
+          width: 200,
           filter: true,
           checkboxSelection: true,
           headerCheckboxSelectionFilteredOnly: true,
@@ -142,35 +113,24 @@ export default {
         },
         {
           headerName: i18n.t('email'),
-          field: 'user.email',
+          field: 'email',
           filter: true,
-          width: 225,
+          width: 250,
           pinned: 'left'
         },
         {
-          headerName:  i18n.t('paymentId'),
-          field: 'payment_id',
+          headerName:  i18n.t('phone'),
+          field: 'phone',
           filter: true,
-          width: 150
-        },
-        {
-          headerName:  i18n.t('country'),
-          field: 'payment_country',
-          filter: true,
-          width: 150
-        },
-        {
-          headerName:  i18n.t('amount'),
-          field: 'amount',
-          filter: 'agNumberColumnFilter',
-          width: 125
-        },
-        {
-          headerName:  i18n.t('paymentDate'),
-          field: 'created_at',
-          filter: 'agNumberColumnFilter',
           width: 175
-        }
+        },
+        {
+          headerName:  i18n.t('loggedDate'),
+          field: 'login_date',
+          filter: 'agNumberColumnFilter',
+          width: 225
+        },
+
       ],
 
     }
@@ -184,17 +144,11 @@ export default {
     }
   },
   computed: {
-    lastWeekPaymentsAmount () {
-      return this.$store.getters['admin/lastWeekPaymentsAmount']
+     activeUsers () {
+      return this.$store.state.admin.activeUsers
     },
-    lastMonthPaymentsAmount () {
-      return this.$store.getters['admin/lastMonthPaymentsAmount']
-    },
-    lastYearPaymentsAmount () {
-      return this.$store.getters['admin/lastYearPaymentsAmount']
-    },
-     paymentsPaginated () {
-      return this.$store.state.admin.payments
+     activeUser () {
+      return Cookies.get('user') ? JSON.parse(Cookies.get('user')) :  this.$store.state.auth.user
     },
      paginationPageSize () {
       if (this.gridApi) return this.gridApi.paginationGetPageSize()
@@ -216,36 +170,6 @@ export default {
 
   },
   methods: {
-      chartDataForLastWeekPayments () {
-      return this.$store.getters['admin/chartDataForLastWeekPayments']
-    },
-    lastWeekPaymentsStatisticData () {
-      return [{name : i18n.t('Amount'), data : this.chartDataForLastWeekPayments()}]
-    },
-     chartDataForLastMonthPayments () {
-      return this.$store.getters['admin/chartDataForLastMonthPayments']
-    },
-    chartDataForThisMonthPayments () {
-      return this.$store.getters['admin/chartDataForThisMonthPayments']
-    },
-    chartDataForLastYearPayments () {
-      return this.$store.getters['admin/chartDataForLastYearPayments']
-    },
-
-    IncomingPaymentsStatisticData () {
-      return [{name : i18n.t('Amount'), data : this.chartDataForPayment()}]
-    },
-    lastWeekPaymentsStatisticData () {
-      return [{name : i18n.t('Amount'), data : this.chartDataForLastWeekPayments()}]
-    },
-    lasMonthPaymentsStatisticData () {
-      return [{name : i18n.t('lastMonth'), data : this.chartDataForLastMonthPayments()}]
-    },
-
-    lastYearPaymentsStatisticData () {
-      return [{name : i18n.t('Amount'), data : this.chartDataForLastYearPayments()}]
-    },
-
     toDate (time) {
       const locale = 'en-us'
       const date_obj = new Date(Date.parse(time))
@@ -294,8 +218,12 @@ export default {
     }
   },
   created () {
-    this.$store.dispatch('user/fetchUsers')
-    this.$store.dispatch('admin/fetchItems')
+    if (this.activeUser.role === 'staff'){
+        this.$store.dispatch('admin/fetchStaffItems')
+    }else{
+        this.$store.dispatch('admin/fetchItems')
+    }
+
    // console.clear()
   }
 

@@ -64,6 +64,8 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 
   Route::get('user', [ApiUserController::class, 'CurrentUser']);
+  Route::get('staff', [ApiAdminController::class, 'staff']);
+  Route::get('events', [ApiAppointmentController::class, 'events']);
   Route::get('cases/my-cases',[ApiPostController::class, 'MyCases']);
 
 

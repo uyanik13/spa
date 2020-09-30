@@ -1,24 +1,13 @@
 /*=========================================================================================
-  File Name: moduleCalendarState.js
-  Description: Calendar Module State
+  File Name: moduleCalendarGetters.js
+  Description: Calendar Module Getters
   ----------------------------------------------------------------------------------------
   Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
   Author: Pixinvent
   Author URL: https://www.dijitalreklam.org
 ==========================================================================================*/
 
-export default {
-  activeUsers: [],
-  staff: [],
-  payments: [],
-  orders: [],
-  lastWeekPayments: [],
-  lastMonthPayments: [],
-  lastYearPayments: [],
-  thisMonthPayments: [],
-  paymentsPaginated: [],
-  countries: [],
-  averageWeeklySalesRevenue:'',
-  totalAmount: '',
 
+export default {
+  getEvent: state => (eventId) => state.events.find((event) => event.id == eventId),
 }

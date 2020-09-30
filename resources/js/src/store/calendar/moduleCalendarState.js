@@ -8,17 +8,10 @@
 ==========================================================================================*/
 
 export default {
-  activeUsers: [],
-  staff: [],
-  payments: [],
-  orders: [],
-  lastWeekPayments: [],
-  lastMonthPayments: [],
-  lastYearPayments: [],
-  thisMonthPayments: [],
-  paymentsPaginated: [],
-  countries: [],
-  averageWeeklySalesRevenue:'',
-  totalAmount: '',
 
+  // Calendar Labels
+  eventLabels: [],
+
+  // Simple Calendar State
+  events: []
 }

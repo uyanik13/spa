@@ -55,9 +55,9 @@
 
              <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
                 <statistics-card-line
-                  v-if="averageWeeklySalesRevenue"
+
                   icon="DollarSignIcon"
-                  :statistic="averageWeeklySalesRevenue ? averageWeeklySalesRevenue : 0 | k_formatter"
+                  :statistic="averageWeeklySalesRevenue ? parseInt(averageWeeklySalesRevenue) : 0 | k_formatter"
                   :statisticTitle="$t('averageWeeklyRevenue')"
                   color="success"
                   type="area" />
@@ -65,7 +65,8 @@
 
 
 
-<div class="vx-col w-full md:w-2/5 mb-base">
+
+        <div class="vx-col w-full md:w-2/5 mb-base">
                 <vx-card title="Revenue">
                     <!-- <template slot="actions">
                         <feather-icon icon="SettingsIcon" svgClasses="w-6 h-6 text-grey"></feather-icon>

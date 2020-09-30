@@ -24,7 +24,7 @@
           <router-link
            tag="div"
            class="vx-logo cursor-pointer flex items-center"
-            :to="activeUser.role === 'admin' ? '/panel/admin-dashboard' : '/panel/dashboard'">
+            :to="`/panel/${activeUser.role}-dashboard`">
             <logo class="w-80 mr-4 fill-current text-primary" />
             <span class="vx-logo-text text-primary" v-show="isMouseEnter || !reduce" v-if="title">{{ title }}</span>
           </router-link>

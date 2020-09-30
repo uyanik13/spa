@@ -76,10 +76,13 @@ export default {
            this.showAlert(i18n.t('Success'), i18n.t('login_successfull'), 'icon-success', 'success')
             if (response.role === 'user') {
             //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
-            return this.$router.push({ name: 'dashboard'})
+            return this.$router.push({ name: 'user.dashboard'}).catch(error => { console.info(error.message) })
             } else if (response.role === 'admin') {
             //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
-            return this.$router.push({ name: 'admin-dashboard'})
+            return this.$router.push({ name: 'admin.dashboard'}).catch(error => { console.info(error.message) })
+            }else if (response.role === 'staff') {
+            //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
+            return this.$router.push({ name: 'staff.dashboard'}).catch(error => { console.info(error.message) })
             }
         })
         .catch(error => {

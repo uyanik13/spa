@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Setting;
@@ -38,6 +39,10 @@ class ApiAdminController extends ApiController
 
       $orders = Order::orderBy('created_at','desc')->get();
 
+      $activeUsers = User::where('isHere',1)->orderBy('created_at','desc')->get();
+
+      $staff = User::where('role','staff')->orderBy('created_at','desc')->get();
+
       $payments = Payment::orderBy('created_at','desc')->where('status','completed')->get();
 
       $paymentsPaginated = Payment::orderBy('created_at','desc')->where('status','completed')->paginate(15);
@@ -62,6 +67,8 @@ class ApiAdminController extends ApiController
       $averageWeeklySalesRevenue = Payment::whereDate('created_at','>', Carbon::now()->addWeek(-1))->avg('amount');
 
       $data = [
+          'activeUsers' => $activeUsers,
+          'staff' => $staff,
           'orders' => $orders,
           'payments' => $payments,
           'paymentsPaginated' => $paymentsPaginated,
@@ -71,6 +78,27 @@ class ApiAdminController extends ApiController
           'thisMonthPayments' => $thisMonthPayments,
           'countries' => $countries,
           'averageWeeklySalesRevenue' => $averageWeeklySalesRevenue,
+      ];
+
+      return $data;
+    }
+
+
+      public function staff(Request $request)
+    {
+
+      if ($this->user->role !== 'staff') {
+        return $this->responseUnauthorized();
+      }
+
+
+
+      $activeUsers = User::where('isHere',1)->orderBy('created_at','desc')->get();
+
+
+
+      $data = [
+          'activeUsers' => $activeUsers,
       ];
 
       return $data;

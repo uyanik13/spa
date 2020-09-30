@@ -35,7 +35,7 @@
                         <h6 class="mb-2">{{ data.name }}</h6>
                         <p class="text-black">Datum:{{ data.appointment_date }}</p>
                         <p class="text-black">Uhrzeit bis:{{ data.appointment_date }}</p>
-                        <p class="text-black">Dauerkartenbesitzer:{{ data.user.subscribed ? 'Ja' : 'Nine' }}</p>
+                        <p class="text-black">Dauerkartenbesitzer: {{ data.user? data.user.subscribed ? 'Ja' : 'Nine' : ''  }}</p>
                     </div>
                     <vs-button type="gradient" class="mt-6 mr-5" color="#7367F0" gradient-color-secondary="#BA300B">Kunde einchecken</vs-button>
             </div>

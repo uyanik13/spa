@@ -68,6 +68,7 @@ class ApiUserController extends ApiController
         'name' => $request->name,
         'email' => $request->email,
         'phone' => $request->phone,
+         'role' => $request->role ?  $request->role : 'user',
         'email_verified_at' => Carbon::now(),
         'password' => bcrypt($request->password),
       ]);
@@ -179,10 +180,10 @@ class ApiUserController extends ApiController
   {
     $user = auth()->setRequest($request)->user();
     // Get user from $request token.
-    if (!$user->role === 'admin') {
+    if ($user->role !== 'admin') {
       return $this->responseUnauthorized();
     }
-    $userData = User::where('id', $id)->firstOrFail();
+    $userData = User::where('id', $id)->first();
 
     try {
       $userData->delete();

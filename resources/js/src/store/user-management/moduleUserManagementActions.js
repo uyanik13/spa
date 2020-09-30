@@ -56,12 +56,7 @@ export default {
   addUser ({ commit }, data) {
     return new Promise((resolve, reject) => {
       console.log('payload', data)
-      axios.post('/api/users', {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        password: data.password
-      })
+      axios.post('/api/users', data)
         .then((response) => {
           commit('ADD_USERS', Object.assign(data,
             {id: response.data.id,

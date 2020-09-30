@@ -46,11 +46,11 @@ const router = new Router({
 
         {
           path: '/panel/',
-          redirect: '/panel/dashboard'
+          redirect: '/panel/user-dashboard'
         },
         {
-          path: '/panel/dashboard',
-          name: 'dashboard',
+          path: '/panel/user-dashboard',
+          name: 'user.dashboard',
           component: () => import('./views/UserDashboard.vue'),
           meta: {
             rule: 'user'
@@ -59,10 +59,19 @@ const router = new Router({
         },
         {
           path: '/panel/admin-dashboard',
-          name: 'admin-dashboard',
+          name: 'admin.dashboard',
           component: () => import('./views/AdminDashboard.vue'),
           meta: {
             rule: 'admin'
+
+          }
+        },
+        {
+          path: '/panel/staff-dashboard',
+          name: 'staff.dashboard',
+          component: () => import('./views/StaffDashboard.vue'),
+          meta: {
+            rule: 'staff'
 
           }
         },
@@ -77,7 +86,7 @@ const router = new Router({
           path: '/panel/file-manager',
           name: 'FileManager',
           meta: {
-            rule: 'admin'
+            rule: 'staff'
           }
         }, //MAIN PAGE
         {
@@ -91,7 +100,7 @@ const router = new Router({
               {title: 'List', active: true}
             ],
             pageTitle: 'FileManager',
-            rule: 'admin'
+            rule: 'staff'
           }
         },
         {
@@ -105,7 +114,7 @@ const router = new Router({
               {title: 'List', active: true}
             ],
             pageTitle: 'FileList',
-            rule: 'admin'
+            rule: 'staff'
           }
         },
 
@@ -188,7 +197,7 @@ const router = new Router({
             component: () => import('@/views/pages/admin/content/service/services.vue'),
             meta: {
               pageTitle: 'services',
-              rule: 'admin'
+              rule: 'staff'
             }
           },
         {
@@ -202,7 +211,7 @@ const router = new Router({
               {title: 'List', active: true}
             ],
             pageTitle: 'Categories',
-            rule: 'admin'
+            rule: 'staff'
           }
         },
         {
@@ -231,7 +240,7 @@ const router = new Router({
         //       {title: 'List', active: true}
         //     ],
         //     pageTitle: 'Packages',
-        //     rule: 'admin'
+        //     rule: 'staff'
         //   }
         // },
 
@@ -247,7 +256,7 @@ const router = new Router({
               {title: 'List', active: true}
             ],
             pageTitle: 'Products',
-            rule: 'admin'
+            rule: 'staff'
           }
         },
         {
@@ -261,7 +270,7 @@ const router = new Router({
               {title: 'List', active: true}
             ],
             pageTitle: 'Orders',
-            rule: 'admin'
+            rule: 'staff'
           }
         },
 
@@ -275,7 +284,7 @@ const router = new Router({
                {title: 'language'},
              ],
              pageTitle: 'Front Side Edit',
-             rule: 'admin'
+             rule: 'staff'
 
            }
          },
@@ -289,7 +298,7 @@ const router = new Router({
                {title: 'language'},
              ],
              pageTitle: 'Back Side Edit',
-             rule: 'admin'
+             rule: 'staff'
 
            }
          },
@@ -323,7 +332,22 @@ const router = new Router({
               {title: 'List', active: true}
             ],
             pageTitle: 'appointments',
-            rule: 'admin'
+            rule: 'staff'
+
+          }
+        },
+        {
+          path: '/panel/calendar',
+          name: 'calendar',
+          component: () => import('@/views/pages/admin/calendar/calendar.vue'),
+          meta: {
+            breadcrumb: [
+              {title: 'Home', url: '/'},
+              {title: 'calendar'},
+              {title: 'List', active: true}
+            ],
+            pageTitle: 'calendar',
+            rule: 'staff'
 
           }
         },
@@ -353,7 +377,7 @@ const router = new Router({
               {title: 'Edit', active: true}
             ],
             pageTitle: 'User Edit',
-            rule: 'admin'
+            rule: 'staff'
 
           }
         },
@@ -369,6 +393,67 @@ const router = new Router({
                 {title: 'List', active: true}
               ],
               pageTitle: 'giro',
+              rule: 'admin'
+
+            }
+          },
+        {
+            path: '/panel/active-users',
+            name: 'active.users',
+            component: () => import('@/views/pages/admin/active-user/activeUsers.vue'),
+            meta: {
+              breadcrumb: [
+                {title: 'Home', url: '/'},
+                {title: 'activeUsers'},
+                {title: 'List', active: true}
+              ],
+              pageTitle: 'activeUsers',
+              rule: 'staff'
+
+            }
+          },
+
+          {
+            path: '/panel/staff',
+            name: 'staff',
+            component: () => import('@/views/pages/admin/staff/staff-list/UserList.vue'),
+            meta: {
+              breadcrumb: [
+                {title: 'Home', url: '/'},
+                {title: 'staff'},
+                {title: 'List', active: true}
+              ],
+              pageTitle: 'staff',
+              rule: 'admin'
+
+            }
+          },
+      {
+            path: '/panel/staff/staff-view/:userId',
+            name: 'staff.view',
+            component: () => import('@/views/pages/admin/staff/UserView.vue'),
+            meta: {
+              breadcrumb: [
+                {title: 'Home', url: '/'},
+                {title: 'staff'},
+                {title: 'View', active: true}
+              ],
+              pageTitle: 'staff View',
+              rule: 'admin'
+
+            }
+          },
+          {
+            path: '/panel/staff/edit/:userId',
+            name: 'staff.edit',
+            component: () => import('@/views/pages/admin/staff/staff-edit/UserEdit.vue'),
+            meta: {
+              breadcrumb: [
+                {title: 'Home', url: '/'},
+                {title: 'staff'},
+                {title: 'Edit', active: true}
+              ],
+              pageTitle: 'staff Edit',
               rule: 'admin'
 
             }

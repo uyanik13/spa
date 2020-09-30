@@ -22,9 +22,27 @@
 export default [
 
   {
-    url: '/panel/dashboard',
-    slug: '/panel/dashboard',
-    name: 'dashboard',
+    url: '/panel/user-dashboard',
+    slug: '/panel/user-dashboard',
+    name: 'user.dashboard',
+    // tag: "2",
+    // tagColor: "warning",
+    icon: 'HomeIcon',
+    i18n: 'Dashboard'
+  },
+  {
+    url: '/panel/staff-dashboard',
+    slug: '/panel/staff-dashboard',
+    name: 'staff.dashboard',
+    // tag: "2",
+    // tagColor: "warning",
+    icon: 'HomeIcon',
+    i18n: 'Dashboard'
+  },
+  {
+    url: '/panel/admin-dashboard',
+    slug: '/panel/admin-dashboard',
+    name: 'admin.dashboard',
     // tag: "2",
     // tagColor: "warning",
     icon: 'HomeIcon',
@@ -62,7 +80,7 @@ export default [
       {
         url: '/panel/users',
         slug: '/panel/users',
-        name: 'Users',
+        name: 'users',
         icon: 'UserIcon',
         i18n: 'clients'
       },
@@ -74,14 +92,42 @@ export default [
         i18n: 'giro'
       },
       {
+        url: '/panel/active-users',
+        slug: '/panel/active-users',
+        name: 'active.users',
+        icon: 'UserPlusIcon',
+        i18n: 'activeUsers'
+      },
+      {
+        url: '/panel/staff',
+        slug: '/panel/staff',
+        name: 'staff',
+        icon: 'UserMinusIcon',
+        i18n: 'staff'
+      },
+      {
         url: '/panel/appointments',
         slug: '/panel/appointments',
         name: 'appointments',
         icon: 'UserIcon',
         i18n: 'appointments'
+      },
+      {
+        url: '/panel/calendar',
+        slug: '/panel/calendar',
+        name: 'calendar',
+        icon: 'CalendarIcon',
+        i18n: 'calendar'
       }
 
     ]
+  },
+  {
+    url:'/panel/components',
+    slug: '/panel/components',
+    name: 'components',
+    icon: 'CreditCardIcon',
+    i18n: 'Components'
   },
 
 //   {
@@ -216,12 +262,6 @@ export default [
 //     ]
 //   }
 
-{
-    url:'/panel/components',
-    slug: '/panel/components',
-    name: 'components',
-    icon: 'CreditCardIcon',
-    i18n: 'Components'
-  },
+
 ]
 

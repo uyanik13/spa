@@ -32,6 +32,12 @@ export default {
 
 
   //ADD ALL DATA TO ARRAY
+  SET_ACTIVE_USERS (state, itemData) {
+    state.activeUsers = itemData
+  },
+  SET_STAFF (state, itemData) {
+    state.staff = itemData
+  },
   SET_PAYMENTS (state, itemData) {
     state.payments = itemData
   },

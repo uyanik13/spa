@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use App\Transformers\AppointmentTransformer;
 
 
 class ApiAppointmentController extends ApiController
@@ -31,13 +32,29 @@ class ApiAppointmentController extends ApiController
     {
       $user = auth()->setRequest($request)->user();
       // Get user from $request token.
-      if (!$user->role == 'admin') {
+      if ($user->role !== 'admin' && $user->role !== 'staff' ) {
         return $this->responseUnauthorized();
       }
       $collection = Appointment::orderBy('created_at','desc')->get();
 
       return $collection->toJson();
     }
+
+
+    public function events(Request $request)
+    {
+      $user = auth()->setRequest($request)->user();
+      // Get user from $request token.
+      if ($user->role !== 'admin' && $user->role !== 'staff' ) {
+        return $this->responseUnauthorized();
+      }
+
+         $collection = Appointment::orderBy('created_at','desc')->get();
+
+        return (new AppointmentTransformer)->transform($collection);
+
+    }
+
 
     /**
      * Show the form for creating a new resource.

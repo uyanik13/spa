@@ -81,8 +81,8 @@
 
 
               <vs-td class="whitespace-no-wrap">
-                <feather-icon icon="EyeIcon" svgClasses="w-7 h-7 hover:text-primary stroke-current" @click="editData(tr)" />
-                <feather-icon icon="TrashIcon" svgClasses="w-7 h-7 hover:text-danger stroke-current" class="ml-2" @click.stop="deleteData(tr.id)" />
+                <feather-icon  icon="EyeIcon" svgClasses="w-7 h-7 hover:text-primary stroke-current" @click="editData(tr)" />
+                <feather-icon  icon="TrashIcon" svgClasses="w-7 h-7 hover:text-danger stroke-current" class="ml-2" @click.stop="deleteData(tr.id)" />
               </vs-td>
 
             </vs-tr>

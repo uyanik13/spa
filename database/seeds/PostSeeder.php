@@ -35,7 +35,7 @@ class PostSeeder extends Seeder
                'seo_description' => 'Seo Description',
                'created_at' => Carbon::now(),
            ]
-             
+
        );
   }
 

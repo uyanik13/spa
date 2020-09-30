@@ -20,7 +20,8 @@ export default new AclCreate({
     globalRules: {
         admin: new AclRule('admin').generate(),
         user: new AclRule('user').generate(),
-        common: new AclRule('user').or('admin').generate(),
+        staff: new AclRule('staff').or('admin').generate(),
+        common: new AclRule('user').or('staff').or('admin').generate(),
         guest: new AclRule('guest').generate()
         // public: new AclRule("public").or("admin").or("editor").generate(),
     }

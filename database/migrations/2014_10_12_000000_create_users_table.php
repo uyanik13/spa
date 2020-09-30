@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->text('address')->default('istanbul');
             $table->string('phone')->unique()->nullable();
             $table->string('avatar')->default('https://via.placeholder.com/150');
-            $table->string('cv')->nullable();
             $table->text('social_data')->nullable();
             $table->text('about_data')->nullable();
             $table->text('user_data')->nullable();
@@ -25,10 +24,11 @@ class CreateUsersTable extends Migration
             $table->datetime('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('subscribed')->default('0');
-            $table->integer('token')->nullable();
-            $table->enum('role', ['admin','user'])->default('user');
+            $table->boolean('isHere')->default('0');
+            $table->timestamp('login_date')->nullable();
+            $table->timestamp('logout_date')->nullable();
+            $table->enum('role', ['admin','user','staff'])->default('user');
             $table->enum('status', ['1', '0'])->default('1');
-            $table->string('remember_token')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

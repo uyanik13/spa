@@ -23,7 +23,9 @@ class CreateAppointmentsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('message')->nullable();
             $table->text('FormData')->nullable();
+            $table->text('hours_between')->nullable();
             $table->timestamp('appointment_date')->nullable();
+            $table->enum('status', ['pending', 'completed'])->default('pending');
             $table->string('form_type')->nullable();
             $table->timestamps();
             $table->foreign('user_id')

@@ -9,5 +9,14 @@
 "services":"Services",
 "thumbnailArea":"Thumbnail Area",
 "thumbnailUpload":"Thumbnail Upload",
+"paymentId":"Payment Amount",
+"paymentDate":"Payment Date",
+"country":"Country",
+"city":"City",
+"loggedDate":"Logged Date",
+"isHere":"Is Here",
+"logout_date":"Logout Date",
+"staff":"Staff",
+"addNewStaff":"Add New Staff",
 "removeThisSLider":"Remove This Slider"
 }
