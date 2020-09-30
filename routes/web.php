@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Api\ApiOrderController;
+use App\Http\Controllers\CalendarInfoController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Api\ApiPaymentController;
 use App\Http\Controllers\Api\ApiAppointmentController;
@@ -80,7 +81,7 @@ Route::any('panel/{path}', function () {
     Route::post('/ajax/create-order',[ApiOrderController::class, 'store'])->name('ajax.order');
 
 
-
+    Route::get('/ajax/createAllDays',[CalendarInfoController::class, 'createAllDays'])->name('ajax.create.all.days');
 
 
 

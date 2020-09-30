@@ -1,10 +1,11 @@
 <?php
 
-use App\Models\Appointment;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Message;
 use App\Models\Payment;
+use App\Models\Appointment;
+use App\Models\CalendarInfo;
 use Illuminate\Database\Seeder;
 
 
@@ -35,6 +36,7 @@ class UserSeeder extends Seeder
         ]);
 
         $user = User::factory(20)->create();
+        //$calendarInfo = CalendarInfo::factory(1)->create();
         $appointment = Appointment::factory(500)->create();
         $payment = Payment::factory(250)->create();
 

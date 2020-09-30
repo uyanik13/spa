@@ -17,14 +17,23 @@ class AppointmentTransformer extends TransformerAbstract
 
         $events = [];
             foreach ($appointments as $key => $appointment) {
+
+                $hoursParse = explode('-',$appointment->hours_between);
+                $h1= substr($hoursParse[0],0,-3);
+                $h2= substr($hoursParse[1],0,-3);
+                $carbon_date = Carbon::parse($appointment->appointment_date);
+                $endDate = $carbon_date->addHours($h2 - $h1);
                     $data = [
                         'id' => $appointment->id,
-                        'title' => $appointment->name,
+                        'title' => substr($appointment->name,0,20),
+                        'hours' => $appointment->hours_between,
+                        'hour1' => $h1,
+                        'hour2' => $h2,
                         'startDate' => $appointment->appointment_date,
-                        'endDate' => $appointment->appointment_date,
-                        'url' => '',
-                        'classes' => $appointment->appointment_date < Carbon::now() ? 'event-success' : 'event-error',
-                        'label'  => 'business'
+                        'endDate' => $endDate,
+                        'status' => $appointment->status,
+                        'classes' => $appointment->appointment_date < Carbon::now() ? 'event-success' : 'event-warning',
+                        'label'  => substr($appointment->name,0,20),
                     ];
 
                     array_push($events , $data);

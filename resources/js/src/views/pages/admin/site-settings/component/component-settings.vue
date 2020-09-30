@@ -8,29 +8,19 @@
       </div>
     </vs-tab>
 
-    <vs-tab icon-pack="feather" icon="flag" :label="!isSmallerScreen ? $t('HomePage') : ''">
+    <vs-tab icon-pack="feather" icon="icon-home" :label="!isSmallerScreen ? $t('HomePage') : ''">
       <div class="tab-change-pwd md:ml-4 md:mt-10 mt-4 ml-0">
         <home-page />
       </div>
     </vs-tab>
 
-      <vs-tab icon-pack="feather" icon="flag" :label="!isSmallerScreen ? $t('AboutUs') : ''">
-          <div class="tab-change-pwd md:ml-4 md:mt-10 mt-4 ml-0">
-              <about-us />
-          </div>
-      </vs-tab>
+    <vs-tab icon-pack="feather" icon="icon-calendar" :label="!isSmallerScreen ? $t('Booking') : ''">
+      <div class="tab-change-pwd md:ml-4 md:mt-10 mt-4 ml-0">
+        <booking />
+      </div>
+    </vs-tab>
 
-      <vs-tab icon-pack="feather" icon="flag" :label="!isSmallerScreen ? $t('References') : ''">
-          <div class="tab-change-pwd md:ml-4 md:mt-10 mt-4 ml-0">
-              <References />
-          </div>
-      </vs-tab>
 
-      <vs-tab icon-pack="feather" icon="flag" :label="!isSmallerScreen ? $t('Faq') : ''">
-          <div class="tab-change-pwd md:ml-4 md:mt-10 mt-4 ml-0">
-              <Faq />
-          </div>
-      </vs-tab>
 
   </vs-tabs>
 
@@ -40,7 +30,7 @@
 import General from "./General.vue"
 import VideoGallery from "./Video-Gallery"
 import HomePage from "./HomePage"
-import AboutUs from "./AboutUs"
+import Booking from "./Booking"
 import Bayiler from "./Bayiler"
 import References from "./References"
 import Faq from "./Faq"
@@ -51,7 +41,7 @@ export default {
     General,
     HomePage,
     Bayiler,
-      AboutUs,
+      Booking,
       References,
       Faq,
   },

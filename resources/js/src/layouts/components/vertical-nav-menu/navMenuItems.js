@@ -28,7 +28,7 @@ export default [
     // tag: "2",
     // tagColor: "warning",
     icon: 'HomeIcon',
-    i18n: 'Dashboard'
+    i18n: 'userDashboard'
   },
   {
     url: '/panel/staff-dashboard',
@@ -37,7 +37,7 @@ export default [
     // tag: "2",
     // tagColor: "warning",
     icon: 'HomeIcon',
-    i18n: 'Dashboard'
+    i18n: 'staffDashboard'
   },
   {
     url: '/panel/admin-dashboard',
@@ -46,7 +46,7 @@ export default [
     // tag: "2",
     // tagColor: "warning",
     icon: 'HomeIcon',
-    i18n: 'Dashboard'
+    i18n: 'adminDashboard'
   },
   {
     header: 'Menu',
@@ -126,8 +126,8 @@ export default [
     url:'/panel/components',
     slug: '/panel/components',
     name: 'components',
-    icon: 'CreditCardIcon',
-    i18n: 'Components'
+    icon: 'SettingsIcon',
+    i18n: 'settings'
   },
 
 //   {

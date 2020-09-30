@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::group(['middleware' => 'guest:api'], function () {
   //POST METHODS
 
-  Route::post('login', [LoginController::class, 'login'] );
+  Route::post('login', [LoginController::class, 'login'] )->name('login');
   Route::post('logout', [AuthController::class, 'logout'])->name('logout');
   Route::post('ajax-logout', [LoginController::class, 'logout'])->name('ajax.logout');
   Route::get('refresh', [AuthController::class, 'checkToken']);

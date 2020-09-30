@@ -49,7 +49,7 @@ class ApiAppointmentController extends ApiController
         return $this->responseUnauthorized();
       }
 
-         $collection = Appointment::orderBy('created_at','desc')->get();
+         $collection = Appointment::orderBy('appointment_date','asc')->get();
 
         return (new AppointmentTransformer)->transform($collection);
 
