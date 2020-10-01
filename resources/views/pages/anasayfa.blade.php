@@ -29,10 +29,12 @@ $homePage = Helper::findCustomData('homepage');
                                                                 <div class="sc_section_inner">
                                                                     <div class="sc_section_content_wrap">
                                                                         <div class="mainPage">
-                                                                            <img src="https://www.placehold.it/450x250"
-                                                                                alt="">
+                                                                            @isset($homePage['image'])
+                                                                            <img src="{!! $homePage['image'] !!}" alt="">
+                                                                            @endisset
+
                                                                             <div class="mainPageContent">
-                                                                                <h3>E-Tickets</h3>
+
                                                                                 @isset($homePage['desc'])
                                                                                 {!! $homePage['desc'] !!}<br>
                                                                                 @endisset

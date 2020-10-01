@@ -58,7 +58,7 @@ class ApiOrderController  extends ApiController
         $new2= new Order();
         $new2->user_id = $data->id;
         $new2->order_details = 'paket adı';
-        $new2->price = 17;
+        $new2->price = $request->price;
         $new2->order_id = $order_id;
         $new2->save();
 
@@ -69,10 +69,10 @@ class ApiOrderController  extends ApiController
             $new->user_id = $partner->id;
             $new->order_details = 'paket adı';
             $new->order_id = $order_id;
-            $new->price = 17;
+            $new->price = $request->price;
             $new->save();
         }
-        return  redirect('order-summary');
+        return  redirect('order-summary/'.$order_id);
 
 
         // $order = Order::create([

@@ -31,7 +31,7 @@
                                                     <div class="sc_section sc_section_block aligncenter">
                                                         <div class="sc_section_inner">
                                                             <div class="sc_section_content_wrap">
-                                                                <a href="/order-complete"
+                                                                <a href="/order-details"
                                                                    class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup dark">
                                                                     <div>
 																	<span class="first">Nein,

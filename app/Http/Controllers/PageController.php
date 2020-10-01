@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use Carbon\Carbon;
+use App\Models\CalendarInfo;
 use Illuminate\Http\Request;
 use App\utils\Helpers\Helper;
 use Illuminate\Http\Response;
@@ -529,12 +531,37 @@ public function anotherPerson(Request $request){
 }
 
 
+        public function createSession(Request $request){
+
+            session()->put($request->key, $request->value);
+
+            return session()->get($request->key);
+
+        }
 
 
 
 public function testMethod(Request $request){
 
- return "alert" ;
+
+                        $lastTime='19:00';
+                        $hoursParse = explode('-','18:30-21:30');
+                        $firstTime = $hoursParse[0];
+                        for ($i=0; $i <=6 ; $i++) {
+                            $h1 = date('H:i', strtotime($firstTime) + 60*30*$i);
+                            if(new DateTime($h1) > new DateTime($lastTime)){
+                                $i = 1;
+                                 break;
+                            }
+                            $h2 = date('H:i', strtotime($h1) + 60*30*6).'<pre>';
+                            print_r($h1.'-'.$h2);
+
+                            //print_r($h1);
+                        }
+
+
+    //dd($selectedDay);
+
 
  }
 

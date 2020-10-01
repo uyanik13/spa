@@ -19,10 +19,11 @@
         "laravel/framework": "^8.0",
         "laravel/ui": "^2.3",
         "league/fractal": "^0.19.2",
+        "livewire/livewire": "^2.2",
         "pusher/pusher-php-server": "~3.0",
         "realrashid/sweet-alert": "^3.1",
-        "tymon/jwt-auth": "^1.0.0",
         "simplesoftwareio/simple-qrcode": "^3.0",
+        "tymon/jwt-auth": "^1.0.0",
         "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {

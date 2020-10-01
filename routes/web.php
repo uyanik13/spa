@@ -39,6 +39,7 @@ Route::any('panel/{path}', function () {
     Route::get('/blog-single/{post}', [PageController::class, 'pageView'])->name('post.find');
     Route::get('/haberler/{post}', [PageController::class, 'pageView'])->name('haber.show');
     Route::get('/payment/{id}', [PageController::class, 'pageView'])->name('payment.page');
+    Route::get('/order-summary/{id}', [PageController::class, 'pageView'])->name('order.summary');
     Route::post('/payment/make', [ApiPaymentController::class, 'create_payment'])->name('payment.make');
 
 
@@ -86,7 +87,7 @@ Route::any('panel/{path}', function () {
     Route::post('/ajax/email-contact',[ApiPaymentController::class, 'create_email_order2'])->name('ajax.email-contact');
     Route::post('/ajax/create-order',[ApiOrderController::class, 'store'])->name('ajax.order');
 
-
+    Route::post('/ajax/createSession',[PageController::class, 'createSession'])->name('ajax.createSession');
     Route::get('/ajax/createAllDays',[CalendarInfoController::class, 'createAllDays'])->name('ajax.create.all.days');
 
 

@@ -15,7 +15,7 @@ class CreateCalendarInfosTable extends Migration
     {
         Schema::create('calendar_infos', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('day');
+            $table->string('day');
             $table->string('time');
             $table->integer('quota');
             $table->double('price');

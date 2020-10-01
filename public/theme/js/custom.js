@@ -1,3 +1,5 @@
+const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+
 document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
 
@@ -16,7 +18,9 @@ document.addEventListener('DOMContentLoaded', function () {
             var dateInput2 = document.getElementById("dateInput2");
             dateInput.value=date.date
             dateInput2.value=toDate(date.date)
-            console.log(date)
+            createSession('day',toDateEN(date.date))
+            Livewire.emit('createdSessionDay')
+
         },
 
     });
@@ -45,6 +49,16 @@ window.onclick = function(event) {
 }
 
 
+function createSession(key,value) {
+    $.ajax({
+        url: '/ajax/createSession',
+        method: 'POST',
+        data: {_token: CSRF_TOKEN, key:key, value:value}
+      }).done(function (response) {
+        console.log(response)
+      })
+
+}
 function toDate (time) {
     const locale = 'de-DE'
     const date_obj = new Date(Date.parse(time))
@@ -54,8 +68,18 @@ function toDate (time) {
     return `${date_obj.getDate()  } ${ monthName} ${date_obj.getFullYear()}`
   }
 
+function toDateEN (time) {
+    const date_obj = new Date(Date.parse(time))
+    var m =  parseInt(date_obj.getMonth()) + parseInt(1);
+    var d =  parseInt(date_obj.getDate());
+    const month = m < 10 ? "0"+m : m
+    const day = d < 10 ? "0"+d : d
 
-  const CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    return `${date_obj.getFullYear()}-${month}-${day}`
+  }
+
+
+
 
 
 function main_live_search () {

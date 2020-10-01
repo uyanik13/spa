@@ -592,10 +592,18 @@ class Helper
             ->where('status','pending')
             ->orderBy('created_at','desc')
             ->pluck('order_id')->first();
-        return Order::where('order_id',$mainUserOrderId)->get();
+            $orders = [
+                'orders' => Order::where('order_id',$mainUserOrderId)->get(),
+                'total' => Order::where('order_id',$mainUserOrderId)->sum('price'),
+            ];
+
+        return $orders;
     }
-public static function getCurrentClientsInSpa(){
-    return "asd";
-}
+
+        public static function getCurrentClientsInSpa(){
+            return "asd";
+        }
+
+
 
 }

@@ -3,10 +3,10 @@
 
 
           <vx-card class="mt-5 w-full">
-               <vs-input :label="$t('homePageTitle')"  v-model="homepage.title" class="mt-5 w-full"  />
+               <vs-input :label="$t('orderDetailsTitle')"  v-model="orderDetails.title" class="mt-5 w-full"  />
 
                 <div class="flex flex-wrap items-center mb-base mt-5">
-               <img :src="!homepage.image ? 'https://via.placeholder.com/150.png' : homepage.image "  height="150px"  width="150px" class="card-img-top" />
+               <img :src="!orderDetails.image ? 'https://via.placeholder.com/400.png' : orderDetails.image "  height="200px"  width="400px" class="card-img-top" />
                 <div>
                     <input type="file" class="hidden" ref="updateImgInput" @change="update_avatar" accept="image/*">
                     <vs-button class="mr-4 sm:mb-0 mb-2 ml-3" @click="$refs.updateImgInput.click()">{{$t('addImage')}}</vs-button>
@@ -15,10 +15,10 @@
 
                <div class="flex flex-wrap items-center mb-5 mt-5  h-full">
                       <span>{{$t('Content')}}</span>
-                      <quill-editor v-model="homepage.desc" :label="$t('Content')" height="600" />
-                      <span class="text-danger text-sm" v-show="errors.has('homepage.desc')">{{ errors.first('homepage.desc') ? $t('Content') : ''}}</span>
+                      <quill-editor v-model="orderDetails.desc" :label="$t('Content')" height="600" />
+                      <span class="text-danger text-sm" v-show="errors.has('orderDetails.desc')">{{ errors.first('orderDetails.desc') ? $t('Content') : ''}}</span>
                     </div>
-                    <vs-button class="ml-auto mt-2" @click="SaveData('homepage')">{{$t('save')}}</vs-button>
+                    <vs-button class="ml-auto mt-2" @click="SaveData('orderDetails')">{{$t('save')}}</vs-button>
           </vx-card>
 
 
@@ -44,7 +44,7 @@ export default {
 
   data () {
     return {
-        homepage:{ title : '', desc:'', image:''}
+        orderDetails:{ title : '', desc:'', image:''}
     }
   },
   methods:{
@@ -83,7 +83,7 @@ export default {
       if (input.target.files && input.target.files[0]) {
         const reader = new FileReader()
         reader.onload = e => {
-          this.homepage.image = e.target.result
+          this.orderDetails.image = e.target.result
           console.log('IMAGEURL', e.target.result)
         }
         reader.readAsDataURL(input.target.files[0])

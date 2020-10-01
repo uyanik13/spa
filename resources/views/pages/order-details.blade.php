@@ -8,6 +8,10 @@
     @php
         $partners=Helper::getPartners();
     $totalClient = count($partners)+1;
+    $orderDetails = Helper::findCustomData('orderDetails');
+    $calendarInfo = Helper::findCustomData('calendarInfo') ;
+    $price = $calendarInfo['price'];
+
     @endphp
 
 
@@ -66,25 +70,22 @@
                     <aside class="widget widget_text">
                         <div id="bookingCheckoutInfos" class="sidebar_inner widget_area_inner">
 
-                            <h3>Sauntarif Spat</h3>
+                            @isset($orderDetails['title'])
+                            <h3>{{$orderDetails['title']}}</h3>
+                            @endisset
                             <div class="reservationLocatImg">
-                                <img src="https://www.placehold.it/450x200" alt="">
+                                @isset($orderDetails['desc'])
+                                <img src=" {{$orderDetails['image']}}" alt="">
+                                @endisset
+
                             </div>
                             <div class="reservationDesc">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus inventore
-                                    delectus animi minus fuga facere possimus excepturi, vel fugiat mollitia. Quis
-                                    nostrum minus eius dignissimos fuga aspernatur velit cum odio?
-                                </p>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id deleniti totam
-                                    magni laboriosam dolorem, praesentium veniam, sint dolores, exercitationem
-                                    dolore accusantium eveniet nostrum. Quibusdam nemo, ea aliquam dolorem quo
-                                    eligendi?
-                                </p>
+                                @isset($orderDetails['desc'])
+                                {!! $orderDetails['desc'] !!}
+                                @endisset
                             </div>
                             <div class="reservationDetailsList">
-                                <h6>Montags (außer an Feiertagen) ist Damentag.</h6>
+
                                 <ul>
                                     <li><span class="reservationSpeciment"><i class="fa fa-building"></i>
                                             Filiale:</span><span class="reservationSpecimentInfo">das
@@ -93,8 +94,7 @@
                                             Termin:</span><span class="reservationSpecimentInfo">
                                                 {{substr((json_decode(session()->get('appointment'),true)['dateInput']),0,21 ) }}
                                               </span></li>
-                                    <li><span class="reservationSpeciment"><i class="fa fa-ticket"></i> Freie
-                                            E-Tickets:</span><span class="reservationSpecimentInfo">30</span></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -105,16 +105,17 @@
                             <ul>
                                 <li>
                                     <span>Saunatarif Spat</span>
-                                        <span>{{$totalClient*17}},00 €</span>
+                                        <span>{{number_format($totalClient*$price,2)}} €</span>
                                 </li>
                                 <li>
                                     <span>Gesamtpreis</span>
-                                        <span>{{$totalClient*17}},00 €</span>
+                                        <span>{{number_format($totalClient*$price,2)}} €</span>
                                 </li>
                             </ul>
                             <div style="text-align: right;">
                                     <form action="{{route('calendar.addOrder')}}" id="addPaymentForm" method="post">
                                         @csrf
+                                        <input type="hidden" id="price"     name="price" value="{{number_format($totalClient*$price,2)}}" >
                                         <a onclick="document.getElementById('addPaymentForm').submit()"
                                     class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup blue">
                                     <div>

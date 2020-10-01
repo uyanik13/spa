@@ -1,7 +1,14 @@
 @auth
+
     @php
-        $orders= Helper::getOrders();
+       $orderDetails= Helper::getOrders();
+        $orders= $orderDetails['orders'];
+        $calendarInfo = Helper::findCustomData('calendarInfo') ;
+        $subtotal = $orderDetails['total'];
+        $tax = ($orderDetails['total']*$calendarInfo['kdv']/100);
+        $total = $orderDetails['total'] + ($orderDetails['total']*$calendarInfo['kdv']/100);
     @endphp
+
     @if(count($orders)>0)
         <script >
             var paymethod = getCookie('PayMethod');
@@ -93,110 +100,101 @@
                                                     document.getElementById('displayPayMethod').innerText = paymethod;
                                                     document.getElementById('displayPayMethodInDetails').innerText = paymethod;
                                                 </script>
-                                            <div class="column-1 sc_column_item">
-                                                <div class="summaryTable lastStep">
-                                                    <h3><i class="fa fa-shopping-cart"></i> Ihre Bestellung
-                                                    </h3>
-                                                    <table>
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Produkt</th>
-                                                                <th>Stückpreis</th>
-                                                                <th>Anzahl</th>
-                                                                <th>Gesamtpreis</th>
-                                                                <th></th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @isset($orders)
-                                                                @foreach($orders as $order)
-                                                                    <tr id="tr_{{$order->id}}">
+                                           <div class="column-1 sc_column_item">
+                                            <div class="summaryTable">
+                                                <table>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Produkt</th>
+                                                        <th>Stückpreis</th>
+                                                        <th>Anzahl</th>
+                                                        <th>Gesamtpreis</th>
+                                                        <th></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    @isset($orders)
+                                                        @foreach($orders as $order)
+                                                            <tr id="tr_{{$order->id}}">
                                                                 <td>
                                                                     <div class="produktCart">
-                                                                        <span class="produktImage">
-                                                                            <img src="https://www.placehold.it/450x250"
-                                                                                alt="">
-                                                                        </span>
+                                                            <span class="produktImage">
+                                                                <img src="https://www.placehold.it/450x250"
+                                                                     alt="">
+                                                            </span>
 
                                                                         <div class="produktInfos">
-                                                                            <span class="pTitle">
-                                                                                Saunatarif Spat
-                                                                            </span>
+                                                                <span class="pTitle">
+                                                                    Saunatarif Spat
+                                                                </span>
                                                                             <span class="pInfos">
-                                                                                <i
-                                                                                    class="fa fa-building"></i>
-                                                                                das
-                                                                                Stadtwerk.Westbad
-                                                                            </span>
+                                                                    <i
+                                                                        class="fa fa-building"></i>
+                                                                    das
+                                                                    Stadtwerk.Westbad
+                                                                </span>
                                                                             <span class="pInfos">
-                                                                                <i
-                                                                                    class="fa fa-calendar"></i>
-                                                                                {{$order->order_details}}
-                                                                            </span>
+                                                                    <i
+                                                                        class="fa fa-calendar"></i>
+                                                                    {{$order->order_details}}
+                                                                </span>
                                                                             <span class="pInfos">
-                                                                                <i class="fa fa-user"></i>
-                                                                                @if(isset($order->user)){{$order->user->name}}@else {{Auth::user()->name}}@endif
-                                                                            </span>
+                                                                    <i class="fa fa-user"></i>
+                                                                    @if(isset($order->user)){{$order->user->name}}@else {{Auth::user()->name}}@endif
+                                                                </span>
                                                                         </div>
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    17,-€
+                                                                    {{number_format($order->price,2)}}€
                                                                 </td>
                                                                 <td>
-                                                                    1
+                                                                     {{count($orders)}}
                                                                 </td>
                                                                 <td>
-                                                                    17,-€
+                                                                    {{ number_format($total,2)}}€
                                                                 </td>
                                                                 <td>
-                                                                            <a class="pDelete"
-                                                                               onclick="deleteOrder({{$order->id}})">
-                                                                                <i class="fa fa-close"></i>
-                                                                            </a>
+                                                                    <a class="pDelete"
+                                                                       onclick="deleteOrder({{$order->id}})">
+                                                                        <i class="fa fa-close"></i>
+                                                                    </a>
                                                                 </td>
-                                                                        <script>
+                                                                <script>
 
-                                                                            function deleteOrder(id) {
-                                                                                $.ajax({
-                                                                                    url: '/calendar/delete-order',
-                                                                                    method: 'post',
-                                                                                    data: {
-                                                                                        _token: '{{csrf_token()}}',
-                                                                                        'id': id
-                                                                                    },
-                                                                                    success(resp) {
-                                                                                        if (resp.message == 200) {
-                                                                                            document.getElementById('tr_' + id).remove();
-                                                                                        }
-                                                                                    }
-                                                                                })
-
+                                                                    function deleteOrder(id) {
+                                                                        $.ajax({
+                                                                            url: '/calendar/delete-order',
+                                                                            method: 'post',
+                                                                            data: {
+                                                                                _token: '{{csrf_token()}}',
+                                                                                'id': id
+                                                                            },
+                                                                            success(resp) {
+                                                                                if (resp.message == 200) {
+                                                                                    document.getElementById('tr_' + id).remove();
+                                                                                }
                                                                             }
+                                                                        })
 
-                                                                        </script>
+                                                                    }
+
+                                                                </script>
 
                                                             </tr>
-                                                        </tbody>
-                                                    </table>
-
-                                                    <div class="pSummary">
-                                                        <ul>
-                                                            <li><span
-                                                                    class="pTag">Zwischensumme:</span><span>17,-€</span>
-                                                            </li>
-                                                            <li><span class="pTag">Mehrwertsteuer
-                                                                    (%16):</span><span>2,72-€</span>
-                                                            </li>
-                                                            <li><span
-                                                                    class="pTag">Gesamtsumme:</span><span>17,-€</span>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                        @endforeach
+                                                    @endisset
+                                                    </tbody>
+                                                </table>
                                             </div>
-
+                                        </div>
+                                        <form action="{{route('payment.make')}}" id="goToPayment" method="post">
+                                            @csrf
                                             <div class="column-1 sc_column_item">
+
+                                            <input type="hidden" name="order_id" value="{{$orders[0]->order_id}}">
+                                            <input type="hidden" name="order_total" value="{{number_format($total,2)}}">
                                                 <div class="acceptPolicies">
                                                     <ul>
                                                         <li><input type="checkbox"> Hiermit bestatige ich,
@@ -204,15 +202,17 @@
                                                     </ul>
 
                                                     <div style="text-align: right;">
-                                                        <a href="/"
-                                                            class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup blue">
-                                                            <div>
-                                                                <span class="first">Jetz zahlungspflichtig
-                                                                    bestellen</span>
-                                                                <span class="second">Jetz zahlungspflichtig
-                                                                    bestellen</span>
-                                                            </div>
-                                                        </a>
+                                            <button type="submit"
+                                            class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup blue">
+                                            <div>
+                                                <span class="first">Jetz zahlungspflichtig
+                                                    bestellen</span>
+                                                <span class="second">Jetz zahlungspflichtig
+                                                    bestellen</span>
+                                            </div>
+                                            </button>
+                                    </form>
+
                                                     </div>
                                                 </div>
                                             </div>

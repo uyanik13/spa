@@ -119,15 +119,7 @@
 																		placeholder="E-Mail *"
 																		style="background-color: #fff;">
 																</div>
-																<div
-																	class="sc_form_item sc_form_field label_over">
-																	<label class="required"
-																		for="sc_form_username">Geburtsdatum</label>
-																	<input id="sc_form_username" type="date"
-																		name="birth_date"
-																		placeholder="Geburtsdatum *"
-																		style="background-color: #fff;">
-																</div>
+
 																<div
 																	class="sc_form_item sc_form_field label_over">
 																	<label class="required"

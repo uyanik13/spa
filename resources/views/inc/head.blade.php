@@ -42,4 +42,5 @@
     <link rel='stylesheet' href='/theme/css/plugins.css' type='text/css' media='all' />
     <link rel='stylesheet' href='/theme/css/custom.css' type='text/css' media='all' />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    @livewireStyles
 </head>
