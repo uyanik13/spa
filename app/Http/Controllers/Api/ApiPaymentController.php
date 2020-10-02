@@ -99,9 +99,9 @@ class ApiPaymentController extends Controller
 
 
 
+                        return  redirect('order-complete/'.$request->order_id);
 
 
-                    return QrCode::size(200)->backgroundColor(255,55,0)->generate($request->order_id);
                 }
 
 

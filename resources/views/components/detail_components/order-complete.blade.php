@@ -1,6 +1,7 @@
 @auth
     @php
-        $gender = json_decode(App\Models\User::find(Auth::user()->id)->about_data,true)['anrede'];
+        $gender = Helper::jsonToArray($user->about_data);
+
     @endphp
 <div class="page_content_wrap page_paddings_no">
 	<div class="content_wrap">
@@ -24,8 +25,12 @@
 													<div class="wrapper">
 														<p>
                                                                 Sehr geehrter
-                                                                <strong>{{$gender}} {{auth()->user()->name}},</strong>
-														</p>
+                                                                @isset($record)
+                                                                <strong>{{$gender['anrede']}} {{auth()->user()->name}},</strong>
+                                                                @endisset
+
+                                                        </p>
+
 														<p>
 															Vielen Dank, dass Sie sich auf unserer Seite
 															registriert haben
@@ -34,7 +39,9 @@
 															Sie werden in Kürze eine E-mail erhalten.
 															Klicken Sie auf den darin enthaltenen Link um
 															die Registrierung abzuschließen.
-														</p>
+                                                        </p>
+                                                        <p> {!! QrCode::size(200)->backgroundColor(255,55,0)->generate($itemId); !!}</p>
+
 														<a href="/order-details"
 															class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup blue">
 															<div>

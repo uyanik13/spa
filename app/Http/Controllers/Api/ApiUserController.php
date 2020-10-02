@@ -100,7 +100,7 @@ class ApiUserController extends ApiController
 
     $user = auth()->setRequest($request)->user();
     // Get user from $request token.
-    if (!$user->role === 'admin') {
+    if ($user->role !== 'admin' && $user->role !== 'staff' ) {
       return $this->responseUnauthorized();
     }
 
@@ -138,6 +138,17 @@ class ApiUserController extends ApiController
         $userData->social_data = request('social_data') ? json_encode(request('social_data')) : $userData->social_data;
         $userData->user_data = request('user_data') ? json_encode(request('user_data')) : $userData->user_data;
         $userData->notification_data = request('notification_data') ? json_encode(request('notification_data')) : $userData->notification_data;
+
+
+        $userData->isHere = request('isHere');
+
+        if (request('isHere') == 1) {
+            $userData->login_date = Carbon::now();
+            $userData->logout_date = null;
+          }else{
+            $userData->logout_date = Carbon::now();
+            $userData->login_date = null;
+          }
 
         if (request('avatar')) {
           $userData->avatar = Helper::PostImageHelper('avatar', request('avatar'), 'user');

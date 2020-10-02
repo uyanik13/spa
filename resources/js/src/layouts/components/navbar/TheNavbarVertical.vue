@@ -22,6 +22,9 @@
 <!--      <bookmarks :navbarColor="navbarColor" v-if="windowWidth >= 992" />-->
 
         <vs-button icon-pack="feather" icon="icon-link" href="/" target="_blank" class="shadow-lg btn-back-to-top" > {{ $t('GoToTheWebSite')}}</vs-button>
+
+         <qr-popup></qr-popup>
+
         <vs-spacer />
 
        <i18n />
@@ -45,6 +48,7 @@ import SearchBar            from './components/SearchBar.vue'
 import CartDropDown         from './components/CartDropDown.vue'
 import NotificationDropDown from './components/NotificationDropDown.vue'
 import ProfileDropDown      from './components/ProfileDropDown.vue'
+import QrPopup      from './components/QrPopup.vue'
 
 export default {
   name: 'the-navbar-vertical',
@@ -60,7 +64,8 @@ export default {
     SearchBar,
     CartDropDown,
     NotificationDropDown,
-    ProfileDropDown
+    ProfileDropDown,
+    QrPopup,
   },
   computed: {
     navbarColorLocal () {

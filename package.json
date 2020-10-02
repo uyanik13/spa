@@ -49,6 +49,7 @@
         "vue-perfect-scrollbar": "^0.1.0",
         "vue-prism-component": "^1.1.1",
         "vue-property-decorator": "^8.1.1",
+        "vue-qrcode-reader": "^2.3.13",
         "vue-quill-editor": "^3.0.6",
         "vue-router": "^3.0.6",
         "vue-select": "^3.1.0",

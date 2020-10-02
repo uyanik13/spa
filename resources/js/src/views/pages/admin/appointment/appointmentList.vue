@@ -5,7 +5,18 @@
 
     <appointment-sidebar :isSidebarActive="addNewDataSidebar" @closeSidebar="toggleDataSidebar" :data="sidebarData" />
 
-    <vs-table ref="table"  multiple v-model="selected" pagination :max-items="itemsPerPage" search :data="DataList">
+   <table-ogur
+        :sst="true"
+        @search="handleSearch"
+        @change-page="handleChangePage"
+        @sort="handleSort"
+        :total="blogPosts.total ? blogPosts.total : 15"
+        v-model="selected"
+        pagination
+        search
+        :max-items="blogPosts.to"
+        :last-page="blogPosts.last_page"
+        :data="blogPosts.data ? blogPosts.data : fakeData ">
 
       <div slot="header" class="flex flex-wrap-reverse items-center flex-grow justify-between">
 
@@ -18,39 +29,17 @@
           </div>-->
 
         </div>
+     </div>
 
-        <!-- ITEMS PER PAGE -->
-        <vs-dropdown vs-trigger-click class="cursor-pointer mb-4 mr-4 items-per-page-handler">
-          <div class="p-4 border border-solid d-theme-border-grey-light rounded-full d-theme-dark-bg cursor-pointer flex items-center justify-between font-medium">
-            <span class="mr-2">{{ currentPage * itemsPerPage - (itemsPerPage - 1) }} - {{ DataList.length - currentPage * itemsPerPage > 0 ? currentPage * itemsPerPage : DataList.length }} of {{ queriedItems }}</span>
-            <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
-          </div>
-          <!-- <vs-button class="btn-drop" type="line" color="primary" icon-pack="feather" icon="icon-chevron-down"></vs-button> -->
-          <vs-dropdown-menu>
-
-            <vs-dropdown-item @click="itemsPerPage=4">
-              <span>4</span>
-            </vs-dropdown-item>
-            <vs-dropdown-item @click="itemsPerPage=10">
-              <span>10</span>
-            </vs-dropdown-item>
-            <vs-dropdown-item @click="itemsPerPage=15">
-              <span>15</span>
-            </vs-dropdown-item>
-            <vs-dropdown-item @click="itemsPerPage=20">
-              <span>20</span>
-            </vs-dropdown-item>
-          </vs-dropdown-menu>
-        </vs-dropdown>
-      </div>
 
       <template slot="thead">
         <vs-th sort-key="id">{{$t('ID')}}</vs-th>
+        <vs-th sort-key="appointment_id">{{$t('appointmentId')}}</vs-th>
         <vs-th sort-key="name">{{$t('name')}}</vs-th>
         <vs-th sort-key="email">{{$t('email')}}</vs-th>
         <vs-th sort-key="phone">{{$t('phone')}}</vs-th>
         <vs-th sort-key="message">{{$t('appointmendDate')}}</vs-th>
-        <vs-th>İşlem</vs-th>
+        <vs-th>{{$t('action')}}</vs-th>
       </template>
 
         <template slot-scope="{data}">
@@ -60,6 +49,9 @@
               <p class="product-name font-medium truncate">{{ tr.id}}</p>
               </vs-td>
 
+              <vs-td>
+                <p class="product-name font-medium truncate">{{ tr.appointment_id }}</p>
+              </vs-td>
               <vs-td>
                 <p class="product-name font-medium truncate">{{ tr.name }}</p>
               </vs-td>
@@ -88,7 +80,7 @@
             </vs-tr>
           </tbody>
         </template>
-    </vs-table>
+    </table-ogur>
   </div>
 </template>
 
@@ -97,15 +89,30 @@ import appointmentSidebar from './appointmentSidebar.vue'
 import Swal from 'sweetalert2'
 import moment from 'moment'
 import i18n from '@/i18n/i18n'
+import axios from 'axios'
+import TableOgur from '@/components/TableOgur'
 
 export default {
   components: {
-    appointmentSidebar
+    appointmentSidebar,
+    TableOgur
 
   },
   data () {
     return {
       selected: [],
+      sst: false,
+      professions: [],
+      fakeData:[
+        {
+          user: {
+            name: 'Loading...'
+          },
+          seo_title: 'Loading...',
+          seo_description: 'Loading...',
+          status: 1
+        }
+      ],
       itemsPerPage: 10,
       isMounted: false,
       addNewDataSidebar: false,
@@ -116,24 +123,43 @@ export default {
     }
   },
   computed: {
-    currentPage () {
-      if (this.isMounted) {
-        return this.$refs.table.currentx
-      }
-      return 0
+     currentPage () {
+      return this.blogPosts.current_page
     },
-    DataList () {
+    blogPosts () {
       return this.$store.state.form.formList
     },
-    queriedItems () {
-      return this.$refs.table ? this.$refs.table.queriedResults.length : this.DataList.length
-    }
+
   },
   methods: {
     format_date (value) {
       if (value) {
         return moment(String(value)).format('DD/MM/YYYY - hh:mm')
       }
+    },handleSearch (search_value) {
+      axios.post('/api/appointment-search', {search_value})
+        .then(response => {
+          console.log(response.data)
+          this.$store.commit('form/SET_ITEM', response.data)
+          //this.$store.state.post.pages = response.data.pages
+        })
+    },
+    handleChangePage () {
+      axios.get(this.blogPosts.next_page_url)
+        .then(response => {
+          //console.log(response.data)
+         this.$store.commit('form/SET_ITEM', response.data)
+          //this.$store.state.post.pages = response.data.pages
+        })
+    },
+    handleSort (key, active) {
+      //console.log(key, active)
+      axios.post('/api/appointment-sort', {key, active})
+        .then(response => {
+          console.log(response.data)
+          this.$store.commit('form/SET_ITEM', response.data)
+          //this.$store.state.post.pages = response.data.pages
+        })
     },
     addNewData () {
       this.sidebarData = {

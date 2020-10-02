@@ -17,6 +17,9 @@ import Vuesax from 'vuesax'
 Vue.use(Vuesax)
 
 
+import VueQrcodeReader from "vue-qrcode-reader";
+
+Vue.use(VueQrcodeReader);
 
 // axios
 //import axios from './axios.js'

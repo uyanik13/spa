@@ -8,6 +8,7 @@ use App\Models\Appointment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\ApiController;
+use App\Http\Resources\invoiceResource;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Transformers\AppointmentTransformer;
@@ -35,7 +36,7 @@ class ApiAppointmentController extends ApiController
       if ($user->role !== 'admin' && $user->role !== 'staff' ) {
         return $this->responseUnauthorized();
       }
-      $collection = Appointment::orderBy('created_at','desc')->get();
+      $collection = Appointment::orderBy('created_at','desc')->paginate(15);
 
       return $collection->toJson();
     }
@@ -143,9 +144,18 @@ class ApiAppointmentController extends ApiController
      * @param  \App\Appointment  $appointment
      * @return \Illuminate\Http\Response
      */
-    public function show(Appointment $appointment)
+    public function show(Request $request,$id)
     {
-        //
+        $user = auth()->setRequest($request)->user();
+
+        if (!$user) {
+          return $this->responseUnauthorized();
+        }
+
+        $appointments = Appointment::where('appointment_id', $id)->get();
+
+
+        return $appointments;
     }
 
     /**
@@ -194,4 +204,35 @@ class ApiAppointmentController extends ApiController
         return $this->responseServerError('Error deleting resource.');
       }
     }
+
+    public function appointmentSearch (Request $request) {
+
+        $type = $request->type;
+        $search_text = $request->search_value;
+
+        if ($search_text === NULL) {
+          $searchData= Appointment::orderBy('created_at', 'desc')->paginate(15);
+      } else {
+          $searchData =Appointment::where('appointment_id','LIKE','%'.$search_text.'%')
+          ->orWhere('name','LIKE','%'.$search_text.'%')
+          ->orWhere('email','LIKE','%'.$search_text.'%')
+          ->orWhere('appointment_date','LIKE','%'.$search_text.'%')
+          ->orWhere('phone','LIKE','%'.$search_text.'%')
+          ->orderBy('created_at', 'desc')->paginate(15);
+      }
+
+
+      return  response()->json($searchData);
+    }
+
+
+    public function appointmentSort (Request $request) {
+
+        $type = $request->type;
+        $key = $request->key;
+        $active = $request->active;
+        $searchData = Appointment::orderBy($key, $active)->paginate(15);
+         return  response()->json($searchData);
+      }
+
 }

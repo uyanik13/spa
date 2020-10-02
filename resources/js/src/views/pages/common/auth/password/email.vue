@@ -23,11 +23,11 @@
                                     <h4 class="mb-4">Şifrenizi Sıfırlayınız</h4>
                                     <p>Lütfen e-posta adresinizi girin, size şifrenizi nasıl sıfırlayacağınızla ilgili talimatlar gönderelim.</p>
                                 </div>
-                              <form class="user" @submit.prevent="send" @keydown="form.onKeydown($event)">
-                                <vs-input type="email" name="email" label-placeholder="Email" v-model="form.email" :class="{ 'is-invalid': form.errors.has('email') }" class="w-full mb-8" />
+                              <form class="user" @submit.prevent="send">
+                                <vs-input type="email" name="email" label-placeholder="Email" v-model="email" :class="{ 'is-invalid': errors.has('email') }" class="w-full mb-8" />
                                 <vs-button type="border" to="/panel/login" class="px-4 w-full md:w-auto">Girişe Dön</vs-button>
 
-                                <vs-button @click="send()" :loading="form.busy" class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0">Şifreyi Sıfırla</vs-button>
+                                <vs-button @click="send()"  class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0">Şifreyi Sıfırla</vs-button>
 
                               </form>
                             </div>

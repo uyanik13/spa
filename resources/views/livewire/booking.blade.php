@@ -2,7 +2,7 @@
 <div class="modal-content1" style="background-color: transparent; border: none;">
 
     <div id="targetModal" class="appointmentForm">
-        <span class="close1">&times;</span>
+        <span class="close1" onclick="closeModal()">&times;</span>
         <h2 class="text-center mb-4">
             Reservierungsformular
         </h2>
@@ -28,9 +28,15 @@
                                 <option value="default">Bitte wählen Sie die Option</option>
                                 @if($selectedDay)
                                 @foreach ($selectedDay as $day)
-                                <option value="{{$day->time}}"class="bg-success text-white ">{{$day->time}}
-                                    <span>letzte {{$day->quota}} Personen</span>
-                                   </option>
+                               @if ($day->quota > 0)
+                               <option value="{{$day->time}}"class="bg-success text-white ">{{$day->time}}
+                                <span>letzte {{$day->quota}} Personen</span>
+                                 </option>
+                               @else
+                               <option value="{{$day->time}}"class="bg-danger text-white " disabled="true" >{{$day->time}}
+                                <span>letzte {{$day->quota}} Personen</span>
+                                </option>
+                               @endif
                                 @endforeach
                                 @endif
 

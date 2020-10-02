@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth:api'], function () {
 
 
  //API RESOURCES
- Route::apiResource('admin',ApiAdminController::class); //ADMIN
+  Route::apiResource('admin',ApiAdminController::class); //ADMIN
   Route::apiResource('blog', ApiBlogController::class);
   Route::apiResource('post', ApiPostController::class );
   Route::apiResource('setting', ApiSettingController::class);
@@ -48,6 +48,8 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::post('uploadAdditionalFiles', [ApiPostController::class, 'uploadAdditionalFiles'] );
   Route::post('uploadImageGallery', [ApiPostController::class, 'uploadImageGallery'] );
   Route::post('removeProductGalleryImage', [ApiPostController::class, 'removeProductGalleryImage'] );
+  Route::post('appointment-search', [ApiAppointmentController::class, 'appointmentSearch'] );
+  Route::post('appointment-sort', [ApiAppointmentController::class, 'appointmentSort'] );
 
 
 

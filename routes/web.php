@@ -40,6 +40,7 @@ Route::any('panel/{path}', function () {
     Route::get('/haberler/{post}', [PageController::class, 'pageView'])->name('haber.show');
     Route::get('/payment/{id}', [PageController::class, 'pageView'])->name('payment.page');
     Route::get('/order-summary/{id}', [PageController::class, 'pageView'])->name('order.summary');
+    Route::get('/order-complete/{id}', [PageController::class, 'pageView'])->name('order.complete');
     Route::post('/payment/make', [ApiPaymentController::class, 'create_payment'])->name('payment.make');
 
 

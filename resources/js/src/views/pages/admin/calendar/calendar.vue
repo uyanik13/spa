@@ -61,21 +61,7 @@
             </div>
           </div>
 
-          <div class="vx-row sm:flex hidden mt-4">
-            <div class="vx-col w-full flex">
-              <!-- Labels -->
-              <div class="flex flex-wrap sm:justify-start justify-center">
-                  <div v-for="(label, index) in calendarLabels" :key="index" class="flex items-center mr-4 mb-2">
-                      <div class="h-3 w-3 inline-block rounded-full mr-2" :class="'bg-' + label.color"></div>
-                      <span>{{ label.text }}</span>
-                  </div>
-                  <div class="flex items-center mr-4 mb-2">
-                      <div class="h-3 w-3 inline-block rounded-full mr-2 bg-primary"></div>
-                      <span>None</span>
-                  </div>
-              </div>
-            </div>
-          </div>
+
         </div>
       </calendar-view>
     </div>
@@ -195,9 +181,7 @@ export default {
     disabledDatesFrom () {
       return { from: new Date(this.endDate) }
     },
-    calendarLabels () {
-      return this.$store.state.calendar.eventLabels
-    },
+
     labelColor () {
       return (label) => {
         if      (label === 'completed') return 'success'
@@ -257,7 +241,6 @@ export default {
   created () {
     this.$store.registerModule('calendar', moduleCalendar)
     this.$store.dispatch('calendar/fetchEvents')
-    this.$store.dispatch('calendar/fetchEventLabels')
   },
   beforeDestroy () {
     this.$store.unregisterModule('calendar')

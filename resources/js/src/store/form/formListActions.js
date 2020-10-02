@@ -45,4 +45,15 @@ export default {
   },
 
 
+
+  findAppointmentUsers ({ commit }, orderId) {
+    return new Promise((resolve, reject) => {
+      axios.get(`/api/appointment/${orderId}`)
+        .then((response) => {
+          resolve(response.data)
+        })
+        .catch((error) => { reject(error) })
+    })
+  },
+
 }

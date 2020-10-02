@@ -10,6 +10,8 @@
 <script type='text/javascript' src='/theme/js/custom/custom.js'></script>
 <script type='text/javascript' src='/theme/js/vendor/superfish.js'></script>
 <script type='text/javascript' src='/theme/js/vendor/jquery.slidemenu.js'></script>
+<script type='text/javascript' src='/theme/js/custom/core.utils.js'></script>
+<script type='text/javascript' src='/theme/js/custom/core.init.js'></script>
 <script type='text/javascript' src='/theme/js/custom/theme.init.js'></script>
 <script type='text/javascript' src='/theme/js/vendor/social-share.js'></script>
 <script type='text/javascript' src='/theme/js/custom/theme.shortcodes.js'></script>
