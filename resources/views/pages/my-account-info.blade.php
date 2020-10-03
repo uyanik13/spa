@@ -5,6 +5,14 @@
         }
     }
 </style>
+
+@auth
+    @php
+        $user = Auth::user();
+        $aboutData = json_decode($user->about_data,true);
+        $partners = \App\Models\User::where('reference_id',$user->id)->get();
+
+    @endphp
 <div class="page_content_wrap page_paddings_yes">
     <div id="acountWrap" class="content_wrap">
         <div class="content">
@@ -31,41 +39,41 @@
                         <div class="column sc_col-sm-8">
                             <div class="kontoInformation">
                                 <h3>Kontoinformation</h3>
-                                <form action="">
+                                <form action="{{route('calendar.userinfoupdate')}}" id="formUpdate" method="post">
+                                    @csrf
                                     <div class="input">
-                                        <label for="Nachname">Nachname</label>
-                                        <input type="text" id="Nachname" name="Nachname"
-                                            placeholder="Nachname">
-                                    </div>
-                                    <div class="input">
-                                        <label for="Vorname">Vorname</label>
-                                        <input type="text" id="Vorname" name="Vorname"
-                                            placeholder="Vorname">
+                                        <label for="Nachname">Vollständiger Name</label>
+                                        <input type="text" id="Nachname" name="name"
+                                            placeholder="Vollständiger Name" @isset($user->name) value="{{$user->name}}" @endisset>
                                     </div>
                                     <div class="input">
                                         <label for="E-Mail">E-Mail</label>
-                                        <input type="text" id="E-Mail" name="E-Mail" placeholder="E-Mail">
+                                        <input type="text" id="E-Mail" name="email" placeholder="E-Mail" @isset($user->email) value="{{$user->email}}" @endisset >
                                     </div>
                                     <div class="input">
                                         <label for="Telefon">Telefon</label>
                                         <input type="text" id="Telefon" name="Telefon"
-                                            placeholder="Telefon">
+                                            placeholder="Telefon"
+                                               @isset($user->phone) value="{{$user->phone}}" @endisset
+                                        >
                                     </div>
-                                    <div class="input">
+                                 {{--   <div class="input">
                                         <label for="Geburtsdatum">Geburtsdatum</label>
-                                        <input type="text" id="Geburtsdatum" name="Geburtsdatum"
-                                            placeholder="Geburtsdatum">
-                                    </div>
-                                    <div class="input">
+                                        <input type="text" id="Geburtsdatum" name="birth_date"
+                                            placeholder="Geburtsdatum"
+                                               @isset($aboutData['birth_date']) value="{{$aboutData['birth_date']}}" @endisset
+                                        >
+                                    </div>--}}
+                                    {{--<div class="input">
                                         <label for="Geburtsdatum">Anrede</label>
                                         <select name="anrede" id="anrede">
-                                            <option value="default">Wählen</option>
+                                            <option value="@isset($aboutData['anrede']){{$aboutData['anrede']}} @endisset">@isset($aboutData['anrede']){{$aboutData['anrede']}} @endisset</option>
                                             <option value="0">Herr</option>
                                             <option value="1">Frau</option>
                                         </select>
-                                    </div>
+                                    </div>--}}
                                     <div style="text-align: center; flex-basis: 100%;">
-                                        <a href="/"
+                                        <a onclick="document.getElementById('formUpdate').submit()"
                                             class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup dark">
                                             <div>
                                                 <span class="first">Speichern</span>
@@ -83,3 +91,4 @@
         </div>
     </div>
 </div>
+    @endauth

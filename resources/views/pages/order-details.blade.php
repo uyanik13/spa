@@ -10,7 +10,9 @@
     $totalClient = count($partners)+1;
     $orderDetails = Helper::findCustomData('orderDetails');
     $calendarInfo = Helper::findCustomData('calendarInfo') ;
+    if(isset($calendarInfo)){
     $price = $calendarInfo['price'];
+    }
 
     @endphp
 
@@ -37,7 +39,7 @@
                                         </label>
                                         <div>
                                                 <h6>{{Auth::user()->name}}</h6>
-                                                {{json_decode(Auth::user()->about_data,true)['birth_date']}}
+                                            @isset($person->about_data) {{json_decode(Auth::user()->about_data,true)['birth_date']}}@endisset
                                         </div>
                                     </li>
                                         @isset($partners)
@@ -49,7 +51,7 @@
                                         </label>
                                         <div>
                                                         <h6>{{$person->name}}</h6>
-                                                        {{   json_decode($person->about_data,true)['birth_date']}}
+                                                       @isset(json_decode($person->about_data,true)['birth_date']) {{   json_decode($person->about_data,true)['birth_date']}}@endisset
                                         </div>
                                     </li>
                                             @endforeach

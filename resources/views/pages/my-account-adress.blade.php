@@ -5,6 +5,13 @@
         }
     }
 </style>
+@auth
+    @php
+        $user = Auth::user();
+        $aboutData = json_decode($user->about_data,true);
+        $partners = \App\Models\User::where('reference_id',$user->id)->get();
+
+    @endphp
 <div class="page_content_wrap page_paddings_yes">
     <div id="acountWrap" class="content_wrap">
         <div class="content">
@@ -31,23 +38,31 @@
                         <div class="column sc_col-sm-8">
                             <div class="kontoInformation adresse">
                                 <h3>Adresse</h3>
-                                <form action="">
+                                <form action="{{route('calendar.userAddressUpdate')}}" method="post" id="updateAddressForm">
+                                    @csrf
                                     <div class="input">
                                         <label for="strasse">Straße/Nr.</label>
                                         <input type="text" id="strasse" name="strasse"
-                                            placeholder="Straße/Nr.">
+                                            placeholder="Straße/Nr."
+                                        @isset($aboutData['strasse']) value="{{$aboutData['strasse']}}" @endisset
+                                        >
                                     </div>
                                     <div class="input">
                                         <label for="Postleitzahl">Postleitzahl/Ort</label>
                                         <input type="text" id="Postleitzahl" name="Postleitzahl"
-                                            placeholder="Postleitzahl/Ort">
+                                            placeholder="Postleitzahl/Ort"
+                                               @isset($aboutData['Postleitzahl']) value="{{$aboutData['Postleitzahl']}}" @endisset
+                                        >
                                     </div>
                                     <div class="input">
                                         <label for="Land">Land</label>
-                                        <input type="text" id="Land" name="Land" placeholder="Land">
+                                        <input type="text" id="Land" name="Land" placeholder="Land"
+                                               @isset($aboutData['Land']) value="{{$aboutData['Land']}}" @endisset
+
+                                        >
                                     </div>
                                     <div style="text-align: center; flex-basis: 100%;">
-                                        <a href="/"
+                                        <a onclick="document.getElementById('updateAddressForm').submit()"
                                             class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup dark">
                                             <div>
                                                 <span class="first">Speichern</span>
@@ -65,3 +80,4 @@
         </div>
     </div>
 </div>
+    @endauth

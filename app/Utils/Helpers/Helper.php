@@ -600,6 +600,33 @@ class Helper
         return $orders;
     }
 
+
+    public static function getOrdersById($orderId){
+        $mainUserOrderId = Order::where('order_id',$orderId)
+            ->where('status','pending')
+            ->orderBy('created_at','desc')
+            ->pluck('order_id')->first();
+        $orders = [
+            'orders' => Order::where('order_id',$mainUserOrderId)->get(),
+            'total' => Order::where('order_id',$mainUserOrderId)->sum('price'),
+        ];
+
+        return $orders;
+    }
+
+
+
+    public static function getAllOrdersBelongsUser(){
+        $mainUser = Auth::user();
+        $mainUserOrderId = Order::where('user_id',Auth::user()->id)
+            ->orderBy('created_at','desc')
+            ->get('order_id');
+        $data=[];
+        foreach ($mainUserOrderId as $key =>  $orders){
+            $data[$key] = Order::where('order_id',$orders->order_id)->get();
+        }
+        return $data;
+    }
         public static function getCurrentClientsInSpa(){
             return "asd";
         }

@@ -38,7 +38,7 @@
                             <li class="menu-item"><a href="/my-account">Profil</a></li>
                             <li class="menu-item"><a href="/my-account-orderlist">Meine Bestellung</a>
                             </li>
-                            <li class="menu-item"><a href="#">Logout</a></li>
+                            <li class="menu-item"><a href="/ajax/logout">Logout</a></li>
                         </ul>
                     </li>
                     @endauth
@@ -84,7 +84,7 @@
                                 </li>
 
                                 <li class="menu-item">
-                                    <a href="#">Logout</a>
+                                    <a href="/ajax/logout">Logout</a>
                                 </li>
                             </ul>
                         </li>

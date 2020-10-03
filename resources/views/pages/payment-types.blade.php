@@ -29,7 +29,7 @@
                                                                      style="margin-top: 15px">
                                                                     <span>GiroPay</span></div>
                                                                 <div class="sc_price_block_link">
-                                                                    <a href="/order-check-laststep" onclick="setPaymentMethod('giropay')"
+                                                                    <a href="/order-check-laststep/" onclick="setPaymentMethod('giropay')"
                                                                        class="sc_button sc_button_square sc_button_style_filled sc_button_size_small blue">
                                                                         <div>
                                                                         <span class="first">Kaufen

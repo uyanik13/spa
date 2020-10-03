@@ -197,9 +197,22 @@
                                             <input type="hidden" name="order_total" value="{{number_format($total,2)}}">
                                                 <div class="acceptPolicies">
                                                     <ul>
-                                                        <li><input type="checkbox"> Hiermit bestatige ich,
-                                                            die AGB gelesen und akzeptiert zu haben</li>
+                                                        <li>
+                                                            <input name="confirm_terms" id="terms" type="checkbox">
+                                                            <label for="terms">Hiermit bestatige ich,
+                                                                die AGB gelesen und akzeptiert zu haben</label>
+                                                        </li>
                                                     </ul>
+
+                                                    @if ($errors->any())
+                                                        <div class="">
+                                                            <ul>
+                                                                @foreach ($errors->all() as $error)
+                                                                    <li style="color: red">*{{ $error }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    @endif
 
                                                     <div style="text-align: right;">
                                             <button type="submit"
@@ -211,11 +224,12 @@
                                                     bestellen</span>
                                             </div>
                                             </button>
-                                    </form>
+
 
                                                     </div>
                                                 </div>
                                             </div>
+                                        </form>
                                         </div>
                                     </div>
                                     <div class="sc_empty_space em_height_4-8">

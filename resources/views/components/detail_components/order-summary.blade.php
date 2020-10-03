@@ -1,6 +1,6 @@
 @auth
     @php
-        $orderDetails= Helper::getOrders();
+        $orderDetails= Helper::getOrdersById($itemId);
         $orders= $orderDetails['orders'];
         $calendarInfo = Helper::findCustomData('calendarInfo') ;
         $subtotal = $orderDetails['total'];
@@ -75,10 +75,10 @@
                                                                                 {{number_format($order->price,2)}}€
                                                                             </td>
                                                                             <td>
-                                                                                 {{count($orders)}}
+                                                                                 1
                                                                             </td>
                                                                             <td>
-                                                                                {{ count($orders)*number_format($order->price,2)}}€
+                                                                                {{ number_format($order->price,2)}}€
                                                                             </td>
                                                                             <td>
                                                                                 <a class="pDelete"

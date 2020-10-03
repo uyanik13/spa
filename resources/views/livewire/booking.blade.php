@@ -24,12 +24,12 @@
 
             <div class="input">
                 <label for="">Bevorzugter Zeitbereich</label>
-                <select name="timeRange" onchange="this.selected" id="timeRange">
+                <select name="timeRange" onchange="this.selected" required id="timeRange">
                                 <option value="default">Bitte wählen Sie die Option</option>
                                 @if($selectedDay)
                                 @foreach ($selectedDay as $day)
                                @if ($day->quota > 0)
-                               <option value="{{$day->time}}"class="bg-success text-white ">{{$day->time}}
+                               <option value="{{$day->time}}" class="bg-success text-white ">{{$day->time}}
                                 <span>letzte {{$day->quota}} Personen</span>
                                  </option>
                                @else
@@ -46,6 +46,7 @@
 
                 </select>
             </div>
+
             <div class="input text-center">
                 <button
                     type="submit"

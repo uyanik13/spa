@@ -34,13 +34,14 @@ class ApiPaymentController extends Controller
     }
 
     public function create_payment(Request $request){
-
+        $validatedData = $request->validate([
+            'confirm_terms' => 'accepted',
+        ]);
         $locale = $request->server('HTTP_ACCEPT_LANGUAGE');
         $locale = substr($locale, 0, strpos($locale, ',') ?: strlen($locale));
         $paymentSuccess = true;
         $cartTotal = Helper::cartTotal();
         $cart = Helper::cart();
-
         if (($cart && count($cart) < 0) || $cartTotal == 0 ) {
             $ordersDetail = Helper::getOrders();
             $cartTotal = $request->order_total;
@@ -93,13 +94,12 @@ class ApiPaymentController extends Controller
                             $selectedDay->quota = $selectedDay->quota - $userCount;
                             $selectedDay->save();
 
-
                             //print_r($h1);
                         }
 
 
 
-                        return  redirect('order-complete/'.$request->order_id);
+                        return  redirect('order-complete/'.$request->order_id)->with('success', trans('lang.paymentFinish'));
 
 
                 }

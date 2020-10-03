@@ -103,7 +103,7 @@
                                                                     for="sc_form_Telefon">Telefon</label>
                                                                 <input id="sc_form_Telefon" type="text"
                                                                     name="Telefon"
-                                                                                   placeholder="Telefon"
+                                                                                   placeholder="Telefon: 0xxxxxxxxx"
                                                                                    value="{{$user->phone}}">
                                                             </div>
 
@@ -115,7 +115,8 @@
                                                                                    name="birth_date"
                                                                                    placeholder="Geburtsdatum *"
                                                                                    style="background-color: #fff;"
-                                                                                   @isset($data['birth_date']) value="{{$data['birth_date']}}" @endisset>
+                                                                                   @isset(json_decode($user->about_data,true)['birth_date']) value="{{json_decode($user->about_data,true)['birth_date']}}"@endisset
+                                                                                  >
                                                             </div>
 
 
@@ -160,6 +161,18 @@
                                                                                    name="Land" placeholder="Land"
                                                                                    @isset($data['Land']) value="{{$data['Land']}}" @endisset>
 																</div>
+
+
+                                                            @if ($errors->any())
+                                                                <div class="alert alert-danger">
+                                                                    <ul>
+                                                                        @foreach ($errors->all() as $error)
+                                                                            <li>{{ $error }}</li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+                                                            @endif
+
 																<div style="margin-top: 25px;">
                                                                             <p><input name="checkbox" type="checkbox"
 																			style="margin-right: 5px;">
@@ -219,6 +232,6 @@
 @endauth
 @guest
     <script >
-        window.location.href = "/login-register";
+        window.location.href = "/booking";
     </script>
     @endguest

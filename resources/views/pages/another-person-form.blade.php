@@ -51,11 +51,11 @@
 
                                                                 <div class="anredeRadio">
                                                                     <label>
-                                                                        <input type="radio" name="anrede">
+                                                                        <input type="radio" value="Frau" name="anrede">
                                                                         <span class="text">Frau</span>
                                                                     </label>
                                                                     <label>
-                                                                        <input type="radio" name="anrede">
+                                                                        <input type="radio" value="Herr" name="anrede">
                                                                         <span class="text">Herr</span>
                                                                     </label>
                                                                 </div>
@@ -92,7 +92,7 @@
                                                                     <label class="required"
                                                                         for="sc_form_Geburtsdatum">Geburtsdatum</label>
                                                                     <input id="sc_form_Geburtsdatum"
-                                                                               type="date" name="Geburtsdatum"
+                                                                               type="date" name="birth_date"
                                                                         placeholder="DD / MM / JJJJ"
                                                                         value="01/02/1998">
                                                                 </div>
@@ -133,13 +133,22 @@
                                                                         name="Land" placeholder="Land">
                                                                 </div>
                                                                 <div style="margin-top: 25px;">
-                                                                    <p><input type="checkbox"
+                                                                    <input id="confirm" type="checkbox"
                                                                                   style="margin-right: 5px;" name="checkbox">
                                                                         Hiermit bestatige ich, die
                                                                         Datenschutzhinweise gelesen und
-                                                                        akzeptiert zu haben. *</p>
+                                                                        akzeptiert zu haben. *
 
                                                                 </div>
+                                                            @if ($errors->any())
+                                                                <div class="alert alert-danger " >
+                                                                    <ul>
+                                                                        @foreach ($errors->all() as $error)
+                                                                            <li >*{{ $error }}</li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                </div>
+                                                            @endif
                                                                 <div class="sc_form_item sc_form_button"
                                                                     style="text-align: center;">
                                                                         <a onclick="document.getElementById('sc_form_629_form').submit()"
@@ -153,6 +162,7 @@
                                                                         </span>
                                                                     </a>
                                                                 </div>
+
                                                                 <div class="result sc_infobox"></div>
 
                                                         </div>
@@ -161,9 +171,13 @@
                                                     </form>
                                             </div>
                                         </div>
+
                                     </div>
+
                                 </div>
+
                             </div>
+
                         </div>
                     </div>
                 </section>

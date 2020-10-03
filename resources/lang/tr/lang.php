@@ -13,6 +13,7 @@ return [
     |
     */
 
+    'paymentFinish' => 'Order has been Created',
     'thanks_for_your_order' => 'Thanks for your order',
     'you_will_receive_an_email_when_your_items_status_changed' => 'You will receive an email when your items are shipped.',
     'view_order_status' => 'View order status',

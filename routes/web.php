@@ -41,6 +41,7 @@ Route::any('panel/{path}', function () {
     Route::get('/payment/{id}', [PageController::class, 'pageView'])->name('payment.page');
     Route::get('/order-summary/{id}', [PageController::class, 'pageView'])->name('order.summary');
     Route::get('/order-complete/{id}', [PageController::class, 'pageView'])->name('order.complete');
+    Route::get('//my-account-orderlist-detail/{id}', [PageController::class, 'pageView'])->name('order.orderlistDetails');
     Route::post('/payment/make', [ApiPaymentController::class, 'create_payment'])->name('payment.make');
 
 
@@ -48,6 +49,9 @@ Route::any('panel/{path}', function () {
     Route::post('/calendar/register', [PageController::class, 'frontEndRegister'])->name('calendar.register');
     Route::post('/calendar/login', [PageController::class, 'frontEndLogin'])->name('calendar.login');
     Route::post('/calendar/checkout', [PageController::class, 'checkoutRegister'])->name('calendar.checkout');
+    Route::post('/calendar/update-user', [PageController::class, 'userInfoUpdate'])->name('calendar.userinfoupdate');
+    Route::post('/calendar/update-partner', [PageController::class, 'partnerUpdate'])->name('calendar.partnerUpdate');
+    Route::post('/calendar/update-address', [PageController::class, 'userAddressUpdate'])->name('calendar.userAddressUpdate');
     Route::post('/calendar/another', [PageController::class, 'anotherPerson'])->name('calendar.anotherPerson');
     Route::post('/calendar/add-order', [ApiOrderController::class, 'store'])->name('calendar.addOrder');
     Route::post('/calendar/delete-order', [ApiOrderController::class, 'destroy'])->name('calendar.delete');
@@ -81,7 +85,7 @@ Route::any('panel/{path}', function () {
     Route::post('/register', [RegisterController::class, 'user_register'])->name('register');
 
 
-    Route::post('/ajax/logout',[PageController::class, 'ajaxLogout'])->name('ajax.logout');
+    Route::get('/ajax/logout',[PageController::class, 'ajaxLogout'])->name('ajax.logout');
     Route::get('/ajax/test',[PageController::class, 'testMethod'])->name('ajax.test');
     Route::post('/ajax/payment',[ApiPaymentController::class, 'create_payment'])->name('ajax.payment');
     Route::post('/ajax/email-order',[ApiPaymentController::class, 'create_email_order'])->name('ajax.email-order');
