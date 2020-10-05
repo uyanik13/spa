@@ -117,15 +117,15 @@
                                                         <div class="pSummary">
                                                             <ul>
                                                                 <li>
-                                                               brut <span class="pTag">Zwischensumme:</span><span>{{$subtotal}}€</span>
+                                                               <span class="pTag">Zwischensumme:</span><span>{{$subtotal}}€</span>
                                                                 </li>
 
                                                                 <li>
-                                                                 kdv   <span class="pTag">Mehrwertsteuer (%{{$calendarInfo['kdv']}}):</span><span>{{number_format($tax,2)}}€</span>
+                                                                 <span class="pTag">Mehrwertsteuer (%{{$calendarInfo['kdv']}}):</span><span>{{number_format($tax,2)}}€</span>
                                                                 </li>
 
                                                                 <li>
-                                                                  toplam  <span  class="pTag">Gesamtsumme:</span><span>{{number_format($total,2)}}€</span>
+                                                                  <span  class="pTag">Gesamtsumme:</span><span>{{number_format($total,2)}}€</span>
                                                                 </li>
 
                                                             </ul>

@@ -540,8 +540,7 @@
                                                                   text-decoration: none;
                                                                   color: #ffffff;
                                                                 "
-                                                                >Bestellnummer:
-                                                                #{{$data['payment']->amount}}</span
+                                                                >{{$data['payment']->amount}}</span
                                                                 >
                                                             </a>
                                                           </td>
