@@ -67,7 +67,7 @@ return [
     'not_in'               => 'Ausgew&auml;hlte(s) :attribute ist inkorrekt.',
     'numeric'              => ':attribute muss eine Zahl sein.',
     'present'              => ':attribute muss vorhanden sein.',
-    'regex'                => 'Das :attribute-Format ist inkorrekt. Die Nummer sollte 0XXXXXXXXXX mögen',
+    'regex'                => 'Das :attribute-Format Ihre Telefonnummer ist leider falsch. Bitte probieren Sie es erneut',
     'required'             => ':attribute field wird ben&ouml;tigt.',
     'required_if'          => ':attribute field wird ben&ouml;tigt wenn :other einen Wert von :value hat.',
     'required_unless'      => ':attribute field wird ben&ouml;tigt au&szlig;er :other ist in den Werten :values enthalten.',
@@ -84,7 +84,7 @@ return [
     ],
     'string'               => ':attribute muss Text sein.',
     'timezone'             => ':attribute muss eine korrekte Zeitzone sein.',
-    'unique'               => ':attribute wurde bereits verwendet.',
+    'unique'               => ':attribute Es ist bereits jemand mit dieser Email Adresse registriert!',
     'uploaded'             => 'Der Upload von :attribute schlug fehl.',
     'url'                  => 'Das :attribute-Format ist inkorrekt.',
 

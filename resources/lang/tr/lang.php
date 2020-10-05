@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'paymentFinish' => 'Order has been Created',
+    'paymentFinish' => 'Gratulation! Ihr E-Ticket ist erstellt.',
     'thanks_for_your_order' => 'Thanks for your order',
     'you_will_receive_an_email_when_your_items_status_changed' => 'You will receive an email when your items are shipped.',
     'view_order_status' => 'View order status',
@@ -69,8 +69,20 @@ return [
     'our_team_title' => 'Yönetim Kurulu Üyelerimiz',
     'our_team_desc' => 'Birbirinden deneyimli, alanında uzman yönetim kurulu üyelerimiz ile Türkiye’nin e-ihracatına katkı sağlıyoruz.',
     'become_a_partner' => 'become_a_partner',
-    'yourDateSelected' => 'Ihr Zeitfenster ist nur für Sie 5 Minuten reserveriert. Bitte fahren Sie fort.',
-    'pleaseLoginWithCredentials' => 'Die Registrierung war erfolgreich! Bitte Login mit Anmeldeinformationen',
+    'yourDateSelected' => 'Gratulation, Sie sind jetzt drin!',
+    'pleaseLoginWithCredentials' => 'Gratulation! Ihre Registrierung war erfolgreich. Bitte loggen Sie sich jetzt ein',
+    'footer_welcome' => 'Willkommen bei AquaQuell Ihrem Wohlfühl Haus mit Tradition ',
+    'booking_title' => 'Planen Sie jetzt Ihren Termin',
+    'contacts' => 'Kontakt',
+    'please_login' => 'Bitte loggen Sie sich mit Ihren Zugangsdaten ein.',
+    'brandname' => 'AquaQuell',
+    'adresse' => 'EMPFÄNGER ADRESSE',
+    'rechnungadresse' => 'RECHNUNGSADRESSE',
+    'paymenta' => 'ZAHLUNGSEMPFÄNGER',
+    'accept_terms_check' => 'Hiermit bestatige ich, die AGB gelesen und akzeptiert zu haben',
+    'jetz_bestellen' => 'JETZT ZAHLUNGSPFLICHTIG BESTELLEN',
+    'order_result_complete' => 'BESTELLUNG ABGESCHLOSSEN',
+    'order_result_complete_descrition' => 'Sie werden in Kürze eine E-mail erhalten der Ihr E-Ticket enthält. Drucken Sie sich Ihr Ticket aus oder zeigen Sie Ihre Email einfach vor. ',
 
 
 

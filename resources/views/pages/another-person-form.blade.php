@@ -62,7 +62,7 @@
 
                                                                 <div
                                                                     class="sc_form_item sc_form_field label_over">
-                                                                    <label class="required"
+                                                                    <label 
                                                                         for="sc_form_Titel">Titel</label>
                                                                     <input id="sc_form_Titel" type="text"
                                                                         name="Titel" placeholder="Titel">
@@ -125,13 +125,7 @@
                                                                         type="text" name="Postleitzahl"
                                                                         placeholder="Postleitzahl/Ort">
                                                                 </div>
-                                                                <div
-                                                                    class="sc_form_item sc_form_field label_over">
-                                                                    <label class="required"
-                                                                        for="sc_form_Land">Land</label>
-                                                                    <input id="sc_form_Land" type="text"
-                                                                        name="Land" placeholder="Land">
-                                                                </div>
+                                                               
                                                                 <div style="margin-top: 25px;">
                                                                     <input id="confirm" type="checkbox"
                                                                                   style="margin-right: 5px;" name="checkbox">
@@ -161,6 +155,12 @@
                                                                                     class="fa fa-save"></i></span>
                                                                         </span>
                                                                     </a>
+                                                                    <a href="/person-choose" class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup dark">
+                                                            <div>
+                                                                <span class="first"><i class="fa fa-chevron-left"></i> Abbrechen </span>
+                                                                <span class="second"><i class="fa fa-chevron-left"></i> zurück zur Reservierung </span>
+                                                            </div>
+                                                        </a>
                                                                 </div>
 
                                                                 <div class="result sc_infobox"></div>

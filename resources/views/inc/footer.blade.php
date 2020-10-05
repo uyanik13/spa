@@ -10,12 +10,11 @@
                                     height="51">
                             </a>
                         </div>
-                        <div class="logo_descr">Willkommen in einem der entspannendsten Salons, in denen
-                            unsere Therapeuten während der Behandlung Ruhe bieten.</div>
+                        <div class="logo_descr">{{__('lang.footer_welcome')}}</div>
                     </div>
                 </aside>
                 <aside class="column-1_2 widget widget_text" style="text-align: center;">
-                    <h5 class="widget_title">Contacts</h5>
+                    <h5 class="widget_title">{{__('lang.contacts')}}</h5>
                     <div class="textwidget">
                         <ul class="sc_list_style_iconed ">
                             <li>
@@ -54,9 +53,8 @@
             </div>
             <span class="beforeSocials">Verbinde dich mit uns:</span>
             <div class="copyright_text">
-                <p>© 2020 All Rights Reserved
-                    <a href="#" target="_blank">Terms of Use</a> and
-                    <a href="#" target="_blank">Privacy Policy</a>
+                <p>© 2020 Alle Rechte vorbehalten. 
+                    <a href="#" target="_blank">Nutzungsbedingungen</a>
                 </p>
             </div>
         </div>

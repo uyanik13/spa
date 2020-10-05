@@ -111,6 +111,7 @@
                                                                 class="sc_form_item sc_form_field label_over">
                                                                 <label class="required"
                                                                                    for="sc_form_username">Geburtsdatum</label>
+                                                                                   <span>Ihr Geburtsdatum </span>
                                                                             <input id="sc_form_username" type="date"
                                                                                    name="birth_date"
                                                                                    placeholder="Geburtsdatum *"
@@ -155,11 +156,11 @@
 																</div>
 																<div
 																	class="sc_form_item sc_form_field label_over">
-																	<label class="required"
-																		for="sc_form_Land">Land</label>
-																	<input id="sc_form_Land" type="text"
-                                                                                   name="Land" placeholder="Land"
-                                                                                   @isset($data['Land']) value="{{$data['Land']}}" @endisset>
+																	<input id="sc_form_Land" type="hidden"
+                                                                                   name="Land" 
+                                                                                    value="sd "
+                                                                                    placeholder="Land"
+                                                                                   @isset($data['Land']) ,value="{{$data['Land']}}" @endisset>
 																</div>
 
 

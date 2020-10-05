@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Auth\AuthController;
@@ -35,8 +36,8 @@ class PageController extends Controller
         $this->category = Category::where('slug', $this->url[0])->first();
         $this->pages = Post::where('type', 'page')->take(20)->get();
         $this->posts = Post::getFilteredPosts($request->input())->where('type', 'post')->paginate(15);
-        $this->setting = Helper::namedSettings(Setting::all());//DONE
-        $this->page = Post::where('slug', $pageUrl)->first();//DONE
+        $this->setting = Helper::namedSettings(Setting::all()); //DONE
+        $this->page = Post::where('slug', $pageUrl)->first(); //DONE
         $this->post = Post::where('slug', $this->url[1] ?? false)->first();
         $this->AnasayfaSlider = Custom::where('type', 'HomePageSlider')->first();
         $this->Testimonials = Custom::where('type', 'Testimonials')->first();
@@ -60,7 +61,6 @@ class PageController extends Controller
 
         $this->posts_for_blog_page = Post::where('type', 'post')->orderBy('created_at', 'desc')->paginate(4);
         $this->recent_post_blog_page = Post::where('type', 'post')->orderBy('created_at', 'desc')->limit(5)->get();
-
     }
 
 
@@ -93,7 +93,6 @@ class PageController extends Controller
             'wishlist_products' => $this->wishlist_products,
             'basket_products' => $this->basket_products,
         ]);
-
     }
 
 
@@ -127,7 +126,7 @@ class PageController extends Controller
                 ->where('role', 'user')->get();
         }
 
-//      $user = User::where('role','user')->where('name','LIKE', '%'.$request->search_text.'%')->orWhere('about_data','LIKE', '%'.$request->search_text.'%')->where('role','user')->orWhere('user_data','LIKE', '%'.$request->search_text.'%')->where('role','user')->limit(4)->get();
+        //      $user = User::where('role','user')->where('name','LIKE', '%'.$request->search_text.'%')->orWhere('about_data','LIKE', '%'.$request->search_text.'%')->where('role','user')->orWhere('user_data','LIKE', '%'.$request->search_text.'%')->where('role','user')->limit(4)->get();
         return response()->json(['message', $searchData]);
     }
 
@@ -170,8 +169,7 @@ class PageController extends Controller
                         ->paginate(16);
                     break;
                 default:
-                    $searchData = DB::table('posts')->
-                    where('type', '=', 'product')
+                    $searchData = DB::table('posts')->where('type', '=', 'product')
                         ->whereNotNull('price')
                         ->orderBy('price', 'desc')->paginate(12);
                     break;
@@ -251,13 +249,12 @@ class PageController extends Controller
             $this->render_basket($request);
             return response()->json($data);
         }
-
     }
 
     public function update_wish(Request $request)
     {
         $data = Basket::find($request->product_id);
-        if ($data->quantity < 1) {//istekler -1 flan olmasın diye, 0 da olmasın isteyen siler
+        if ($data->quantity < 1) { //istekler -1 flan olmasın diye, 0 da olmasın isteyen siler
             $data->quantity = 1;
         } else {
             $data->quantity = $data->quantity + (int)$request->is_inc;
@@ -357,7 +354,7 @@ class PageController extends Controller
         } else {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
-                'phone' => 'required|regex:/(0)[0-9]{9}/|unique:users',
+                'phone' => 'required',
                 'accept_terms' => 'required',
                 'address_line1' => 'required',
                 'country' => 'required',
@@ -381,8 +378,6 @@ class PageController extends Controller
             ]);
 
             return redirect('login-register')->withSuccess(trans('lang.please_login_with_credentials_you_created'));
-
-
         }
 
         return back()->withSuccess(trans('lang.you_can_now_go_to_payment'));
@@ -393,7 +388,7 @@ class PageController extends Controller
     {
         $product = Basket::find($request->product_id);
         if ($product) {
-            if ($product->quantity <= 1 and (int)$request->quantity == -1) {//istekler -1 flan olmasın diye, 0 da olmasın isteyen siler
+            if ($product->quantity <= 1 and (int)$request->quantity == -1) { //istekler -1 flan olmasın diye, 0 da olmasın isteyen siler
                 $product->quantity = 1;
             } else {
                 $product->quantity = $product->quantity + (int)$request->quantity;
@@ -417,7 +412,6 @@ class PageController extends Controller
         Cookie::forget('token');
         auth()->logout();
         return redirect('/');
-
     }
 
 
@@ -431,13 +425,13 @@ class PageController extends Controller
 
     public function calendarAppointment(Request $request)
     {
-//        $validator = Validator::make($request->all(), [
-//            'timeRange' => 'required',
-//            'dateInput' => 'required',
-//        ]);
-//        if ($validator->fails()) {
-//            return back()->with('errors', $validator->messages()->all()[0])->withInput();
-//        }
+        //        $validator = Validator::make($request->all(), [
+        //            'timeRange' => 'required',
+        //            'dateInput' => 'required',
+        //        ]);
+        //        if ($validator->fails()) {
+        //            return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        //        }
         session()->put('appointment', collect($request->all()));
 
         if (Auth::user()) {
@@ -445,7 +439,6 @@ class PageController extends Controller
         } else {
             return redirect('login-register')->with('success', trans('lang.yourDateSelected'));
         }
-
     }
 
 
@@ -455,7 +448,7 @@ class PageController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'phone' => 'required|regex:/(0)[0-9]{9}/|unique:users',
+            'phone' => 'required',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
@@ -464,7 +457,7 @@ class PageController extends Controller
             return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
 
-        
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -473,31 +466,35 @@ class PageController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
+        $email = $request->email;
+        $data = ['user' => $user];
+        Mail::send('mail.register-mail', ["data" => $data], function ($message) use ($email) {
+            $message->to($email)
+                ->subject('AquaQuell - Sie haben sich erfolgreich auf der AquaQuell registriert');
+        });
+
         return redirect('login-register')->with('success', trans('lang.pleaseLoginWithCredentials'));
-
-
     }
 
     public function frontEndLogin(Request $request)
     {
-//        $validator = Validator::make($request->all(), [
-//            'email' => 'required',
-//            'password' => 'required',
-//        ]);
+        //        $validator = Validator::make($request->all(), [
+        //            'email' => 'required',
+        //            'password' => 'required',
+        //        ]);
 
-//         if ($validator->fails()) {
-//             return back()->with('errors', $validator->messages()->all()[0])->withInput();
-//         }
+        //         if ($validator->fails()) {
+        //             return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        //         }
 
 
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $token = Auth::guard()->attempt($credentials);
-            setcookie('token', $token, time() + 24*60*60, '/');
+            setcookie('token', $token, time() + 24 * 60 * 60, '/');
             return redirect('checkout')->with('success', trans('lang.yourDateSelected'));
         }
-
     }
 
 
@@ -506,14 +503,14 @@ class PageController extends Controller
         $validatedData = $request->validate([
             'checkbox' => 'accepted',
             'Telefon' => 'required|regex:/(0)[0-9]/',
-            'name'=>'required',
-            'email'=>'required|email',
-            'anrede'=>'required',
-            'Titel'=>'required',
-            'birth_date'=>'required',
-            'strasse'=>'required',
-            'Postleitzahl'=>'required',
-            'Land'=>'required',
+            'name' => 'required',
+            'email' => 'required|email',
+            'anrede' => 'required',
+            'Titel' => 'required',
+            'birth_date' => 'required',
+            'strasse' => 'required',
+            'Postleitzahl' => 'required',
+            'Land' => 'required',
         ]);
         $aboutData = [
             'anrede' => $request->anrede,
@@ -542,13 +539,14 @@ class PageController extends Controller
         $data->email = $request->email;
         $data->save();
         return redirect()->back()->withSuccess(trans('Profile has updated'));
-
     }
 
-    public function partnerUpdate(Request $request){
+    public function partnerUpdate(Request $request)
+    {
+        //        dd($request->all());
         $user = User::find($request->partner);
 
-        $userAbout = json_decode($user->about_data,true);
+        $userAbout = json_decode($user->about_data, true);
         $default = [
             'anrede' => $request->anrede,
             'Titel' => $userAbout['Titel'],
@@ -593,13 +591,13 @@ class PageController extends Controller
         $validatedData = $request->validate([
             'checkbox' => 'accepted',
             'Telefon' => 'required|regex:/(0)[0-9]/',
-            'name'=>'required',
-            'email'=>'required|email',
-            'Titel'=>'required',
-            'birth_date'=>'required',
-            'strasse'=>'required',
-            'Postleitzahl'=>'required',
-            'Land'=>'required',
+            'name' => 'required',
+            'email' => 'required|email',
+            'Titel' => 'required',
+            'birth_date' => 'required',
+            'strasse' => 'required',
+            'Postleitzahl' => 'required',
+            'Land' => 'required',
         ]);
 
         $aboutData = [
@@ -622,7 +620,6 @@ class PageController extends Controller
         if ($data) {
             return redirect('order-details');
         }
-
     }
 
 
@@ -632,7 +629,6 @@ class PageController extends Controller
         session()->put($request->key, $request->value);
 
         return session()->get($request->key);
-
     }
 
 
@@ -660,6 +656,4 @@ class PageController extends Controller
 
 
     }
-
-
 }

@@ -80,7 +80,7 @@
                                             @endisset
                                         </div>
                                         <div class="weiterePersonen">
-                                            <h4>Adressen</h4>
+                                            <h4>{{__('lang.adresse')}}</h4>
                                             <p style="word-wrap: break-word">
                                                 {{$aboutData['strasse']}} <br>
                                                 {{$aboutData['Land']}} <br>

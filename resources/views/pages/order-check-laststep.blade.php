@@ -4,9 +4,9 @@
        $orderDetails= Helper::getOrders();
         $orders= $orderDetails['orders'];
         $calendarInfo = Helper::findCustomData('calendarInfo') ;
-        $subtotal = $orderDetails['total'];
         $tax = ($orderDetails['total']*$calendarInfo['kdv']/100);
-        $total = $orderDetails['total'] + ($orderDetails['total']*$calendarInfo['kdv']/100);
+        $subtotal = $orderDetails['total']-$tax;
+        $total = $orderDetails['total'] ;
     @endphp
 
     @if(count($orders)>0)
@@ -42,17 +42,17 @@
                                     </div>
                                     <div class="sc_section sc_section_block aligncenter max_width">
                                         <div class="sc_section_inner">
-                                            <h2 class="sc_section_title sc_item_title line_show">Bestatigung
+                                            <h2 class="sc_section_title sc_item_title line_show">BESTÄTIGUNG
+
                                             </h2>
 
                                             <div class="column-1 sc_column_item">
                                                 <div class="summaryInformations">
-                                                    <h3><i class="fa fa-home"></i> Adressen</h3>
+                                                    <h3><i class="fa fa-home"></i> {{__('lang.adresse')}}</h3>
                                                     <div class="summaryInfoContainer">
                                                         <div class="personelInfos">
-                                                            <h4>Rechnungadresse</h4>
-                                                            <p>das Stadtwerk Regensburg.Bader und Arenen
-                                                                GmbH</p>
+                                                            <h4>{{__('lang.rechnungadresse')}}</h4>
+                                                            <p>{{__('lang.brandname')}}</p>
                                                             <p>
                                                                 Greflingerstraße 22
                                                             </p>
@@ -72,9 +72,8 @@
                                                     <h3><i class="fa fa-money"></i> Zahlung</h3>
                                                     <div class="summaryInfoContainer">
                                                         <div class="personelInfos">
-                                                            <h4>Zahlungsempfanger</h4>
-                                                            <p>das Stadtwerk Regensburg.Bader und Arenen
-                                                                GmbH</p>
+                                                            <h4>{{__('lang.paymenta')}}</h4>
+                                                            <p>{{__('lang.brandname')}}</p>
                                                             <p>
                                                                 Greflingerstraße 22
                                                             </p>
@@ -89,9 +88,8 @@
                                                         <div class="paymentInfos">
                                                             <h4>Zahlungsart</h4>
                                                                 <h5 id="displayPayMethod"></h5>
-                                                                <p>Sie werden im nachsten Schritt zu <span id="displayPayMethodInDetails"></span>
-                                                                weitergeleitet um die Zahlung zu
-                                                                autorisieren.</p>
+                                                                <p>Sie werden im nächsten Schritt zu <span id="displayPayMethodInDetails"></span>
+                                                                giropay weitergeleitet um die Zahlung zu autorisieren.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -131,8 +129,7 @@
                                                                             <span class="pInfos">
                                                                     <i
                                                                         class="fa fa-building"></i>
-                                                                    das
-                                                                    Stadtwerk.Westbad
+                                                                    {{__('lang.brandname')}}
                                                                 </span>
                                                                             <span class="pInfos">
                                                                     <i
@@ -147,7 +144,7 @@
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    {{number_format($order->price,2)}}€
+                                                                    {{number_format($subtotal,2)}}€
                                                                 </td>
                                                                 <td>
                                                                      {{count($orders)}}
@@ -199,8 +196,7 @@
                                                     <ul>
                                                         <li>
                                                             <input name="confirm_terms" id="terms" type="checkbox">
-                                                            <label for="terms">Hiermit bestatige ich,
-                                                                die AGB gelesen und akzeptiert zu haben</label>
+                                                            <label for="terms">{{__('lang.accept_terms_check')}}</label>
                                                         </li>
                                                     </ul>
 
@@ -218,10 +214,8 @@
                                             <button type="submit"
                                             class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup blue">
                                             <div>
-                                                <span class="first">Jetz zahlungspflichtig
-                                                    bestellen</span>
-                                                <span class="second">Jetz zahlungspflichtig
-                                                    bestellen</span>
+                                                <span class="first">{{__('lang.jetz_bestellen')}}</span>
+                                                <span class="second">{{__('lang.jetz_bestellen')}}</span>
                                             </div>
                                             </button>
 

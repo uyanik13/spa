@@ -19,26 +19,18 @@
 									<div class="sc_section mockingbird-block sc_section_block">
 										<div class="sc_section_inner">
 											<h2 class="sc_section_title sc_item_title line_show">
-												Registrierung fast abgeschlossen</h2>
+												{{__('lang.order_result_complete')}}</h2>
 											<div class="sc_section_content_wrap">
 												<div class="text_column content_element  mockingbird-text">
 													<div class="wrapper">
 														<p>
-                                                                Sehr geehrter
                                                                 @isset($record)
                                                                 <strong>{{$gender['anrede']}} {{auth()->user()->name}},</strong>
                                                                 @endisset
 
                                                         </p>
-
 														<p>
-															Vielen Dank, dass Sie sich auf unserer Seite
-															registriert haben
-														</p>
-														<p>
-															Sie werden in Kürze eine E-mail erhalten.
-															Klicken Sie auf den darin enthaltenen Link um
-															die Registrierung abzuschließen.
+															{{__('lang.order_result_complete_descrition')}}
                                                         </p>
                                                         <p> {!! QrCode::size(200)->generate($itemId); !!}</p>
 

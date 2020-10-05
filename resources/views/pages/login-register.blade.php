@@ -19,8 +19,7 @@
                                             <div class="sc_section_content_wrap">
                                                 <h2 class="sc_title sc_title_regular cu_mrg_5">
                                                     <i class="fa fa-sign-in"></i> Login</h2>
-                                                <p>Bitte loggen Sie sich mit dem untenstehenden Formular
-                                                    ein.</p>
+                                                <p>{{__('lang.please_login')}}</p>
                                                 <div id="sc_form_629_wrap" class="sc_form_wrap">
                                                     <div id="sc_form_629"
                                                          class="sc_form sc_form_style_form_3">

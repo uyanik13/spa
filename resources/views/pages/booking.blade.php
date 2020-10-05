@@ -31,9 +31,7 @@
                                         <div class="sc_section_inner">
                                             <h6 class="sc_section_subtitle sc_item_subtitle">Buchung
                                                 Kalender</h6>
-                                            <h2 class="sc_section_title sc_item_title line_hide">Machen Sie
-                                                eine
-                                                Geplanter Termin</h2>
+                                            <h2 class="sc_section_title sc_item_title line_hide">{{__('lang.booking_title')}}</h2>
                                             <div id='calendar'></div>
                                         </div>
                                     </div>

@@ -22,20 +22,20 @@
                                         </div>
                                         <div class="sc_section sc_section_block aligncenter max_width">
                                             <div id="printJS-form" class="sc_section_inner">
-                                                <h2 class="sc_section_title sc_item_title line_show">Bestatigung
+                                                <h2 class="sc_section_title sc_item_title line_show">BESTÄTIGUNG
+
                                                 </h2>
 
                                                 <div class="column-1 sc_column_item">
                                                     <div class="summaryInformations">
-                                                        <h3><i class="fa fa-home"></i> Adressen</h3>
+                                                        <h3><i class="fa fa-home"></i> {{__('lang.adresse')}}</h3>
                                                         <div class="summaryInfoContainer">
                                                             <div class="personelInfos">
-                                                                <h4>Rechnungadresse</h4>
+                                                                <h4>{{__('lang.rechnungadresse')}}</h4>
                                                                 <p>
                                                                     {{$userData['anrede']}} {{$user->name}}
                                                                 </p>
-                                                                <p>das Stadtwerk Regensburg.Bader und Arenen
-                                                                    GmbH</p>
+                                                                <p>{{__('lang.brandname')}}</p>
                                                                 <p>
                                                                     Greflingerstraße 22
                                                                 </p>
@@ -56,22 +56,21 @@
                                                         <div class="summaryInfoContainer">
                                                             <div class="personelInfos zahlungDetails row">
                                                                 <div class="col-md-7">
-                                                                    <h4>Zahlungsempfanger</h4>
+                                                                    <h4>{{__('lang.paymenta')}}</h4>
                                                                     <ul>
                                                                         <li>
                                                                             <span>Gesamtpreis:</span>@isset($payment->amount){{$payment->amount}}@endisset
                                                                             €
                                                                         </li>
                                                                         <li>
-                                                                            <span>Preis(brutto):</span>@isset($payment->amount){{$payment->amount}}@endisset
+                                                                            <span>Preis(brutto):</span>@isset($payment->amount){{$payment->amount-($payment->amount*$taxInfo['kdv']/100)}}@endisset
                                                                             €
                                                                         </li>
                                                                         <li>
-                                                                            <span>Preis (netto):</span>{{$order->price-$taxInfo['kdv']}}
+                                                                            <span>Preis (netto):</span>{{$payment->amount}}
                                                                             €
                                                                         </li>
-                                                                        <li><span>enthaltene MwSt:</span>{{$taxInfo['kdv']}}
-                                                                            €
+                                                                        <li><span>enthaltene MwSt:</span>{{$taxInfo['kdv']}} %
                                                                         </li>
                                                                         <li>
                                                                             <span>Zahllart:</span>{{$payment['payment_method']}}
@@ -109,8 +108,7 @@
                                                                                     <span class="pInfos">
                                                                                 <i
                                                                                     class="fa fa-building"></i>
-                                                                                das
-                                                                                Stadtwerk.Westbad
+                                                                                {{__('lang.brandname')}}
                                                                             </span>
                                                                                     <span class="pInfos">
                                                                                 <i
@@ -137,10 +135,10 @@
                                                         <div class="pSummary">
                                                             <ul>
                                                                 <li><span
-                                                                        class="pTag">Zwischensumme:</span><span>{{count($allOrderForOnce)*$once->price}}-€</span>
+                                                                        class="pTag">Zwischensumme:</span><span>{{count($allOrderForOnce)*($once->price - ($once->price*$taxInfo['kdv']/100))}}€</span>
                                                                 </li>
                                                                 <li><span
-                                                                        class="pTag">Mehrwertsteuer (%16):</span><span>{{$taxInfo['kdv']*count($allOrderForOnce)}} %</span>
+                                                                        class="pTag">Mehrwertsteuer (%{{$taxInfo['kdv']}}):</span><span>{{$taxInfo['kdv']}} %</span>
                                                                 </li>
                                                                 <li><span
                                                                         class="pTag">Gesamtsumme:</span><span>{{$payment->amount}}€</span>

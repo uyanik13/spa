@@ -20,7 +20,6 @@
 
 <div class="page_content_wrap page_paddings_yes">
     <div class="container">
-
             <form  action="{{route('calendar.addOrder')}}" id="addPaymentForm" method="post">
             @csrf
                 <div class="row ">
@@ -98,6 +97,7 @@
                                     <li><span class="reservationSpeciment"><i class="fa fa-calendar"></i>
                                             Termin:</span><span class="reservationSpecimentInfo">
                                                 {{substr((json_decode(session()->get('appointment'),true)['dateInput']),0,21 ) }}
+                                            {{session()->get('appointment')['timeRange']}}
                                               </span></li>
 
                                 </ul>

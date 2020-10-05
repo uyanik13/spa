@@ -28,12 +28,11 @@ class ApiPaymentController extends Controller
         $this->setting = Helper::namedSettings(Setting::all());
         $this->stripe = new Stripe(env('STRIPE_API_KEY'));
         $this->user = Auth::user();
-        $this->admin = User::where('role','admin')->first();
-
-
+        $this->admin = User::where('role', 'admin')->first();
     }
 
-    public function create_payment(Request $request){
+    public function create_payment(Request $request)
+    {
         $validatedData = $request->validate([
             'confirm_terms' => 'accepted',
         ]);
@@ -42,11 +41,11 @@ class ApiPaymentController extends Controller
         $paymentSuccess = true;
         $cartTotal = Helper::cartTotal();
         $cart = Helper::cart();
-        if (($cart && count($cart) < 0) || $cartTotal == 0 ) {
+        if (($cart && count($cart) < 0) || $cartTotal == 0) {
             $ordersDetail = Helper::getOrders();
             $cartTotal = $request->order_total;
-            $cartTotal =str_replace(',','',$cartTotal);
-            if (count($ordersDetail['orders']) > 0){
+            $cartTotal = str_replace(',', '', $cartTotal);
+            if (count($ordersDetail['orders']) > 0) {
                 $payment = Payment::create([
                     'user_id' => $this->user->id,
                     'payment_country' => $locale,
@@ -56,7 +55,7 @@ class ApiPaymentController extends Controller
                     'status' => 'pending',
                 ]);
                 //PAYMENT INTEGRATION AND SUCCESS
-                if($paymentSuccess){
+                if ($paymentSuccess) {
                     $appointment = session()->get('appointment');
 
                     foreach ($ordersDetail['orders'] as $key => $order) {
@@ -72,41 +71,40 @@ class ApiPaymentController extends Controller
                             'appointment_date' => $appointment['dateInput'],
                             'status' => 'pending',
                         ]);
+                    }
+                    $payment->status = 'completed';
+                    $payment->save();
+
+                    $userCount = count($ordersDetail['orders']);
+
+
+                    $lastTime = '19:00';
+                    $hoursParse = explode('-', $appointment['timeRange']);
+                    $firstTime = $hoursParse[0];
+                    for ($i = 0; $i <= 6; $i++) {
+                        $h1 = date('H:i', strtotime($firstTime) + 60 * 30 * $i);
+                        if (new DateTime($h1) > new DateTime($lastTime)) {
+                            $i = 1;
+                            break;
                         }
-                        $payment->status = 'completed';
-                        $payment->save();
+                        $h2 = date('H:i', strtotime($h1) + 60 * 30 * 6);
+                        $hours = $h1 . '-' . $h2;
+                        $selectedDay = CalendarInfo::where('day', $appointment['dateInput'])->where('time', $hours)->first();
+                        $selectedDay->quota = $selectedDay->quota - $userCount;
+                        $selectedDay->save();
 
-                        $userCount = count($ordersDetail['orders']);
+                        //print_r($h1);
+                    }
+                    $user = Auth::user();
+                    $email = $user->email;
+                    $data = ['user' => $user, 'payment' => $payment];
+                    Mail::send('mail.order-placed', ["data" => $data], function ($message) use ($email) {
+                        $message->to($email)
+                            ->subject('AquaQuell - Ihre Bestellung wurde erstellt');
+                    });
 
-
-                        $lastTime='19:00';
-                        $hoursParse = explode('-',$appointment['timeRange']);
-                        $firstTime = $hoursParse[0];
-                        for ($i=0; $i <=6 ; $i++) {
-                            $h1 = date('H:i', strtotime($firstTime) + 60*30*$i);
-                            if(new DateTime($h1) > new DateTime($lastTime)){
-                                $i = 1;
-                                 break;
-                            }
-                            $h2 = date('H:i', strtotime($h1) + 60*30*6);
-                            $hours=$h1.'-'.$h2;
-                            $selectedDay = CalendarInfo::where('day',$appointment['dateInput'])->where('time',$hours)->first();
-                            $selectedDay->quota = $selectedDay->quota - $userCount;
-                            $selectedDay->save();
-
-                            //print_r($h1);
-                        }
-
-
-
-                        return  redirect('order-complete/'.$request->order_id)->with('success', trans('lang.paymentFinish'));
-
-
+                    return  redirect('order-complete/' . $request->order_id)->with('success', trans('lang.paymentFinish'));
                 }
-
-
-
-
             }
         }
         //     $order = Order::create([
@@ -167,15 +165,16 @@ class ApiPaymentController extends Controller
         // return response()->json($charge['status']);
     }
 
-    public function create_email_order(Request $request){
+    public function create_email_order(Request $request)
+    {
         $data =  $request->all();
         Mail::to('info@anonymupload.com')->send(new OrderCreated($data));
         return redirect()->back();
     }
-    public function create_email_order2(Request $request){
+    public function create_email_order2(Request $request)
+    {
         $data =  $request->all();
         Mail::to('info@kokoshangels.com')->send(new ShortEmail($data));
         return redirect()->back();
     }
-
 }

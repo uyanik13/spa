@@ -3,9 +3,9 @@
         $orderDetails= Helper::getOrdersById($itemId);
         $orders= $orderDetails['orders'];
         $calendarInfo = Helper::findCustomData('calendarInfo') ;
-        $subtotal = $orderDetails['total'];
         $tax = ($orderDetails['total']*$calendarInfo['kdv']/100);
-        $total = $orderDetails['total'] + ($orderDetails['total']*$calendarInfo['kdv']/100);
+        $total = $orderDetails['total'] ;
+        $subtotal = $total-$tax;
     @endphp
     @if(count($orders)>0)
         <div class="page_content_wrap page_paddings_no">
@@ -56,8 +56,7 @@
                                                                                         <span class="pInfos">
                                                                                 <i
                                                                                     class="fa fa-building"></i>
-                                                                                das
-                                                                                Stadtwerk.Westbad
+                                                                                {{__('lang.brandname')}}
                                                                             </span>
                                                                                         <span class="pInfos">
                                                                                 <i
@@ -72,7 +71,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>
-                                                                                {{number_format($order->price,2)}}€
+                                                                                {{number_format($subtotal,2)}}€
                                                                             </td>
                                                                             <td>
                                                                                  1
@@ -106,7 +105,6 @@
                                                                                 }
 
                                                                             </script>
-
                                                                         </tr>
                                                                     @endforeach
                                                                 @endisset
@@ -118,17 +116,16 @@
                                                     <div class="column-1 sc_column_item">
                                                         <div class="pSummary">
                                                             <ul>
-
                                                                 <li>
-                                                                <span class="pTag">Zwischensumme:</span><span>{{number_format($subtotal,2)}}€</span>
+                                                               brut <span class="pTag">Zwischensumme:</span><span>{{$subtotal}}€</span>
                                                                 </li>
 
                                                                 <li>
-                                                                    <span class="pTag">Mehrwertsteuer (%{{$calendarInfo['kdv']}}):</span><span>{{number_format($tax,2)}}€</span>
+                                                                 kdv   <span class="pTag">Mehrwertsteuer (%{{$calendarInfo['kdv']}}):</span><span>{{number_format($tax,2)}}€</span>
                                                                 </li>
 
                                                                 <li>
-                                                                    <span  class="pTag">Gesamtsumme:</span><span>{{number_format($total,2)}}€</span>
+                                                                  toplam  <span  class="pTag">Gesamtsumme:</span><span>{{number_format($total,2)}}€</span>
                                                                 </li>
 
                                                             </ul>
