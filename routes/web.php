@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
@@ -94,6 +95,13 @@ Route::any('panel/{path}', function () {
 
     Route::post('/ajax/createSession',[PageController::class, 'createSession'])->name('ajax.createSession');
     Route::get('/ajax/createAllDays',[CalendarInfoController::class, 'createAllDays'])->name('ajax.create.all.days');
+    Route::get('/ajax/optimize',function (){
+       $data = Artisan::call('optimize:clear');
+        if($data){
+            return "success";
+        }
+
+    });
 
 
 
