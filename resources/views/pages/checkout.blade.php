@@ -178,8 +178,8 @@
                                                                             <p><input name="checkbox" type="checkbox"
 																			style="margin-right: 5px;">
 																		Hiermit bestatige ich, die
-																		<a href="#" onclick="window.open('print.html', 'newwindow', 
-                                                                        'width=300,height=250'); 
+																		<a href="/kvkk" onclick="window.open('print.html', 'newwindow', 
+                                                                        'width=600,height=350'); 
                                                                         return false;">Datenschutzhinweise</a> gelesen und
 																		akzeptiert zu haben. *</p>
 
