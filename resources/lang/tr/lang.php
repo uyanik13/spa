@@ -69,7 +69,7 @@ return [
     'our_team_title' => 'Yönetim Kurulu Üyelerimiz',
     'our_team_desc' => 'Birbirinden deneyimli, alanında uzman yönetim kurulu üyelerimiz ile Türkiye’nin e-ihracatına katkı sağlıyoruz.',
     'become_a_partner' => 'become_a_partner',
-    'yourDateSelected' => 'Gratulation, Sie sind jetzt drin!',
+    'yourDateSelected' => 'Ihr Zeitfenster ist nur für Sie 5 Minuten reserveriert. Bitte fahren Sie fort.',
     'pleaseLoginWithCredentials' => 'Gratulation! Ihre Registrierung war erfolgreich. Bitte loggen Sie sich jetzt ein',
     'footer_welcome' => 'Willkommen bei AquaQuell Ihrem Wohlfühl Haus mit Tradition ',
     'booking_title' => 'Planen Sie jetzt Ihren Termin',
