@@ -89,7 +89,7 @@
                                                             <h4>Zahlungsart</h4>
                                                                 <h5 id="displayPayMethod"></h5>
                                                                 <p>Sie werden im nächsten Schritt zu <span id="displayPayMethodInDetails"></span>
-                                                                giropay weitergeleitet um die Zahlung zu autorisieren.</p>
+                                                                weitergeleitet um die Zahlung zu autorisieren.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -196,7 +196,10 @@
                                                     <ul>
                                                         <li>
                                                             <input name="confirm_terms" id="terms" type="checkbox">
-                                                            <label for="terms">{{__('lang.accept_terms_check')}}</label>
+                                                            <label for="terms">Hiermit bestatige ich, die <a href="#" onclick="window.open('print.html', 
+                                                            'newwindow', 
+                                                            'width=300,height=250'); 
+                                                            return false;">AGB</a> gelesen und akzeptiert zu haben</label>
                                                         </li>
                                                     </ul>
 

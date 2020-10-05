@@ -102,7 +102,7 @@ class ApiPaymentController extends Controller
                         $message->to($email)
                             ->subject('AquaQuell - Ihre Bestellung wurde erstellt');
                     });
-
+                    session()->forget('appointment');
                     return  redirect('order-complete/' . $request->order_id)->with('success', trans('lang.paymentFinish'));
                 }
             }

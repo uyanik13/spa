@@ -27,12 +27,11 @@ class ApiOrderController  extends ApiController
     public function index()
     {
         $postAdmin = Order::where('status', 1)->orderBy('created_at', 'desc')->get();
-        $postUser = Order::where('user_id',Auth::user()->id)->where('status', 1)->orderBy('created_at', 'desc')->get();
-        $post = Auth::user()->role === 'admin' ? $postAdmin : $postUser ;
+        $postUser = Order::where('user_id', Auth::user()->id)->where('status', 1)->orderBy('created_at', 'desc')->get();
+        $post = Auth::user()->role === 'admin' ? $postAdmin : $postUser;
 
 
         return $post;
-
     }
 
     /**
@@ -56,7 +55,7 @@ class ApiOrderController  extends ApiController
 
         $order_id = Carbon::now()->timestamp;
         $data = User::find(Auth::user()->id);
-        $new2= new Order();
+        $new2 = new Order();
         $new2->user_id = $data->id;
         $new2->order_details = 'paket adı';
         $new2->price = $request->price;
@@ -65,9 +64,9 @@ class ApiOrderController  extends ApiController
 
 
         $partners = $request->partners;
-        if (isset($partners)){
-            foreach ($partners as $partner){
-                $new= new Order();
+        if (isset($partners)) {
+            foreach ($partners as $partner) {
+                $new = new Order();
                 $new->user_id = $partner;
                 $new->order_details = 'paket adı';
                 $new->order_id = $order_id;
@@ -75,7 +74,7 @@ class ApiOrderController  extends ApiController
                 $new->save();
             }
         }
-        return  redirect('order-summary/'.$order_id);
+        return  redirect('order-summary/' . $order_id);
 
 
         // $order = Order::create([
@@ -131,7 +130,6 @@ class ApiOrderController  extends ApiController
         Mail::to($orderUser)->send(new OrderStatusChanged($order));
 
         return response()->json($order);
-
     }
 
     /**
@@ -147,23 +145,24 @@ class ApiOrderController  extends ApiController
         $forDeleteInUserReference->reference_id = null;
         $forDeleteInUserReference->save();
         $data->delete();
-        return response()->json(['message'=>200]);
-
+        return response()->json(['message' => 200]);
     }
-    public function resetOrders(Request $request){
+    public function resetOrders(Request $request)
+    {
 
-        $orders = json_decode($request['orders'][0],true)/*[0]['id']*/;
+        $orders = json_decode($request['orders'][0], true)/*[0]['id']*/;
         foreach ($orders as $order) {
             $data = Order::find($order['id']);
             $userId = $data->user_id;
 
             $user = User::find($userId);
-            if ($user){
+            if ($user) {
                 $user->reference_id = null;
                 $user->save();
             }
             $data->delete();
         }
+        session()->forget('appointment');
         return redirect('/');
     }
 }

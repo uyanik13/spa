@@ -59,6 +59,7 @@
                                                                                 {{__('lang.brandname')}}
                                                                             </span>
                                                                                         <span class="pInfos">
+                                                                                            
                                                                                 <i
                                                                                     class="fa fa-calendar"></i>
                                                                                 {{$order->order_details}}

@@ -435,12 +435,7 @@
                                                       "
                                                     >
                                                       {{$data['payment']->id}} Id-Nr.
-                                                      deine Bestellung
-                                                      wurde erschaffen. Einzelheiten
-                                                      Folgen Sie von Ihrem Konto
-                                                      du kannst. Uns
-                                                      für Ihre Wahl
-                                                      Vielen Dank.
+                                                      ID-Nr. Dein Ticket ist erstellt! Einfach am Einlass vorzeigen! Vielen Dank!
                                                     </td>
                                                   </tr>
                                                 </table>

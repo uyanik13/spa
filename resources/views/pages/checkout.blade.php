@@ -143,7 +143,7 @@
 																	<input id="sc_form_strasse" type="text"
 																		name="strasse"
                                                                                    placeholder="Straße/Nr."
-                                                                                   @isset($data['strasse']) value="{{$data['Titel']}}" @endisset>
+                                                                                   @isset($data['strasse']) value="{{$data['strasse']}}" @endisset>
 																</div>
 																<div
 																	class="sc_form_item sc_form_field label_over">
@@ -178,7 +178,9 @@
                                                                             <p><input name="checkbox" type="checkbox"
 																			style="margin-right: 5px;">
 																		Hiermit bestatige ich, die
-																		Datenschutzhinweise gelesen und
+																		<a href="#" onclick="window.open('print.html', 'newwindow', 
+                                                                        'width=300,height=250'); 
+                                                                        return false;">Datenschutzhinweise</a> gelesen und
 																		akzeptiert zu haben. *</p>
 
 																</div>

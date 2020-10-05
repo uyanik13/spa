@@ -5,11 +5,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         selectable: true,
+        locale: 'de',
+
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
         },
+
+       buttonText: {
+               today: 'Heute',
+               month: 'Monat',
+               week: 'Woche',
+               day: 'Tag'
+       },
+        
 
         dateClick: function (date, jsEvent, view) {
             modal.style.display = "block"
@@ -74,8 +84,6 @@ function toDateEN (time) {
 
     return `${date_obj.getFullYear()}-${month}-${day}`
   }
-
-
 
 
 
