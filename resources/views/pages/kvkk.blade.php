@@ -12,7 +12,7 @@
             <article class="post_item post_item_single page">
                 <section class="post_content">
                     <div class="sc_row row sc_row-fluid">
-                        <div class="column sc_col-sm-3 accountSidebar">
+                        <div class="column sc_col-sm-12 accountSidebar">
                             <div class="accountOptions">
                                 <h5 class="sc_title sc_title_regular cu_mrg_5">
                                     Datenschutzhinweise
