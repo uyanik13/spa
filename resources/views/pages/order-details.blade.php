@@ -20,7 +20,10 @@
 
 <div class="page_content_wrap page_paddings_yes">
     <div class="container">
-        <div class="row">
+
+            <form  action="{{route('calendar.addOrder')}}" id="addPaymentForm" method="post">
+            @csrf
+                <div class="row ">
             <div class="col-md-5">
                 <div class="content">
                     <article class="post_item_excerpt post_item post">
@@ -46,7 +49,7 @@
                                             @foreach($partners as $key=> $person)
                                     <li>
                                         <label class="toggleSwitch">
-                                                        <input  id="checkbox_{{$key}}" type="checkbox" checked onclick="return false;">
+                                                        <input  id="checkbox_{{$key}}" name="partners[]" value="{{$person->id}}" type="checkbox" checked >
                                             <span class="toggleSlider"></span>
                                         </label>
                                         <div>
@@ -115,8 +118,6 @@
                                 </li>
                             </ul>
                             <div style="text-align: right;">
-                                    <form action="{{route('calendar.addOrder')}}" id="addPaymentForm" method="post">
-                                        @csrf
                                         <input type="hidden" id="price"     name="price" value="{{number_format($totalClient*$price,2)}}" >
                                         <a onclick="document.getElementById('addPaymentForm').submit()"
                                     class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup blue">
@@ -127,14 +128,15 @@
                                             Warenkorb</span>
                                     </div>
                                 </a>
-                                    </form>
                             </div>
                         </div>
                     </aside>
                 </div>
             </div>
-        </div>
+
     </div>
+            </form>
+        </div>
 
 </div>
 @endauth

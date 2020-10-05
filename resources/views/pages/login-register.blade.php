@@ -120,16 +120,16 @@
                                                                     <label class="required"
                                                                            for="sc_form_username">Vorname
                                                                         Nachname</label>
-                                                                    <input id="sc_form_username" type="text"
+                                                                    <input required id="sc_form_username" type="text"
                                                                            name="name"
                                                                            placeholder="Vorname Nachname *"
                                                                            style="background-color: #fff;">
                                                                 </div>
                                                                 <div
                                                                     class="sc_form_item sc_form_field label_over">
-                                                                    <label class="required"
+                                                                    <label  class="required"
                                                                            for="sc_form_username">Telefon</label>
-                                                                    <input id="sc_form_username" type="text"
+                                                                    <input required id="sc_form_username" type="text"
                                                                            name="phone"
                                                                            placeholder="Telefon *"
                                                                            style="background-color: #fff;">
@@ -139,7 +139,7 @@
                                                                     <label class="required"
                                                                            for="sc_form_username">E-Mail
                                                                         *</label>
-                                                                    <input id="sc_form_username"
+                                                                    <input required id="sc_form_username"
                                                                            type="email" name="email"
                                                                            placeholder="E-Mail *"
                                                                            style="background-color: #fff;">
@@ -150,7 +150,7 @@
                                                                     <label class="required"
                                                                            for="sc_form_email">Passwort
                                                                         *</label>
-                                                                    <input id="sc_form_email" type="password"
+                                                                    <input required  id="sc_form_email" type="password"
                                                                            name="password"
                                                                            placeholder="Passwort *">
                                                                 </div>
