@@ -69,6 +69,8 @@ return [
     'our_team_title' => 'Yönetim Kurulu Üyelerimiz',
     'our_team_desc' => 'Birbirinden deneyimli, alanında uzman yönetim kurulu üyelerimiz ile Türkiye’nin e-ihracatına katkı sağlıyoruz.',
     'become_a_partner' => 'become_a_partner',
+    'yourDateSelected' => 'Ihr Zeitfenster ist nur für Sie 5 Minuten reserveriert. Bitte fahren Sie fort.',
+    'pleaseLoginWithCredentials' => 'Die Registrierung war erfolgreich! Bitte Login mit Anmeldeinformationen',
 
 
 

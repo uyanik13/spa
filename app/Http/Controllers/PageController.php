@@ -357,7 +357,7 @@ class PageController extends Controller
         } else {
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:255',
-                'phone' => 'required',
+                'phone' => 'required|regex:/(0)[0-9]{9}/|unique:users',
                 'accept_terms' => 'required',
                 'address_line1' => 'required',
                 'country' => 'required',
@@ -455,7 +455,7 @@ class PageController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'phone' => 'required',
+            'phone' => 'required|regex:/(0)[0-9]{9}/|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
