@@ -45,7 +45,6 @@ class ApiPaymentController extends Controller
         if (($cart && count($cart) < 0) || $cartTotal == 0 ) {
             $ordersDetail = Helper::getOrders();
             $cartTotal = $request->order_total;
-            $cartTotal = "321,323,543.25";
             $cartTotal =str_replace(',','',$cartTotal);
             if (count($ordersDetail['orders']) > 0){
                 $payment = Payment::create([
