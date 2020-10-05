@@ -464,7 +464,7 @@ class PageController extends Controller
             return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
 
-
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

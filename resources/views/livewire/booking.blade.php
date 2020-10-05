@@ -27,7 +27,7 @@
                 <select name="timeRange" onchange="this.selected" required id="timeRange">
                                 <option value="default">Bitte wählen Sie die Option</option>
                                 @if($selectedDay)
-                                @foreach ($selectedDay as $day)
+                                @foreach ($selectedDay as $key => $day)
                                @if ($day->quota > 0)
                                <option value="{{$day->time}}" class="bg-success text-white ">{{$day->time}}
                                 <span>letzte {{$day->quota}} Personen</span>

@@ -64,30 +64,7 @@
                                                             </div>
                                                             <div class="result sc_infobox"></div>
                                                         </form>
-                                                        @if(session('errors'))
-
-                                                            @if ($errors->any())
-                                                                <div class="alert alert-danger">
-                                                                    <ul>
-                                                                        @foreach ($errors->all() as $error)
-                                                                            <li>{{ $error }}</li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                </div>
-                                                            @endif
-                                                        @endif
-                                                        @if(session('errors'))
-
-                                                            @if ($errors->any())
-                                                                <div class="alert alert-danger">
-                                                                    <ul>
-                                                                        @foreach ($errors->all() as $error)
-                                                                            <li>{{ $error }}</li>
-                                                                        @endforeach
-                                                                    </ul>
-                                                                </div>
-                                                            @endif
-                                                        @endif
+                                                       
                                                     </div>
                                                 </div>
                                             </div>

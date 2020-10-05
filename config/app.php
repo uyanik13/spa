@@ -93,7 +93,6 @@ return [
     |
     */
 
-    'locale' => 'tr',
 
     'locales' => [
         'en' => 'en',
