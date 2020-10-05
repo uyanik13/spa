@@ -67,7 +67,7 @@ return [
     'not_in'               => 'Ausgew&auml;hlte(s) :attribute ist inkorrekt.',
     'numeric'              => ':attribute muss eine Zahl sein.',
     'present'              => ':attribute muss vorhanden sein.',
-    'regex'                => 'Das :attribute-Format ist inkorrekt.',
+    'regex'                => 'Das :attribute-Format ist inkorrekt. Die Nummer sollte 0XXXXXXXXXX mögen',
     'required'             => ':attribute field wird ben&ouml;tigt.',
     'required_if'          => ':attribute field wird ben&ouml;tigt wenn :other einen Wert von :value hat.',
     'required_unless'      => ':attribute field wird ben&ouml;tigt au&szlig;er :other ist in den Werten :values enthalten.',
