@@ -196,9 +196,9 @@
                                                     <ul>
                                                         <li>
                                                             <input name="confirm_terms" id="terms" type="checkbox">
-                                                            <label for="terms">Hiermit bestatige ich, die <a href="#" onclick="window.open('print.html', 
+                                                            <label for="terms">Hiermit bestatige ich, die <a href="#" onclick="window.open('/agb', 
                                                             'newwindow', 
-                                                            'width=300,height=250'); 
+                                                            'width=600,height=350'); 
                                                             return false;">AGB</a> gelesen und akzeptiert zu haben</label>
                                                         </li>
                                                     </ul>
