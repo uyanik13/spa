@@ -39,19 +39,19 @@
 
             <!-- CONTENT CARD - PROGRESS BAR/GOAL -->
              <div class="vx-col w-full sm:w-1/2 lg:w-1/2 ">
-             <div class="my-6" v-for="(user,index) in AppointmentUsers" :key="index">
+             <div class="my-6" v-for="(appointment,index) in AppointmentUsers" :key="index">
                         <h5 class="mb-2">Ticket/Kundeninformationen</h5>
-                        <h6 class="mb-2">{{ user.name }}</h6>
-                        <p class="text-black">TickedId:{{ user.appointment_id }}</p>
-                        <p class="text-black">Datum:{{ user.appointment_date }}</p>
-                        <p class="text-black">Uhrzeit bis:{{ user.appointment_date }}</p>
-                        <p class="text-black">Dauerkartenbesitzer: {{ user.user? user.user.subscribed ? 'Ja' : 'Nine' : ''  }}</p>
+                        <h6 class="mb-2">{{ appointment.name }}</h6>
+                        <p class="text-black">TickedId:{{ appointment.appointment_id }}</p>
+                        <p class="text-black">Datum:{{ appointment.appointment_date }}</p>
+                        <p class="text-black">Uhrzeit bis:{{ appointment.appointment_date }}</p>
+                        <p class="text-black">Dauerkartenbesitzer: {{ appointment.user? appointment.user.subscribed ? 'Ja' : 'Nine' : ''  }}</p>
                          <vs-button
-                                    v-if="!user.user.isHere"
+                                    v-if="!appointment.user.isHere"
                                     type="gradient"
                                     class="mt-6 mr-5"
                                     color="#7367F0"
-                                    @click="clientCameOrLeft(user.user_id,1)"
+                                    @click="clientCameOrLeft(appointment.user_id,1)"
                                     gradient-color-secondary="#BA300B">
                                     {{$t('clientCame')}}
                            </vs-button>
@@ -61,7 +61,7 @@
                                     type="gradient"
                                     class="mt-6 mr-5"
                                     color="#7367F0"
-                                    @click="clientCameOrLeft(user.user_id,0)"
+                                    @click="clientCameOrLeft(appointment.user_id,0)"
                                     gradient-color-secondary="#BA300B">
                                     {{$t('clientHasLeft')}}
                            </vs-button>
@@ -125,6 +125,7 @@ export default {
        fetchUsersAppointment() {
         this.$store.dispatch("form/findAppointmentUsers", this.orderId)
         .then(res => {
+            console.log(res)
             this.AppointmentUsers = res
 
             })
@@ -173,8 +174,10 @@ export default {
     },
 
     onDecode (decodedString) {
-    this.orderId = decodedString
-    return this.fetchUsersAppointment()
+        if (decodedString){
+            this.orderId = decodedString
+            return this.fetchUsersAppointment()
+        }
   }
 
 

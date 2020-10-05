@@ -151,12 +151,18 @@ class ApiOrderController  extends ApiController
 
     }
     public function resetOrders(Request $request){
+
         $orders = json_decode($request['orders'][0],true)/*[0]['id']*/;
         foreach ($orders as $order) {
             $data = Order::find($order['id']);
             $userId = $data->user_id;
+
+            $user = User::find($userId);
+            if ($user){
+                $user->reference_id = null;
+                $user->save();
+            }
             $data->delete();
-            User::find('user_id',$userId)->reference_id = null;
         }
         return redirect('/');
     }

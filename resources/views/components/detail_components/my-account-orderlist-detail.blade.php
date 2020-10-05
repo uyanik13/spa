@@ -54,28 +54,33 @@
                                                     <div class="summaryInformations">
                                                         <h3><i class="fa fa-money"></i> Zahlungsdetail</h3>
                                                         <div class="summaryInfoContainer">
-                                                            <div class="personelInfos zahlungDetails">
-                                                                <h4>Zahlungsempfanger</h4>
-                                                                <ul>
-                                                                    <li>
-                                                                        <span>Gesamtpreis:</span>@isset($payment->amount){{$payment->amount}}@endisset
-                                                                        €
-                                                                    </li>
-                                                                    <li>
-                                                                        <span>Preis(brutto):</span>@isset($payment->amount){{$payment->amount}}@endisset
-                                                                        €
-                                                                    </li>
-                                                                    <li>
-                                                                        <span>Preis (netto):</span>{{$order->price-$taxInfo['kdv']}}
-                                                                        €
-                                                                    </li>
-                                                                    <li><span>enthaltene MwSt:</span>{{$taxInfo['kdv']}}
-                                                                        €
-                                                                    </li>
-                                                                    <li>
-                                                                        <span>Zahllart:</span>{{$payment['payment_method']}}
-                                                                    </li>
-                                                                </ul>
+                                                            <div class="personelInfos zahlungDetails row">
+                                                                <div class="col-md-7">
+                                                                    <h4>Zahlungsempfanger</h4>
+                                                                    <ul>
+                                                                        <li>
+                                                                            <span>Gesamtpreis:</span>@isset($payment->amount){{$payment->amount}}@endisset
+                                                                            €
+                                                                        </li>
+                                                                        <li>
+                                                                            <span>Preis(brutto):</span>@isset($payment->amount){{$payment->amount}}@endisset
+                                                                            €
+                                                                        </li>
+                                                                        <li>
+                                                                            <span>Preis (netto):</span>{{$order->price-$taxInfo['kdv']}}
+                                                                            €
+                                                                        </li>
+                                                                        <li><span>enthaltene MwSt:</span>{{$taxInfo['kdv']}}
+                                                                            €
+                                                                        </li>
+                                                                        <li>
+                                                                            <span>Zahllart:</span>{{$payment['payment_method']}}
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    {!! QrCode::size(200)->generate($order->id); !!}
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -146,7 +151,7 @@
                                                 </div>
                                             </div>
                                             <div class="printButton">
-                                                <btn onclick="printJS('printJS-form', 'html')"
+                                                <btn onClick="window.print()"
                                                      class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup dark">
                                                     <div>
                                                     <span class="first"><i class="fa fa-print fa-2x"></i>

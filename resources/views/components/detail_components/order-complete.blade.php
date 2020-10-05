@@ -40,7 +40,7 @@
 															Klicken Sie auf den darin enthaltenen Link um
 															die Registrierung abzuschließen.
                                                         </p>
-                                                        <p> {!! QrCode::size(200)->backgroundColor(255,55,0)->generate($itemId); !!}</p>
+                                                        <p> {!! QrCode::size(200)->generate($itemId); !!}</p>
 
 														<a href="/order-details"
 															class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup blue">
