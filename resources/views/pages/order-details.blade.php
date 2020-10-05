@@ -13,10 +13,10 @@
     if(isset($calendarInfo)){
     $price = $calendarInfo['price'];
     }
-
+$temp = session()->get('appointment');
     @endphp
 
-
+@if($temp)
 
 <div class="page_content_wrap page_paddings_yes">
     <div class="container">
@@ -138,6 +138,11 @@
         </div>
 
 </div>
+    @else
+    <script >
+        window.location.href = "/booking";
+    </script>
+    @endif
 @endauth
 @guest
     <script >

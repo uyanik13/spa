@@ -46,7 +46,7 @@ class ApiPaymentController extends Controller
             $cartTotal = $request->order_total;
             $cartTotal = str_replace(',', '', $cartTotal);
             if (count($ordersDetail['orders']) > 0) {
-                $payment = Payment::create([
+                $paymentx = Payment::create([
                     'user_id' => $this->user->id,
                     'payment_country' => $locale,
                     'payment_id' => $request->order_id,
@@ -97,7 +97,7 @@ class ApiPaymentController extends Controller
                     }
                     $user = Auth::user();
                     $email = $user->email;
-                    $data = ['user' => $user, 'payment' => $payment];
+                    $data = ['user' => $user, 'payment' => $paymentx,'appointment'=>$payment];
                     Mail::send('mail.order-placed', ["data" => $data], function ($message) use ($email) {
                         $message->to($email)
                             ->subject('AquaQuell - Ihre Bestellung wurde erstellt');

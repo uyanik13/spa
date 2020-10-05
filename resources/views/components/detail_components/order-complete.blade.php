@@ -1,8 +1,8 @@
 @auth
     @php
         $gender = Helper::jsonToArray($user->about_data);
-
     @endphp
+
 <div class="page_content_wrap page_paddings_no">
 	<div class="content_wrap">
 		<div class="content">

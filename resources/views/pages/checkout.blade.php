@@ -3,12 +3,9 @@
         $data = json_decode(App\Models\User::find(Auth::user()->id)->about_data,true);
     @endphp
     @if(!isset(session()->get('appointment')['dateInput']))
-        <br><br>
-        <div class="danger text-danger text-center text-white">
-            Select date first
-            <a href="/booking" class="btn btn-primary text-white">Go Booking Page</a>
-        </div>
-        <br><br>
+        <script >
+            window.location.href = "/booking";
+        </script>
     @else
 <div class="page_content_wrap page_paddings_yes">
 	<div class="content_wrap">
@@ -157,7 +154,7 @@
 																<div
 																	class="sc_form_item sc_form_field label_over">
 																	<input id="sc_form_Land" type="hidden"
-                                                                                   name="Land" 
+                                                                                   name="Land"
                                                                                     value="sd "
                                                                                     placeholder="Land"
                                                                                    @isset($data['Land']) ,value="{{$data['Land']}}" @endisset>
@@ -178,8 +175,8 @@
                                                                             <p><input name="checkbox" type="checkbox"
 																			style="margin-right: 5px;">
 																		Hiermit bestatige ich, die
-																		<a href="/kvkk" onclick="window.open('print.html', 'newwindow', 
-                                                                        'width=600,height=350'); 
+																		<a href="/kvkk" onclick="window.open('print.html', 'newwindow',
+                                                                        'width=600,height=350');
                                                                         return false;">Datenschutzhinweise</a> gelesen und
 																		akzeptiert zu haben. *</p>
 

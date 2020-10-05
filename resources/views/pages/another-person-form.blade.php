@@ -1,4 +1,8 @@
 @auth
+    @php
+        $temp = session()->get('appointment');
+    @endphp
+    @if($temp)
 <div class="page_content_wrap page_paddings_yes">
     <div class="content_wrap">
         <div class="content">
@@ -62,7 +66,7 @@
 
                                                                 <div
                                                                     class="sc_form_item sc_form_field label_over">
-                                                                    <label 
+                                                                    <label
                                                                         for="sc_form_Titel">Titel</label>
                                                                     <input id="sc_form_Titel" type="text"
                                                                         name="Titel" placeholder="Titel">
@@ -125,7 +129,7 @@
                                                                         type="text" name="Postleitzahl"
                                                                         placeholder="Postleitzahl/Ort">
                                                                 </div>
-                                                               
+
                                                                 <div style="margin-top: 25px;">
                                                                     <input id="confirm" type="checkbox"
                                                                                   style="margin-right: 5px;" name="checkbox">
@@ -186,6 +190,11 @@
         </div>
     </div>
     </div>
+        @else
+        <script >
+            window.location.href = "/booking";
+        </script>
+        @endif
 @endauth
 <script>
     import Button from "../../js/src/views/components/vuesax/button/Button";

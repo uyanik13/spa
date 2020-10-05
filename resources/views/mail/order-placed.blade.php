@@ -434,8 +434,10 @@
                                                         text-align: center;
                                                       "
                                                     >
-                                                      {{$data['payment']->id}} Id-Nr.
-                                                      ID-Nr. Dein Ticket ist erstellt! Einfach am Einlass vorzeigen! Vielen Dank!
+                                                      ID-Nr: {{$data['payment']->id}}. Dein Ticket ist erstellt! Einfach am Einlass vorzeigen! Vielen Dank!
+                                                        <span>Id-Nr :<b>{{$data['payment']->id}}</b></span> <br>
+                                                        <span>Gesamtsumme :<b>{{$data['payment']->amount}}</b></span> <br>
+                                                        <span>Sitzungszeit :<b>{{$data['appointment']->appointment_date}} - {{$data['appointment']->hours_between}}</b></span> <br>
                                                     </td>
                                                   </tr>
                                                 </table>
@@ -443,7 +445,21 @@
                                             </tr>
                                           </table>
                                           <!-- END Section - Intro -->
-
+                                        <div class="text-center">
+                                            <div
+                                                 class="text-center img-center p-30 px-15"
+                                                 style="
+                                            font-size: 0pt;
+                                            line-height: 0pt;
+                                            text-align: center;
+                                            padding: 30px;
+                                            padding-left: 15px;
+                                            padding-right: 15px;
+                                          "
+                                            >
+                                                <p> {!! QrCode::size(200)->generate($data['payment']->payment_id); !!}</p>
+                                            </div>
+                                        </div>
                                           <!-- Section - Order Details -->
                                           <table
                                             width="100%"
@@ -529,14 +545,7 @@
                                                                 >Bestellnummer:
                                                                 #{{$data['payment']->id}}</span
                                                               >
-                                                                <span
-                                                                    class="link c-white"
-                                                                    style="
-                                                                  text-decoration: none;
-                                                                  color: #ffffff;
-                                                                "
-                                                                >{{$data['payment']->amount}}</span
-                                                                >
+
                                                             </a>
                                                           </td>
                                                         </tr>

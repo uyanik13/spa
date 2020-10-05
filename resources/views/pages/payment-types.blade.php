@@ -2,6 +2,10 @@
 
     @endphp
 @auth
+    @php
+        $temp = session()->get('appointment');
+    @endphp
+    @if($temp)
     <div class="page_content_wrap page_paddings_no">
         <div class="content_wrap">
             <div class="content">
@@ -107,6 +111,11 @@
             </div>
         </div>
     </div>
+        @else
+        <script >
+            window.location.href = "/booking";
+        </script>
+    @endif
 @endauth
 @guest
     <script >
