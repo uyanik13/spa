@@ -455,6 +455,9 @@
                                             padding-right: 15px;
                                           "
                                             >
+                                            @php
+                                                    use SimpleSoftwareIO\QrCode\Facade as QrCode;
+                                                @endphp
                                                 <p> {!! QrCode::size(200)->generate($data['payment']->payment_id); !!}</p>
                                             </div>
                                         </div>
