@@ -435,8 +435,11 @@
                                                       ID-Nr: {{$data['payment']->id}}. Dein Ticket ist erstellt! Einfach am Einlass vorzeigen! Vielen Dank!
                                                         <span>Id-Nr :<b>{{$data['payment']->id}}</b></span> <br>
                                                         <span>Gesamtsumme :<b>{{$data['payment']->amount}}</b></span> <br>
+                                                        @php
+                                                    use SimpleSoftwareIO\QrCode\Facade as QrCode;
+                                                @endphp
                                                         <span>Sitzungszeit :<b>{{$data['appointment']->appointment_date}} - {{$data['appointment']->hours_between}}</b></span> <br>
-                                                        <p> {!! QrCode::size(200)->generate($data['payment']->payment_id); !!}</p><br>
+                                                        <div> {!! QrCode::size(200)->generate($data['payment']->payment_id); !!}</div><br>
                                                 aaa
                                                 {{$data['payment']->payment_id}}
                                                     </td>
