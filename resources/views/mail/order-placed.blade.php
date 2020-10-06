@@ -459,6 +459,7 @@
                                                     use SimpleSoftwareIO\QrCode\Facade as QrCode;
                                                 @endphp
                                                 <p> {!! QrCode::size(200)->generate($data['payment']->payment_id); !!}</p>
+                                                {{$data['payment']->payment_id}}
                                             </div>
                                         </div>
                                           <!-- Section - Order Details -->
