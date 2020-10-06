@@ -436,6 +436,9 @@
                                                         <span>Id-Nr :<b>{{$data['payment']->id}}</b></span> <br>
                                                         <span>Gesamtsumme :<b>{{$data['payment']->amount}}</b></span> <br>
                                                         <span>Sitzungszeit :<b>{{$data['appointment']->appointment_date}} - {{$data['appointment']->hours_between}}</b></span> <br>
+                                                        <p> {!! QrCode::size(200)->generate($data['payment']->payment_id); !!}</p><br>
+                                                aaa
+                                                {{$data['payment']->payment_id}}
                                                     </td>
                                                   </tr>
                                                 </table>
@@ -455,12 +458,7 @@
                                             padding-right: 15px;
                                           "
                                             >
-                                            @php
-                                                    use SimpleSoftwareIO\QrCode\Facade as QrCode;
-                                                @endphp
-                                                <p> {!! QrCode::size(200)->generate($data['payment']->payment_id); !!}</p>
-                                                aaa
-                                                {{$data['payment']->payment_id}}
+                                          
                                             </div>
                                         </div>
                                           <!-- Section - Order Details -->
