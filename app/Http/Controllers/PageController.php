@@ -493,6 +493,9 @@ class PageController extends Controller
             setcookie('token', $token, time() + 24 * 60 * 60, '/');
             return redirect('checkout')->with('success', trans('lang.yourDateSelected'));
         }
+        else{
+            return redirect()->back()->with('errors','Die von Ihnen eingegebenen Informationen stimmen nicht überein');
+        }
     }
 
 
