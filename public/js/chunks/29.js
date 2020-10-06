@@ -167,16 +167,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -340,6 +330,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     },
     averageWeeklySalesRevenue: function averageWeeklySalesRevenue() {
       return this.$store.state.admin.averageWeeklySalesRevenue;
+    },
+    activeUsers: function activeUsers() {
+      return this.$store.state.admin.activeUsers;
     }
   },
   methods: {
@@ -756,24 +749,15 @@ var render = function() {
         "div",
         { staticClass: "vx-col w-full lg:w-1/3 lg:mt-0 mt-base" },
         [
-          _c("vx-card", { attrs: { title: "Sales Country Performance" } }, [
-            _c(
-              "div",
-              { attrs: { slot: "no-body" }, slot: "no-body" },
-              [
-                _c("vue-apex-charts", {
-                  staticClass: "mt-10 mb-10",
-                  attrs: {
-                    type: "pie",
-                    height: "345",
-                    options: _vm.SalesCountryPerformance.chartOptions,
-                    series: _vm.SalesCountryPerformance.series
-                  }
-                })
-              ],
-              1
-            )
-          ])
+          _c("statistics-card-line", {
+            attrs: {
+              icon: "UserPlusIcon",
+              statistic: _vm._f("k_formatter")(_vm.activeUsers.length),
+              statisticTitle: _vm.$t("activeUsers"),
+              color: "success",
+              type: "area"
+            }
+          })
         ],
         1
       )

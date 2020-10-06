@@ -94,23 +94,13 @@
             </div>
 
 <div class="vx-col w-full lg:w-1/3 lg:mt-0 mt-base">
-                <vx-card title="Sales Country Performance">
-                    <!-- SLOT = ACTIONS -->
-                    <!-- <template slot="actions">
-                        <change-time-duration-dropdown />
-                    </template> -->
 
-                    <div slot="no-body">
-                        <!-- CHART -->
-                        <vue-apex-charts
-                         type="pie" height="345"
-                         class="mt-10 mb-10"
-                          :options="SalesCountryPerformance.chartOptions"
-                           :series="SalesCountryPerformance.series" />
-
-                        <!-- CHART DATA -->
-
-                    </div>
+                <statistics-card-line
+                  icon="UserPlusIcon"
+                  :statistic="activeUsers.length | k_formatter"
+                  :statisticTitle="$t('activeUsers')"
+                  color="success"
+                  type="area" />
 
                 </vx-card>
             </div>
@@ -279,6 +269,9 @@ export default{
     },
     averageWeeklySalesRevenue () {
       return this.$store.state.admin.averageWeeklySalesRevenue
+    },
+      activeUsers () {
+      return this.$store.state.admin.activeUsers
     },
 
 

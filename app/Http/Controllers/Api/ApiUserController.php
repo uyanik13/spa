@@ -147,7 +147,6 @@ class ApiUserController extends ApiController
             $userData->logout_date = null;
           }else{
             $userData->logout_date = Carbon::now();
-            $userData->login_date = null;
           }
 
         if (request('avatar')) {

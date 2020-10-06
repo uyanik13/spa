@@ -34,6 +34,8 @@
          <div class="vx-col w-full sm:w-1/2 lg:w-1/2 ">
                   <div class="my-6">
                           <qrcode-stream @decode="onDecode"></qrcode-stream>
+
+                          <qrcode-capture @decode="onDecode" class="my-10"></qrcode-capture>
                     </div>
             </div>
 
@@ -43,8 +45,8 @@
                         <h5 class="mb-2">Ticket/Kundeninformationen</h5>
                         <h6 class="mb-2">{{ appointment.name }}</h6>
                         <p class="text-black">TickedId:{{ appointment.appointment_id }}</p>
-                        <p class="text-black">Datum:{{ appointment.appointment_date }}</p>
-                        <p class="text-black">Uhrzeit bis:{{ appointment.appointment_date }}</p>
+                        <p class="text-black">Datum:{{ appointment.appointment_date.substr(0,10) }}</p>
+                        <p class="text-black">Uhrzeit bis: {{ appointment.hours_between }}</p>
                         <p class="text-black">Dauerkartenbesitzer: {{ appointment.user? appointment.user.subscribed ? 'Ja' : 'Nine' : ''  }}</p>
                          <vs-button
                                     v-if="!appointment.user.isHere"
@@ -65,6 +67,12 @@
                                     gradient-color-secondary="#BA300B">
                                     {{$t('clientHasLeft')}}
                            </vs-button>
+
+                        <div class="my-6" v-show="!appointment.user.isHere">
+                        <p class="text-black font-semibold">eingeloggt: {{ appointment.user.login_date }}</p>
+                        <p class="text-black font-semibold">Ausloggen: {{ appointment.user.logout_date }}</p>
+                        <!-- <p class="text-black">alle Zeit hier:{{ diff_minutes( new Date(appointment.user.login_date,appointment.user.logout_date)) }}</p> -->
+                        </div>
 
 
 
@@ -115,7 +123,15 @@ export default {
       activeUser () {
           return  Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null
       },
+     diff_minutes(dt2, dt1){
 
+         console.log(dt2)
+        //var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+        diff /= 60;
+        //return Math.abs(Math.round(diff));
+        return true;
+
+ }
 
 
   },

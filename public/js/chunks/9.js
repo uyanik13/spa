@@ -2225,6 +2225,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2245,6 +2253,13 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     activeUser: function activeUser() {
       return js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get('user') ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get('user')) : null;
+    },
+    diff_minutes: function diff_minutes(dt2, dt1) {
+      console.log(dt2); //var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+
+      diff /= 60; //return Math.abs(Math.round(diff));
+
+      return true;
     }
   },
   methods: {
@@ -6659,7 +6674,14 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "my-6" },
-                [_c("qrcode-stream", { on: { decode: _vm.onDecode } })],
+                [
+                  _c("qrcode-stream", { on: { decode: _vm.onDecode } }),
+                  _vm._v(" "),
+                  _c("qrcode-capture", {
+                    staticClass: "my-10",
+                    on: { decode: _vm.onDecode }
+                  })
+                ],
                 1
               )
             ]),
@@ -6685,12 +6707,15 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("p", { staticClass: "text-black" }, [
-                      _vm._v("Datum:" + _vm._s(appointment.appointment_date))
+                      _vm._v(
+                        "Datum:" +
+                          _vm._s(appointment.appointment_date.substr(0, 10))
+                      )
                     ]),
                     _vm._v(" "),
                     _c("p", { staticClass: "text-black" }, [
                       _vm._v(
-                        "Uhrzeit bis:" + _vm._s(appointment.appointment_date)
+                        "Uhrzeit bis: " + _vm._s(appointment.hours_between)
                       )
                     ]),
                     _vm._v(" "),
@@ -6759,7 +6784,35 @@ var render = function() {
                                 "\n                           "
                             )
                           ]
-                        )
+                        ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !appointment.user.isHere,
+                            expression: "!appointment.user.isHere"
+                          }
+                        ],
+                        staticClass: "my-6"
+                      },
+                      [
+                        _c("p", { staticClass: "text-black font-semibold" }, [
+                          _vm._v(
+                            "eingeloggt: " + _vm._s(appointment.user.login_date)
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "text-black font-semibold" }, [
+                          _vm._v(
+                            "Ausloggen: " + _vm._s(appointment.user.logout_date)
+                          )
+                        ])
+                      ]
+                    )
                   ],
                   1
                 )
