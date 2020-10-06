@@ -15,7 +15,7 @@
         <title>{{ $page->seo_title }}</title>
         <meta name="description" content="{{ $page->seo_description }}"/>
     @else
-        <title>test</title>
+        <title>AquaQuell</title>
         <meta name="description" content="test"/>
 @endif
 

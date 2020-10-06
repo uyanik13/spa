@@ -358,7 +358,7 @@
                                                 width: 219px;
                                                 height: 128px;
                                               "
-                                              src="/theme/images/aqua.png"
+                                              src="{{asset('/theme/images/aqua.png')}}"
                                               border="0"
                                               alt=""
                                           /></a>

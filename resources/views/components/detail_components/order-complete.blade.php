@@ -22,7 +22,7 @@
 												{{__('lang.order_result_complete')}}</h2>
 											<div class="sc_section_content_wrap">
 												<div class="text_column content_element  mockingbird-text">
-													<div class="wrapper">
+													<div class="wrapper text-center">
 														<p>
                                                                 @isset($record)
                                                                 <strong>{{$gender['anrede']}} {{auth()->user()->name}},</strong>

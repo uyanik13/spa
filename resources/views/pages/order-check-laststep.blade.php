@@ -134,8 +134,9 @@
                                                                             <span class="pInfos">
                                                                     <i
                                                                         class="fa fa-calendar"></i>
-                                                                    {{$order->order_details}}
-                                                                </span>
+                                                                    {{substr((json_decode(session()->get('appointment'),true)['dateInput']),0,21 ) }}
+                                                                    {{session()->get('appointment')['timeRange']}}
+                                                                    </span>
                                                                             <span class="pInfos">
                                                                     <i class="fa fa-user"></i>
                                                                     @if(isset($order->user)){{$order->user->name}}@else {{Auth::user()->name}}@endif

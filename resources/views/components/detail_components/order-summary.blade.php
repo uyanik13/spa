@@ -62,7 +62,8 @@
                                                                                             
                                                                                 <i
                                                                                     class="fa fa-calendar"></i>
-                                                                                {{$order->order_details}}
+                                                                                {{substr((json_decode(session()->get('appointment'),true)['dateInput']),0,21 ) }}
+                                                                                {{session()->get('appointment')['timeRange']}}
                                                                             </span>
                                                                                         <span class="pInfos">
                                                                                 <i class="fa fa-user"></i>
