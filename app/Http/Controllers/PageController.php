@@ -444,8 +444,6 @@ class PageController extends Controller
 
     public function frontEndRegister(Request $request)
     {
-
-
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'phone' => 'required',
@@ -503,13 +501,12 @@ class PageController extends Controller
         $validatedData = $request->validate([
             'checkbox' => 'accepted',
             'Telefon' => 'required|regex:/(0)[0-9]/',
-            'name' => 'required',
-            'email' => 'required|email',
             'anrede' => 'required',
             'birth_date' => 'required',
             'strasse' => 'required',
             'Postleitzahl' => 'required',
-            'Land' => 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
         ]);
         $aboutData = [
             'anrede' => $request->anrede,
@@ -633,7 +630,7 @@ class PageController extends Controller
     public function testMethod(Request $request)
     {
 
-
+        return redirect()->back()->withSuccess(trans('Address has updated'));
         $lastTime = '19:00';
         $hoursParse = explode('-', '18:30-21:30');
         $firstTime = $hoursParse[0];

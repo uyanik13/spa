@@ -2300,6 +2300,8 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onDecode: function onDecode(decodedString) {
+      console.log(decodedString);
+
       if (decodedString) {
         this.orderId = decodedString;
         return this.fetchUsersAppointment();

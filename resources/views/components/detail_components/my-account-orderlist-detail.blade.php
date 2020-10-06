@@ -78,7 +78,7 @@
                                                                     </ul>
                                                                 </div>
                                                                 <div class="col-md-5">
-                                                                    {!! QrCode::size(200)->generate($order->id); !!}
+                                                                    {!! QrCode::size(200)->generate($order->order_id); !!}
                                                                 </div>
                                                             </div>
                                                         </div>

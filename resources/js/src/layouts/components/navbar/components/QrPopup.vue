@@ -174,6 +174,7 @@ export default {
     },
 
     onDecode (decodedString) {
+           console.log(decodedString)
         if (decodedString){
             this.orderId = decodedString
             return this.fetchUsersAppointment()

@@ -77,6 +77,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _i18n_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/i18n/i18n */ "./resources/js/src/i18n/i18n.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! js-cookie */ "./node_modules/js-cookie/src/js.cookie.js");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -117,8 +119,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
+    this.checkUser();
+
     if (this.$route.query.sessionExpired == 1) {
       this.$acl.change('guest');
       console.clear();
@@ -153,24 +158,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$acl.change(response.role); // this.showAlert(i18n.t('Success'), i18n.t('login_successfull'), 'icon-success', 'success')
 
 
-        if (response.role === 'user') {
-          //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
-          return _this.showAlert(_i18n_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('Authorisation Error'), _i18n_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('auth_error'), 'icon-alert-circle', 'warning');
-        } else if (response.role === 'admin') {
-          //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
-          return _this.$router.push({
-            name: 'admin.dashboard'
-          }).catch(function (error) {
-            console.info(error.message);
-          });
-        } else if (response.role === 'staff') {
-          //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
-          return _this.$router.push({
-            name: 'staff.dashboard'
-          }).catch(function (error) {
-            console.info(error.message);
-          });
-        }
+        _this.checkUser();
       }).catch(function (error) {
         console.log(error);
 
@@ -181,6 +169,30 @@ __webpack_require__.r(__webpack_exports__);
     },
     registerUser: function registerUser() {
       this.$router.push('/panel/register').catch(function () {});
+    },
+    checkUser: function checkUser() {
+      var userInfo = js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get('user') ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_1___default.a.get('user')) : null;
+
+      if (userInfo) {
+        if (userInfo.role === 'user') {
+          //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
+          return this.showAlert(_i18n_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('Authorisation Error'), _i18n_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('auth_error'), 'icon-alert-circle', 'warning');
+        } else if (userInfo.role === 'admin') {
+          //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
+          return this.$router.push({
+            name: 'admin.dashboard'
+          }).catch(function (error) {
+            console.info(error.message);
+          });
+        } else if (userInfo.role === 'staff') {
+          //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
+          return this.$router.push({
+            name: 'staff.dashboard'
+          }).catch(function (error) {
+            console.info(error.message);
+          });
+        }
+      }
     },
     showAlert: function showAlert(title, text, icon, color) {
       this.$vs.notify({

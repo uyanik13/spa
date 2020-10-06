@@ -40,9 +40,11 @@
 <script>
 
 import i18n from '@/i18n/i18n'
+import Cookies from 'js-cookie'
 
 export default {
   created () {
+      this.checkUser()
     if (this.$route.query.sessionExpired == 1) {
       this.$acl.change('guest')
       console.clear()
@@ -74,17 +76,7 @@ export default {
           this.$vs.loading.close()
           this.$acl.change(response.role)
            // this.showAlert(i18n.t('Success'), i18n.t('login_successfull'), 'icon-success', 'success')
-            if (response.role === 'user') {
-
-            //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
-            return this.showAlert(i18n.t('Authorisation Error'), i18n.t('auth_error'), 'icon-alert-circle', 'warning')
-            } else if (response.role === 'admin') {
-            //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
-            return this.$router.push({ name: 'admin.dashboard'}).catch(error => { console.info(error.message) })
-            }else if (response.role === 'staff') {
-            //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
-            return this.$router.push({ name: 'staff.dashboard'}).catch(error => { console.info(error.message) })
-            }
+            this.checkUser()
         })
         .catch(error => {
           console.log(error)
@@ -95,6 +87,22 @@ export default {
     registerUser () {
       this.$router.push('/panel/register').catch(() => {})
     },
+      checkUser(){
+          const userInfo = Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null
+        if (userInfo){
+            if (userInfo.role === 'user') {
+
+                //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
+                return this.showAlert(i18n.t('Authorisation Error'), i18n.t('auth_error'), 'icon-alert-circle', 'warning')
+            } else if (userInfo.role === 'admin') {
+                //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
+                return this.$router.push({ name: 'admin.dashboard'}).catch(error => { console.info(error.message) })
+            }else if (userInfo.role === 'staff') {
+                //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
+                return this.$router.push({ name: 'staff.dashboard'}).catch(error => { console.info(error.message) })
+            }
+        }
+      },
     showAlert (title, text, icon, color) {
       this.$vs.notify({
         title,

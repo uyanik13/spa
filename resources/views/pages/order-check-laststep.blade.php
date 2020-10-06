@@ -196,22 +196,14 @@
                                                     <ul>
                                                         <li>
                                                             <input name="confirm_terms" id="terms" type="checkbox">
-                                                            <label for="terms">Hiermit bestatige ich, die <a href="#" onclick="window.open('/agb', 
-                                                            'newwindow', 
-                                                            'width=600,height=350'); 
+                                                            <label for="terms">Hiermit bestatige ich, die <a href="#" onclick="window.open('/agb',
+                                                            'newwindow',
+                                                            'width=600,height=350');
                                                             return false;">AGB</a> gelesen und akzeptiert zu haben</label>
                                                         </li>
                                                     </ul>
 
-                                                    @if ($errors->any())
-                                                        <div class="">
-                                                            <ul>
-                                                                @foreach ($errors->all() as $error)
-                                                                    <li style="color: red">*{{ $error }}</li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    @endif
+
 
                                                     <div style="text-align: right;">
                                             <button type="submit"
