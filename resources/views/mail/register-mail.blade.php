@@ -358,9 +358,7 @@
                                                 width: 219px;
                                                 height: 128px;
                                               "
-                                              src="https://www.zeytinagacihotels.com/assets/img/mail-logo.png"
-                                              width="112"
-                                              height="43"
+                                              src="/theme/images/aqua.png"
                                               border="0"
                                               alt=""
                                           /></a>

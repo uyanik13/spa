@@ -108,7 +108,8 @@
                                                                 class="sc_form_item sc_form_field label_over">
                                                                 <label class="required"
                                                                                    for="sc_form_username">Geburtsdatum</label>
-                                                                                   <input type = "text" id = "datepicker-1" name="birth_date"
+                                                                                   <input type="text" id="datepicker"
+                                                                                   name="birth_date"
                                                                                    placeholder="Geburtsdatum *"
                                                                                    @isset(json_decode($user->about_data,true)['birth_date']) value="{{json_decode($user->about_data,true)['birth_date']}}"@endisset>
                                                                         
@@ -164,7 +165,7 @@
                                                                             <p><input name="checkbox" type="checkbox"
 																			style="margin-right: 5px;">
 																		Hiermit bestatige ich, die
-																		<a href="/kvkk" onclick="window.open('print.html', 'newwindow',
+																		<a href="/kvkk" onclick="window.open('/kvkk', 'newwindow',
                                                                         'width=600,height=350');
                                                                         return false;">Datenschutzhinweise</a> gelesen und
 																		akzeptiert zu haben. *</p>
