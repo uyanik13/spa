@@ -3,7 +3,7 @@
         <div class="menu_button icon-menu"></div>
         <div class="logo">
             <a href="/">
-                <img src="/theme/images/Logo.png" class="logo_main" alt="" width="238" height="56">
+                <img src="/theme/images/aqua.png" class="logo_main" alt="" width="238" height="56">
             </a>
         </div>
         <div class="menu_main_cart top_panel_icon">
@@ -59,10 +59,10 @@
         <div class="top_panel_middle">
             <div class="content_wrap">
                 <div class="column-1_3 contact_logo">
-                    <div class="logo">
+                    <div class="logo" style="margin-top: 0">
                         <a href="/">
-                            <img src="/theme/images/Logo.png" class="logo_main" alt="" width="238" height="56">
-                            <img src="/theme/images/Logo.png" class="logo_fixed" alt="" width="238" height="56">
+                            <img src="/theme/images/aqua.png" class="logo_main" alt="" width="238" height="56">
+                            <img src="/theme/images/aqua.png" class="logo_fixed" alt="" width="238" height="56">
                         </a>
                     </div>
                 </div>
