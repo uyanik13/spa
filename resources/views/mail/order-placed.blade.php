@@ -439,11 +439,9 @@
                                                     use SimpleSoftwareIO\QrCode\Facade as QrCode;
                                                 @endphp
                                                         <span>Sitzungszeit :<b>{{$data['appointment']->appointment_date}} - {{$data['appointment']->hours_between}}</b></span> <br>
-                                                        <div> {!! QrCode::size(500)->generate($data['payment']->payment_id); !!}</div>
+                                                      
                                                         <img height="500" width="500" src="{!!$message->embedData(QrCode::format('png')->generate($data['payment']->payment_id), 'QrCode.png', 'image/png')!!}">
                                                         <br>
-                                                aaa
-                                                {{$data['payment']->payment_id}}
                                                     </td>
                                                   </tr>
                                                 </table>

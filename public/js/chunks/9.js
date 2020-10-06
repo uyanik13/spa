@@ -6714,9 +6714,13 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("p", { staticClass: "text-black" }, [
+<<<<<<< HEAD
                       _vm._v(
                         "Uhrzeit bis: " + _vm._s(appointment.hours_between)
                       )
+=======
+                      _vm._v("Uhrzeit bis:" + _vm._s(appointment.hours_between))
+>>>>>>> a7ba4b1... camera date
                     ]),
                     _vm._v(" "),
                     _c("p", { staticClass: "text-black" }, [

@@ -46,7 +46,11 @@
                         <h6 class="mb-2">{{ appointment.name }}</h6>
                         <p class="text-black">TickedId:{{ appointment.appointment_id }}</p>
                         <p class="text-black">Datum:{{ appointment.appointment_date.substr(0,10) }}</p>
+<<<<<<< HEAD
                         <p class="text-black">Uhrzeit bis: {{ appointment.hours_between }}</p>
+=======
+                        <p class="text-black">Uhrzeit bis:{{ appointment.hours_between }}</p>
+>>>>>>> a7ba4b1... camera date
                         <p class="text-black">Dauerkartenbesitzer: {{ appointment.user? appointment.user.subscribed ? 'Ja' : 'Nine' : ''  }}</p>
                          <vs-button
                                     v-if="!appointment.user.isHere"
