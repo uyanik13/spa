@@ -73,10 +73,11 @@ export default {
           // console.log('İÇ',response)
           this.$vs.loading.close()
           this.$acl.change(response.role)
-           this.showAlert(i18n.t('Success'), i18n.t('login_successfull'), 'icon-success', 'success')
+           // this.showAlert(i18n.t('Success'), i18n.t('login_successfull'), 'icon-success', 'success')
             if (response.role === 'user') {
+
             //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
-            return this.$router.push({ name: 'user.dashboard'}).catch(error => { console.info(error.message) })
+            return this.showAlert(i18n.t('Authorisation Error'), i18n.t('auth_error'), 'icon-alert-circle', 'warning')
             } else if (response.role === 'admin') {
             //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
             return this.$router.push({ name: 'admin.dashboard'}).catch(error => { console.info(error.message) })

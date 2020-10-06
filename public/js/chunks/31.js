@@ -150,17 +150,12 @@ __webpack_require__.r(__webpack_exports__);
         // console.log('İÇ',response)
         _this.$vs.loading.close();
 
-        _this.$acl.change(response.role);
+        _this.$acl.change(response.role); // this.showAlert(i18n.t('Success'), i18n.t('login_successfull'), 'icon-success', 'success')
 
-        _this.showAlert(_i18n_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('Success'), _i18n_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('login_successfull'), 'icon-success', 'success');
 
         if (response.role === 'user') {
           //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
-          return _this.$router.push({
-            name: 'user.dashboard'
-          }).catch(function (error) {
-            console.info(error.message);
-          });
+          return _this.showAlert(_i18n_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('Authorisation Error'), _i18n_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('auth_error'), 'icon-alert-circle', 'warning');
         } else if (response.role === 'admin') {
           //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
           return _this.$router.push({

@@ -185,6 +185,7 @@ export default {
 
   created () {
     this.fetchUsersAppointment()
+      console.log(this.fetchUsersAppointment())
   }
 
 }
