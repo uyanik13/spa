@@ -95,10 +95,7 @@
                                                                     class="sc_form_item sc_form_field label_over">
                                                                     <label class="required"
                                                                         for="sc_form_Geburtsdatum">Geburtsdatum</label>
-                                                                    <input id="sc_form_Geburtsdatum"
-                                                                               type="date" name="birth_date"
-                                                                        placeholder="DD / MM / JJJJ"
-                                                                        value="01/02/1998">
+                                                                        <input type = "text" id = "datepicker-1" name="birth_date" placeholder="DD / MM / JJJJ">
                                                                 </div>
                                                         </div>
                                                     </div>

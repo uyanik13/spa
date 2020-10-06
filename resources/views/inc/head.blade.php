@@ -43,6 +43,7 @@
     <link rel='stylesheet' href='/theme/css/custom.css' type='text/css' media='all' />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    
+    <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+         rel = "stylesheet">
     @livewireStyles
 </head>

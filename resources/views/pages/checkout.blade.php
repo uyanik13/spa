@@ -108,13 +108,10 @@
                                                                 class="sc_form_item sc_form_field label_over">
                                                                 <label class="required"
                                                                                    for="sc_form_username">Geburtsdatum</label>
-                                                                                   <span>Ihr Geburtsdatum </span>
-                                                                            <input id="sc_form_username" type="date"
-                                                                                   name="birth_date"
+                                                                                   <input type = "text" id = "datepicker-1" name="birth_date"
                                                                                    placeholder="Geburtsdatum *"
-                                                                                   style="background-color: #fff;"
-                                                                                   @isset(json_decode($user->about_data,true)['birth_date']) value="{{json_decode($user->about_data,true)['birth_date']}}"@endisset
-                                                                                  >
+                                                                                   @isset(json_decode($user->about_data,true)['birth_date']) value="{{json_decode($user->about_data,true)['birth_date']}}"@endisset>
+                                                                        
                                                             </div>
 
 
