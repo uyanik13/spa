@@ -22,28 +22,28 @@
 <script type='text/javascript' src='/theme/js/vendor/swiper/swiper.js'></script>
 <script type='text/javascript' src='/theme/js/custom.js'></script>
 <script type='text/javascript' src='/theme/js/main.js'></script>
-
- @if ($page->title === "checkout" | $page->title === "another-person-form")
-{{-- <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
-<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script>
-  $(function() {
-    $( "#datepicker-1" ).datepicker();
-  });
-</script> --}}
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-  $( function() {
-		$( "#datepicker" ).datepicker({
-      yearRange: "1920:2020",
-			changeMonth: true,
-			changeYear: true
-		});
-	} );
-</script>
-    @else
-@endif
-</body>
-
-</html>
+@php
+    $url ='';
+        if (isset($page->title)){
+        $url = $page->title;
+        }else{
+            $url=null;
+        }
+@endphp
+@if($url)
+    @if ($page->title === "checkout" | $page->title === "another-person-form")
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+           $( function() {
+            $( "#datepicker" ).datepicker({
+              yearRange: "1920:2020",
+              changeMonth: true,
+              changeYear: true
+            });
+          } );
+        </script>
+        @endif
+        @endif
+        </body>
+        </html>

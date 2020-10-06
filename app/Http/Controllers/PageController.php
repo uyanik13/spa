@@ -595,7 +595,6 @@ class PageController extends Controller
             'birth_date' => 'required',
             'strasse' => 'required',
             'Postleitzahl' => 'required',
-            'Land' => 'required',
         ]);
 
         $aboutData = [
@@ -605,7 +604,6 @@ class PageController extends Controller
             'birth_date' => $request->birth_date,
             'strasse' => $request->strasse,
             'Postleitzahl' => $request->Postleitzahl,
-            'Land' => $request->Land
         ];
         $data = new User();
         $data->reference_id = $request->ref;

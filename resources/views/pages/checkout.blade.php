@@ -7,6 +7,7 @@
             window.location.href = "/booking";
         </script>
     @else
+
 <div class="page_content_wrap page_paddings_yes">
 	<div class="content_wrap">
 		<div class="content">
@@ -112,7 +113,7 @@
                                                                                    name="birth_date"
                                                                                    placeholder="Geburtsdatum *"
                                                                                    @isset(json_decode($user->about_data,true)['birth_date']) value="{{json_decode($user->about_data,true)['birth_date']}}"@endisset>
-                                                                        
+
                                                             </div>
 
 
