@@ -11,43 +11,58 @@
 <template>
   <vs-sidebar click-not-close position-right parent="body" default-index="1" color="primary" class="add-new-data-sidebar items-no-padding" spacer v-model="isSidebarActiveLocal">
     <div class="mt-6 flex items-center justify-between px-6">
-      <h4> {{ data.name }} - {{ data.appointment_date }} </h4>
+      <h4> {{ data.name }} - {{ data.appointment_date.substr(0,10) }} {{ data.hours_between }} </h4>
       <feather-icon icon="XIcon" @click.stop="isSidebarActiveLocal = false" class="cursor-pointer"></feather-icon>
     </div>
     <vs-divider class="mb-0"></vs-divider>
 
 
-<div class="vx-row pt-10 pl-5">
+    <div class="vx row p-5">
+   <vs-button
+                                    type="gradient"
+                                    class="mt-6"
+                                    color="#7367F0"
+                                    @click="fetchUsersAppointment(data.appointment_id)"
+                                    gradient-color-secondary="#BA300B">
+                                    {{$t('fetchAppointment')}}
+                           </vs-button>
 
-
-         <div class="vx-col w-full sm:w-1/2 lg:w-1/2 ">
-                  <div class="my-6">
-                        <h5 class="mb-2">Ticketnummer : {{ data.appointment_id }}</h5>
-                             <p class="text-grey">QR Code : </p>
-                             <img src="@assets/images/place-holders/qr.png"  height="80px"  width="80px" class="card-img-top" />
-                    </div>
-            </div>
-
-            <!-- CONTENT CARD - PROGRESS BAR/GOAL -->
-            <div class="vx-col w-full sm:w-1/2 lg:w-1/2 ">
-             <div class="my-6">
+        <div class="my-6 " v-for="(appointment,index) in AppointmentUsers" :key="index">
                         <h5 class="mb-2">Ticket/Kundeninformationen</h5>
-                        <h6 class="mb-2">{{ data.name }}</h6>
-                        <p class="text-black">Datum:{{ data.appointment_date }}</p>
-                        <p class="text-black">Uhrzeit bis:{{ data.appointment_date }}</p>
-                        <p class="text-black">Dauerkartenbesitzer: {{ data.user? data.user.subscribed ? 'Ja' : 'Nine' : ''  }}</p>
-                    </div>
-                    <vs-button type="gradient" class="mt-6 mr-5" color="#7367F0" gradient-color-secondary="#BA300B">Kunde einchecken</vs-button>
-            </div>
+                        <h6 class="mb-2">{{ appointment.name }}</h6>
+                        <p class="text-black">TickedId:{{ appointment.appointment_id }}</p>
+                        <p class="text-black">Datum:{{ appointment.appointment_date.substr(0,10) }}</p>
+                        <p class="text-black">Uhrzeit bis: {{ appointment.hours_between }}</p>
+                        <p class="text-black">Dauerkartenbesitzer: {{ appointment.user? appointment.user.subscribed ? 'Ja' : 'Nine' : ''  }}</p>
+                         <vs-button
+                                    v-if="!appointment.user.isHere"
+                                    type="gradient"
+                                    class="mt-6 mr-5"
+                                    color="#7367F0"
+                                    @click="clientCameOrLeft(appointment.user_id,1)"
+                                    gradient-color-secondary="#BA300B">
+                                    {{$t('clientCame')}}
+                           </vs-button>
 
+                           <vs-button
+                                    v-else
+                                    type="gradient"
+                                    class="mt-6 mr-5"
+                                    color="#7367F0"
+                                    @click="clientCameOrLeft(appointment.user_id,0)"
+                                    gradient-color-secondary="#BA300B">
+                                    {{$t('clientHasLeft')}}
+                           </vs-button>
 
+                        <div class="my-6" v-show="!appointment.user.isHere">
+                        <p class="text-black font-semibold">eingeloggt: </p>{{ appointment.user.login_date }}
+                        <p class="text-black font-semibold">Ausloggen: </p>{{ appointment.user.logout_date }}
+                        <p class="text-black font-semibold">Aufenthaltsdauer: </p>{{ diff_minutes( new Date(appointment.user.login_date), new Date(appointment.user.logout_date)) }}
+                        <p class="text-black font-semibold">Zeitüberschreitung: </p> {{ diff_appointment( new Date(appointment.appointment_date.substr(0,10)+ ' '+appointment.hours_between.substr(-5)), new Date(appointment.user.logout_date),appointment.hours_between.substr(-5)) }}
+                        </div>
 
-
-
-
-
-        </div>
-
+             </div>
+    </div>
 
 
 
@@ -75,31 +90,6 @@ export default {
       default: () => {}
     }
   },
-  watch: {
-    isSidebarActive (val) {
-      if (!val) return
-      console.log(this.data.FormData)
-      const map = new Map(Object.entries(JSON.parse(this.data.FormData)))
-      for (const [key, value] of map) {
-        this.FormData.push({
-          key,
-          value
-        })
-      }
-      this.FormData.splice(0, 2)
-      if (Object.entries(this.data).length === 0) {
-        this.initValues()
-        this.$validator.reset()
-      } else {
-        const {  id} = JSON.parse(JSON.stringify(this.data))
-        console.log('active:', this.data)
-        this.dataId = id
-
-
-      }
-
-    }
-  },
   data () {
     return {
       isMounted: false,
@@ -108,6 +98,7 @@ export default {
       dataEmail: '',
       dataSubject: '',
       dataMessage: '',
+      AppointmentUsers : [],
       FormData: [
         {
           key: '',
@@ -125,6 +116,9 @@ export default {
     }
   },
   computed: {
+        activeUser () {
+          return  Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null
+      },
     isSidebarActiveLocal: {
       get () {
         return this.isSidebarActive
@@ -140,8 +134,75 @@ export default {
   },
   mounted () {
     this.isMounted = true
+
+  },
+  created (){
+        this.data
+      this.fetchUsersAppointment(this.data.appointment_id)
   },
   methods: {
+       diff_minutes(dt2, dt1){
+        var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+        diff /= 60;
+        return Math.abs(Math.round(diff)) + ' Minuten';
+        //return true;
+    },
+
+      diff_appointment(dt2, dt1, hours_between){
+        var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+        diff /= 60;
+        return Math.abs(Math.round(diff)) + ' Minuten';
+        //return true;
+    },
+   fetchUsersAppointment(id) {
+        this.$store.dispatch("form/findAppointmentUsers", id)
+        .then(res => {
+            console.log(res)
+            this.AppointmentUsers = res
+
+            })
+        .catch(err => {
+          if(err.response.status === 404) {
+            this.AppointmentUsers = []
+            return
+          }
+          console.error(err) })
+    },
+     clientCameOrLeft(userId,type,) {
+      const payload = {
+        id: userId,
+        isHere : type
+      }
+      this.$store.dispatch('user/updateUser',payload).then((response) => {
+        this.$vs.notify({
+          title: 'Başarılı',
+          text: 'Değişiklikler Başarıyla Düzenlendi',
+          iconPack: 'feather',
+          icon: 'icon-success',
+          color: 'success'
+        })
+        this.fetchUsersAppointment(this.data.appointment_id)
+
+      }).catch(error => {
+        this.$vs.notify({
+          title: 'Hata',
+          text: 'Değişiklikler Kaydedilemedi.',
+          iconPack: 'feather',
+          icon: 'icon-alert-circle',
+          color: 'danger'
+        })
+      })
+    },
+    showAlert (title, text, icon, color) {
+      this.$vs.notify({
+        title,
+        text,
+        iconPack: 'feather',
+        icon,
+        color
+      })
+    },
+
   },
   components: {
     VuePerfectScrollbar
@@ -160,7 +221,7 @@ export default {
     }
     ::v-deep .vs-sidebar {
       z-index: 52010;
-      width: 1280px !important;
+      width: 600px !important;
       max-width: 90vw ;
 
       .img-upload {

@@ -2233,6 +2233,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2253,16 +2267,27 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     activeUser: function activeUser() {
       return js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get('user') ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get('user')) : null;
-    },
-    diff_minutes: function diff_minutes(dt2, dt1) {
-      console.log(dt2); //var diff =(dt2.getTime() - dt1.getTime()) / 1000;
-
-      diff /= 60; //return Math.abs(Math.round(diff));
-
-      return true;
+    }
+  },
+  watch: {
+    orderId: function orderId(appointmentID) {
+      if (appointmentID) {
+        this.orderId = appointmentID;
+        return setTimeout(this.fetchUsersAppointment(), 2000);
+      }
     }
   },
   methods: {
+    diff_minutes: function diff_minutes(dt2, dt1) {
+      var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+      diff /= 60;
+      return Math.abs(Math.round(diff)) + ' Minuten'; //return true;
+    },
+    diff_appointment: function diff_appointment(dt2, dt1, hours_between) {
+      var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+      diff /= 60;
+      return Math.abs(Math.round(diff)) + ' Minuten'; //return true;
+    },
     fetchUsersAppointment: function fetchUsersAppointment() {
       var _this = this;
 
@@ -2324,8 +2349,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.fetchUsersAppointment();
-    console.log(this.fetchUsersAppointment());
+    //console.log(new Date(2020-10-01 07:16:15))
+    this.fetchUsersAppointment(); //console.log(this.fetchUsersAppointment())
   }
 });
 
@@ -5692,8 +5717,6 @@ var render = function() {
             _vm._v(" "),
             _c("vs-spacer"),
             _vm._v(" "),
-            _c("i18n"),
-            _vm._v(" "),
             _c("profile-drop-down")
           ],
           1
@@ -6675,12 +6698,53 @@ var render = function() {
                 "div",
                 { staticClass: "my-6" },
                 [
-                  _c("qrcode-stream", { on: { decode: _vm.onDecode } }),
-                  _vm._v(" "),
-                  _c("qrcode-capture", {
-                    staticClass: "my-10",
-                    on: { decode: _vm.onDecode }
-                  })
+                  _c(
+                    "vs-tabs",
+                    [
+                      _c(
+                        "vs-tab",
+                        { attrs: { label: _vm.$t("camera") } },
+                        [_c("qrcode-stream", { on: { decode: _vm.onDecode } })],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "vs-tab",
+                        { attrs: { label: _vm.$t("Upload") } },
+                        [
+                          _c("qrcode-capture", {
+                            staticClass: "my-10",
+                            on: { decode: _vm.onDecode }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "vs-tab",
+                        { attrs: { label: _vm.$t("Manuel") } },
+                        [
+                          _c("vs-input", {
+                            staticClass: "w-full mb-base",
+                            attrs: {
+                              "icon-pack": "feather",
+                              icon: "icon-search",
+                              "label-placeholder": _vm.$t("appointment_id")
+                            },
+                            model: {
+                              value: _vm.orderId,
+                              callback: function($$v) {
+                                _vm.orderId = $$v
+                              },
+                              expression: "orderId"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
                 ],
                 1
               )
@@ -6805,16 +6869,48 @@ var render = function() {
                       },
                       [
                         _c("p", { staticClass: "text-black font-semibold" }, [
-                          _vm._v(
-                            "eingeloggt: " + _vm._s(appointment.user.login_date)
-                          )
+                          _vm._v("eingeloggt: ")
                         ]),
-                        _vm._v(" "),
+                        _vm._v(
+                          _vm._s(appointment.user.login_date) +
+                            "\n                        "
+                        ),
                         _c("p", { staticClass: "text-black font-semibold" }, [
-                          _vm._v(
-                            "Ausloggen: " + _vm._s(appointment.user.logout_date)
-                          )
-                        ])
+                          _vm._v("Ausloggen: ")
+                        ]),
+                        _vm._v(
+                          _vm._s(appointment.user.logout_date) +
+                            "\n                        "
+                        ),
+                        _c("p", { staticClass: "text-black font-semibold" }, [
+                          _vm._v("Aufenthaltsdauer: ")
+                        ]),
+                        _vm._v(
+                          _vm._s(
+                            _vm.diff_minutes(
+                              new Date(appointment.user.login_date),
+                              new Date(appointment.user.logout_date)
+                            )
+                          ) + "\n                        "
+                        ),
+                        _c("p", { staticClass: "text-black font-semibold" }, [
+                          _vm._v("Zeitüberschreitung: ")
+                        ]),
+                        _vm._v(
+                          " " +
+                            _vm._s(
+                              _vm.diff_appointment(
+                                new Date(
+                                  appointment.appointment_date.substr(0, 10) +
+                                    " " +
+                                    appointment.hours_between.substr(-5)
+                                ),
+                                new Date(appointment.user.logout_date),
+                                appointment.hours_between.substr(-5)
+                              )
+                            ) +
+                            "\n                        "
+                        )
                       ]
                     )
                   ],
