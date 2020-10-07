@@ -27,7 +27,7 @@ class Booking extends Component
     {
         $this->day =session()->get('day');
         $selectedDay = DB::table('calendar_infos')->where('day',$this->day)
-            ->select('day', 'time','quota')->whereDate('day','>', Carbon::today()->format('y-m-d'))->get();
+            ->select('day', 'time','quota')->whereDate('day','>=', Carbon::today()->format('y-m-d'))->get();
         $this->selectedDay = $selectedDay;
 
     }
@@ -42,8 +42,8 @@ class Booking extends Component
 
     public function render()
     {
-        // $selectedDay = DB::table('calendar_infos')->where('day',$this->day)->select('day', 'time')->get();
+         $selectedDay = DB::table('calendar_infos')->where('day',$this->day)->select('day', 'time')->get();
         // $this->selectedDay = $selectedDay;
-        return view('livewire.booking');
+        return view('livewire.booking', ['selectedDay'=>$selectedDay]);
     }
 }

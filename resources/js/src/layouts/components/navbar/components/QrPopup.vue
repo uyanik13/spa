@@ -33,9 +33,22 @@
 
          <div class="vx-col w-full sm:w-1/2 lg:w-1/2 ">
                   <div class="my-6">
-                          <qrcode-stream @decode="onDecode"></qrcode-stream>
+                             <vs-tabs>
+                                  <vs-tab :label="$t('camera')">
+                                    <qrcode-stream @decode="onDecode"></qrcode-stream>
+                                  </vs-tab>
 
-                          <qrcode-capture @decode="onDecode" class="my-10"></qrcode-capture>
+                                  <vs-tab :label="$t('Upload')">
+                                   <qrcode-capture @decode="onDecode" class="my-10"></qrcode-capture>
+                                  </vs-tab>
+
+                                  <vs-tab :label="$t('Manuel')">
+                                   <vs-input class="w-full mb-base"  icon-pack="feather" icon="icon-search" :label-placeholder="$t('appointment_id')" v-model="orderId"></vs-input>
+                                  </vs-tab>
+
+                                </vs-tabs>
+
+
                     </div>
             </div>
 
@@ -46,11 +59,7 @@
                         <h6 class="mb-2">{{ appointment.name }}</h6>
                         <p class="text-black">TickedId:{{ appointment.appointment_id }}</p>
                         <p class="text-black">Datum:{{ appointment.appointment_date.substr(0,10) }}</p>
-<<<<<<< HEAD
                         <p class="text-black">Uhrzeit bis: {{ appointment.hours_between }}</p>
-=======
-                        <p class="text-black">Uhrzeit bis:{{ appointment.hours_between }}</p>
->>>>>>> a7ba4b1... camera date
                         <p class="text-black">Dauerkartenbesitzer: {{ appointment.user? appointment.user.subscribed ? 'Ja' : 'Nine' : ''  }}</p>
                          <vs-button
                                     v-if="!appointment.user.isHere"
@@ -73,9 +82,10 @@
                            </vs-button>
 
                         <div class="my-6" v-show="!appointment.user.isHere">
-                        <p class="text-black font-semibold">eingeloggt: {{ appointment.user.login_date }}</p>
-                        <p class="text-black font-semibold">Ausloggen: {{ appointment.user.logout_date }}</p>
-                        <!-- <p class="text-black">alle Zeit hier:{{ diff_minutes( new Date(appointment.user.login_date,appointment.user.logout_date)) }}</p> -->
+                        <p class="text-black font-semibold">eingeloggt: </p>{{ appointment.user.login_date }}
+                        <p class="text-black font-semibold">Ausloggen: </p>{{ appointment.user.logout_date }}
+                        <p class="text-black font-semibold">Aufenthaltsdauer: </p>{{ diff_minutes( new Date(appointment.user.login_date), new Date(appointment.user.logout_date)) }}
+                        <p class="text-black font-semibold">Zeitüberschreitung: </p> {{ diff_appointment( new Date(appointment.appointment_date.substr(0,10)+ ' '+appointment.hours_between.substr(-5)), new Date(appointment.user.logout_date),appointment.hours_between.substr(-5)) }}
                         </div>
 
 
@@ -127,21 +137,33 @@ export default {
       activeUser () {
           return  Cookies.get('user') ? JSON.parse(Cookies.get('user')) : null
       },
-     diff_minutes(dt2, dt1){
-
-         console.log(dt2)
-        //var diff =(dt2.getTime() - dt1.getTime()) / 1000;
-        diff /= 60;
-        //return Math.abs(Math.round(diff));
-        return true;
-
- }
-
-
   },
 
+    watch: {
+        orderId : function (appointmentID){
+            if (appointmentID){
+                this.orderId = appointmentID
+          return setTimeout(this.fetchUsersAppointment(), 2000);
 
+        }
+        }
+    },
   methods: {
+      diff_minutes(dt2, dt1){
+        var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+        diff /= 60;
+        return Math.abs(Math.round(diff)) + ' Minuten';
+        //return true;
+    },
+
+      diff_appointment(dt2, dt1, hours_between){
+        var diff =(dt2.getTime() - dt1.getTime()) / 1000;
+        diff /= 60;
+        return Math.abs(Math.round(diff)) + ' Minuten';
+        //return true;
+    },
+
+
        fetchUsersAppointment() {
         this.$store.dispatch("form/findAppointmentUsers", this.orderId)
         .then(res => {
@@ -205,8 +227,9 @@ export default {
   },
 
   created () {
+    //console.log(new Date(2020-10-01 07:16:15))
     this.fetchUsersAppointment()
-      console.log(this.fetchUsersAppointment())
+      //console.log(this.fetchUsersAppointment())
   }
 
 }
