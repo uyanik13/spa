@@ -48,7 +48,7 @@ $temp = session()->get('appointment');
                                             @foreach($partners as $key=> $person)
                                     <li>
                                         <label class="toggleSwitch">
-                                                        <input  id="checkbox_{{$key}}" name="partners[]" value="{{$person->id}}" type="checkbox" checked >
+                                                        <input class="zcheckGob" onclick="main_live_search()" id="checkbox_{{$key}}" name="partners[]" value="{{$person->id}}" type="checkbox" checked >
                                             <span class="toggleSlider"></span>
                                         </label>
                                         <div>
@@ -69,6 +69,7 @@ $temp = session()->get('appointment');
                     </article>
                 </div>
             </div>
+                    <input type="hidden" id="sAwrds" value="{{number_format($price,2)}}">
             <div class="col-md-7">
                 <div class="sidebar widget_area scheme_original" role="complementary">
                     <aside class="widget widget_text">
@@ -108,12 +109,12 @@ $temp = session()->get('appointment');
                             <h3>Preis</h3>
                             <ul>
                                 <li>
-                                    <span>Saunatarif Spat</span>
-                                        <span>{{number_format($totalClient*$price,2)}} €</span>
+                                    <span >Saunatarif Spat</span>
+                                        <span id="totalPrice1"id="totalPrice1">{{number_format($totalClient*$price,2)}} €</span>
                                 </li>
                                 <li>
                                     <span>Gesamtpreis</span>
-                                        <span>{{number_format($totalClient*$price,2)}} €</span>
+                                        <span id="totalPrice2">{{number_format($totalClient*$price,2)}} €</span>
                                 </li>
                             </ul>
                             <div style="text-align: right;">

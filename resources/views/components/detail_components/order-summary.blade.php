@@ -59,11 +59,11 @@
                                                                                 {{__('lang.brandname')}}
                                                                             </span>
                                                                                         <span class="pInfos">
-                                                                                            
+
                                                                                 <i
                                                                                     class="fa fa-calendar"></i>
                                                                                 {{substr((json_decode(session()->get('appointment'),true)['dateInput']),0,21 ) }}
-                                                                                {{session()->get('appointment')['timeRange']}}
+                                                                                            {{session()->get('appointment')['timeRange']}}
                                                                             </span>
                                                                                         <span class="pInfos">
                                                                                 <i class="fa fa-user"></i>
@@ -76,18 +76,18 @@
                                                                                 {{number_format($subtotal,2)}}€
                                                                             </td>
                                                                             <td>
-                                                                                 1
+                                                                                1
                                                                             </td>
                                                                             <td>
                                                                                 {{ number_format($order->price,2)}}€
                                                                             </td>
                                                                             <td>
-                                                                                <a class="pDelete"
+                                                                                {{--<a class="pDelete"
                                                                                    onclick="deleteOrder({{$order->id}})">
                                                                                     <i class="fa fa-close"></i>
-                                                                                </a>
+                                                                                </a>--}}
                                                                             </td>
-                                                                            <script>
+                                                                            {{--<script>
 
                                                                                 function deleteOrder(id) {
                                                                                     $.ajax({
@@ -106,7 +106,7 @@
 
                                                                                 }
 
-                                                                            </script>
+                                                                            </script>--}}
                                                                         </tr>
                                                                     @endforeach
                                                                 @endisset
@@ -119,15 +119,15 @@
                                                         <div class="pSummary">
                                                             <ul>
                                                                 <li>
-                                                               <span class="pTag">Zwischensumme:</span><span>{{$subtotal}}€</span>
+                                                                    <span class="pTag">Zwischensumme:</span><span>{{$subtotal}}€</span>
                                                                 </li>
 
                                                                 <li>
-                                                                 <span class="pTag">Mehrwertsteuer (%{{$calendarInfo['kdv']}}):</span><span>{{number_format($tax,2)}}€</span>
+                                                                    <span class="pTag">Mehrwertsteuer (%{{$calendarInfo['kdv']}}):</span><span>{{number_format($tax,2)}}€</span>
                                                                 </li>
 
                                                                 <li>
-                                                                  <span  class="pTag">Gesamtsumme:</span><span>{{number_format($total,2)}}€</span>
+                                                                    <span  class="pTag">Gesamtsumme:</span><span>{{number_format($total,2)}}€</span>
                                                                 </li>
 
                                                             </ul>

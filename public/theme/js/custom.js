@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
                week: 'Woche',
                day: 'Tag'
        },
-        
+
 
         dateClick: function (date, jsEvent, view) {
             modal.style.display = "block"
@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
             var dateInput2 = document.getElementById("dateInput2");
             dateInput.value=date.date
             dateInput2.value=toDate(date.date)
-            createSession('day',toDateEN(date.date))
-            Livewire.emit('createdSessionDay')
+            // createSession('day',toDateEN(date.date))
+            Livewire.emit('createdSessionDay',toDateEN(date.date))
 
         },
 
@@ -88,32 +88,12 @@ function toDateEN (time) {
 
 
 function main_live_search () {
-  const element = document.getElementById('search_result')
-  if (document.getElementById('search_text_input').value == '') {
-    element.style.display = 'none'
-  } else {
-    element.style.display = 'block'
-    element.innerHTML = ''
-    element.innerText = 'Loading...'
-    $.ajax({
-      url: '/search/product',
-      method: 'get',
-      data: {'search_text': document.getElementById('search_text_input').value},
-      success (resp) {
-        var element = document.getElementById('search_result')
-        element.innerHTML = ''
-        var element = document.getElementById('search_result')
-        if (resp[1].length < 1) {
-          var new_result = '<li ><h5 class="text-danger text-center search_result_a" style="height: 35px" >Product not found</h5></li>'
-          element.innerHTML += new_result
-        }
-        for (let i = 0; i < resp[1].length; i++) {
-          var new_result = `<li class="search_result_li"  > <a class="search_result_a" href=/product/${  resp[1][i].slug  }>${  resp[1][i].title  }</li><hr>`
-          element.innerHTML += new_result
-        }
-      }
-    })
-  }
+   let selected = document.querySelectorAll('input[type=checkbox]:checked').length;
+    let  price =document.getElementById('sAwrds').value;
+    console.log(selected)
+    document.getElementById('price').value =price*selected
+    document.getElementById('totalPrice1').innerHTML = price*selected+".00 €";
+    document.getElementById('totalPrice2').innerHTML = price*selected +".00 €";
 }
 
 function sortByKey (key) {

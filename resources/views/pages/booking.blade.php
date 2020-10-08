@@ -48,8 +48,21 @@
 
 <div id="myModal" class="modal1">
     <!-- Modal content -->
+
+    <div class="modal-content1" style="background-color: transparent; border: none;">
+
+        <div id="targetModal" class="appointmentForm">
+            <span class="close1" onclick="closeModal()">&times;</span>
+            <h2 class="text-center mb-4">
+                Reservierungsformular
+            </h2>
+            <p class="text-center">Bitte wählen Sie die Reservierungsinformationen aus, um mit dem nächsten Schritt
+                fortzufahren</p>
     @livewire('booking')
 
+        </div>
+
+    </div>
 </div>
 <script>
     window.addEventListener('click', function (e) {

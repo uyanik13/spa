@@ -52,25 +52,29 @@ class ApiOrderController  extends ApiController
      */
     public function store(Request $request)
     {
-
         $order_id = Carbon::now()->timestamp;
+        $partners = $request->partners;
+        if (!isset($partners)){
+            $partners = [];
+        }
+        $price = ($request->price)/(count($partners)+1);
         $data = User::find(Auth::user()->id);
         $new2 = new Order();
         $new2->user_id = $data->id;
         $new2->order_details = 'paket adı';
-        $new2->price = $request->price;
+        $new2->price = $price;
         $new2->order_id = $order_id;
         $new2->save();
 
 
-        $partners = $request->partners;
+
         if (isset($partners)) {
             foreach ($partners as $partner) {
                 $new = new Order();
                 $new->user_id = $partner;
                 $new->order_details = 'paket adı';
                 $new->order_id = $order_id;
-                $new->price = $request->price;
+                $new->price =$price;
                 $new->save();
             }
         }

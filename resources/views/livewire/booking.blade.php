@@ -1,13 +1,4 @@
 
-<div class="modal-content1" style="background-color: transparent; border: none;">
-
-    <div id="targetModal" class="appointmentForm">
-        <span class="close1" onclick="closeModal()">&times;</span>
-        <h2 class="text-center mb-4">
-            Reservierungsformular
-        </h2>
-        <p class="text-center">Bitte wählen Sie die Reservierungsinformationen aus, um mit dem nächsten Schritt
-            fortzufahren</p>
             <form action="{{route('calendar.appointment')}}" class="contact-form" method="POST">
                 @csrf
 
@@ -16,12 +7,6 @@
                 <input type="hidden" id="dateInput"   wire:model="day"   name="dateInput" value="" >
                 <input type="text" id="dateInput2"  name="dateInput2" placeholder="DD / MM / JJJJ" value="" disabled>
             </div>
-
-
-
-
-
-
             <div class="input">
                 <label for="">Bevorzugter Zeitbereich</label>
                 <select name="timeRange" onchange="this.selected" required id="timeRange">
@@ -41,11 +26,6 @@
                                @endif
                                 @endforeach
                                 @endif
-
-
-
-
-
                 </select>
             </div>
 
@@ -61,13 +41,5 @@
             </div>
 
         </form>
-    </div>
-
-</div>
-
-
 @push('scripts')
-
-
-
 @endpush
