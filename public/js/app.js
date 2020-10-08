@@ -93647,10 +93647,10 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************!*\
   !*** ./resources/js/src/i18n/de.json ***!
   \***************************************/
-/*! exports provided: 404, staff, default */
+/*! exports provided: 404, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"404\":\"404\",\"staff\":\"aaa\"}");
+module.exports = JSON.parse("{\"404\":\"404\"}");
 
 /***/ }),
 
