@@ -157,7 +157,8 @@ export default {
     },
 
       countStayTime(stayTime){
-        console.log(stayTime)
+        console.log("calendarInfo : ")
+        console.log(this.calendarInfo.timeout_price)
         let time = (stayTime-180);
         if (time < 0) return 0;
         return ( time/30 ) * this.calendarInfo.timeout_price
