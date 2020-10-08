@@ -111,6 +111,7 @@
                                                                                    for="sc_form_username">Geburtsdatum</label>
                                                                                    <input type="text" id="datepicker"
                                                                                    name="birth_date"
+                                                                                   autocomplete="off" 
                                                                                    placeholder="Geburtsdatum *"
                                                                                    @isset(json_decode($user->about_data,true)['birth_date']) value="{{json_decode($user->about_data,true)['birth_date']}}"@endisset>
 

@@ -95,7 +95,8 @@
                                                                     class="sc_form_item sc_form_field label_over">
                                                                     <label class="required"
                                                                         for="sc_form_Geburtsdatum">Geburtsdatum</label>
-                                                                        <input type = "text" id ="datepicker" name="birth_date" placeholder="DD / MM / JJJJ">
+                                                                        <input type = "text" id ="datepicker"
+                                                                        autocomplete="off" name="birth_date" placeholder="DD / MM / JJJJ">
                                                                 </div>
                                                         </div>
                                                     </div>

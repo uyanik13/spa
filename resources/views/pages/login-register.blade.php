@@ -143,6 +143,7 @@
                                                         for="sc_form_date">Geburtsdatum
                                                     *</label>
                                                 <input required  id="datepicker" type="text"
+                                                        autocomplete="off" 
                                                         name="birth_date"
                                                         placeholder="Geburstdatum *"
                                                         style="background-color: #fff;">
