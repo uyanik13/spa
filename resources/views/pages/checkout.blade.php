@@ -57,7 +57,7 @@
                                                                 <label class="required"
                                                                     for="sc_form_email">E-mail</label>
                                                                 <input id="sc_form_email" type="text"
-                                                                name="email"  value="{{$user->email}}" placeholder="E-mail">
+                                                                name="email" readonly disabled="true"  value="{{$user->email}}" placeholder="E-mail">
                                                             </div>
                                                                         {{--                                                                    @isset($data['anrede'])--}}
                                                             <div class="anredeRadio">
@@ -100,8 +100,8 @@
                                                                 <label class="required"
                                                                     for="sc_form_Telefon">Telefon</label>
                                                                 <input id="sc_form_Telefon" type="text"
-                                                                    name="Telefon"
-                                                                                   placeholder="Telefon: 0xxxxxxxxx"
+                                                                    name="Telefon"  readonly disabled="true"
+                                                                       placeholder="Telefon: 0xxxxxxxxx"
                                                                                    value="{{$user->phone}}">
                                                             </div>
 

@@ -72,97 +72,25 @@ class ApiPaymentController extends Controller
                             'status' => 'pending',
                         ]);
                     }
-                    $payment->status = 'completed';
-                    $payment->save();
-
-                    $userCount = count($ordersDetail['orders']);
-
-
-                    $lastTime = '19:00';
-                    $hoursParse = explode('-', $appointment['timeRange']);
-                    $firstTime = $hoursParse[0];
-                    for ($i = 0; $i <= 6; $i++) {
-                        $h1 = date('H:i', strtotime($firstTime) + 60 * 30 * $i);
-                        if (new DateTime($h1) > new DateTime($lastTime)) {
-                            $i = 1;
-                            break;
-                        }
-                        $h2 = date('H:i', strtotime($h1) + 60 * 30 * 6);
-                        $hours = $h1 . '-' . $h2;
-                        $selectedDay = CalendarInfo::where('day', $appointment['dateInput'])->where('time', $hours)->first();
+                        $payment->status = 'completed';
+                        $payment->save();
+                        $userCount = count($ordersDetail['orders']);
+                        $selectedDay = CalendarInfo::where('day', $appointment['dateInput'])->where('time', $appointment['timeRange'])->first();
                         $selectedDay->quota = $selectedDay->quota - $userCount;
                         $selectedDay->save();
-
-                        //print_r($h1);
-                    }
-                    $user = Auth::user();
-                    $email = $user->email;
-                    $data = ['user' => $user, 'payment' => $paymentx,'appointment'=>$payment];
-                    Mail::send('mail.order-placed', ["data" => $data], function ($message) use ($email) {
-                        $message->to($email)
-                            ->subject('AquaQuell - Ihre Bestellung wurde erstellt');
-                    });
+                        $user = Auth::user();
+                        $email = $user->email;
+                        $data = ['user' => $user, 'payment' => $paymentx,'appointment'=>$payment];
+                        Mail::send('mail.order-placed', ["data" => $data], function ($message) use ($email) {
+                            $message->to($email)
+                                ->subject('AquaQuell - Ihre Bestellung wurde erstellt');
+                        });
                     session()->forget('appointment');
                     return  redirect('order-complete/' . $request->order_id)->with('success', trans('lang.paymentFinish'));
                 }
             }
-        }
-        //     $order = Order::create([
-        //         'user_id' => $this->user->id,
-        //         'order_details' => $cart,
-        //         'order_id' => $request->order_id,
-        //         'price' => $cartTotal,
-        //         'status' => 'pending',
-        //     ]);
+           }
 
-        //     $payment = Payment::create([
-        //         'user_id' => $this->user->id,
-        //         'payment_id' => $request->order_id,
-        //         'payment_method' => 'stripe', //DO AOUTO
-        //         'amount' => $cartTotal,
-        //         'status' => 'pending',
-        //     ]);
-        // }
-
-
-        // $customer = $this->stripe->customers()->create([
-        //     'email' => $this->user->email,
-        //     'name' => $this->user->name,
-        // ]);
-
-        // $token = $this->stripe->tokens()->create([
-        //     'card' => [
-        //         'number' => $request->card_number,
-        //         'exp_month' => $request->exp_month,
-        //         'exp_year' => $request->exp_year,
-        //         'cvc' => $request->cvc
-        //     ],
-        // ]);
-
-        // $card = $this->stripe->cards()->create( $customer['id'], $token['id']);
-
-        // $charge = $this->stripe->charges()->create([
-        //     'customer' => $customer['id'],
-        //     'currency' => $this->setting['currency']->value,
-        //     'amount'   => $cartTotal,
-        // ]);
-
-
-        // if($charge['status'] === 'succeeded'){
-        //     $order->status = 'completed';
-        //     $order->save();
-
-        //     $payment->status = 'completed';
-        //     $payment->save();
-
-        //     Mail::to($this->user)
-        //     ->cc($this->admin)
-        //     ->send(new OrderCreated($order));
-
-        //     $toEmptyCart = Helper::toEmptyCart();
-        // }
-
-        // return response()->json($charge['status']);
     }
 
     public function create_email_order(Request $request)
@@ -171,10 +99,13 @@ class ApiPaymentController extends Controller
         Mail::to('info@anonymupload.com')->send(new OrderCreated($data));
         return redirect()->back();
     }
+
     public function create_email_order2(Request $request)
     {
         $data =  $request->all();
         Mail::to('info@kokoshangels.com')->send(new ShortEmail($data));
         return redirect()->back();
     }
+
+
 }

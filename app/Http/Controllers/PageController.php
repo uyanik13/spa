@@ -503,18 +503,15 @@ class PageController extends Controller
     {
         $validatedData = $request->validate([
             'checkbox' => 'accepted',
-            'Telefon' => 'required|regex:/(0)[0-9]/',
             'anrede' => 'required',
             'birth_date' => 'required',
             'strasse' => 'required',
             'Postleitzahl' => 'required',
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
         ]);
         $aboutData = [
             'anrede' => $request->anrede,
             'Titel' => $request->Titel,
-            'Telefon' => $request->Telefon,
             'birth_date' => $request->birth_date,
             'strasse' => $request->strasse,
             'Postleitzahl' => $request->Postleitzahl,
@@ -523,8 +520,6 @@ class PageController extends Controller
         $data = User::find(Auth::user()->id);
 
         $data->name = $request->name;
-        $data->email = $request->email;
-        $data->phone = $request->Telefon;
         $data->about_data = json_encode($aboutData);
         $data->save();
         return redirect('person-choose');

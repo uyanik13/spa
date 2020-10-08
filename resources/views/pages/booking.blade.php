@@ -58,7 +58,7 @@
             </h2>
             <p class="text-center">Bitte wählen Sie die Reservierungsinformationen aus, um mit dem nächsten Schritt
                 fortzufahren</p>
-    @livewire('booking')
+             @livewire('booking')
 
         </div>
 

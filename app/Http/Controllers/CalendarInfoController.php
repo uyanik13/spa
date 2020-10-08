@@ -115,7 +115,7 @@ class CalendarInfoController extends Controller
 
     //          $dates = $this->generateDateRange($to, $from);
 
-    //          $hours = ['14:00-17:00','14:30-17:30','15:00-18:00','15:30-18:30','16:00-19:00','16:30-19:30','17:00-20:00','17:30-20:30','18:00-21:00','18:30-21:30','19:00-22:00'];
+    //          $hours = ['13:00-16:00', '16:00-19:00','19:00-22:00',];
 
 
     //          foreach ($dates as $key => $value) {

@@ -14,7 +14,7 @@
                                 @foreach ($selectedDay as $key => $day)
                                @if ($day->quota > 0)
                                @if ($key == 0)
-                               <option value="14:00-17:00" selected>Bitte wählen Sie die Option</option>
+                               <option value="13:00-16:00" selected>Bitte wählen Sie die Option</option>
                                @endif
                                <option value="{{$day->time}}" class="bg-success text-white ">{{$day->time}}
                                 <span>letzte {{$day->quota}} Personen</span>
