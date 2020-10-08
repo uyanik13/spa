@@ -9,19 +9,19 @@
             </div>
             <div class="input">
                 <label for="">Bevorzugter Zeitbereich</label>
-                <select name="timeRange" onchange="this.selected" required id="timeRange">
+                <select class="timeRangeSelector" name="timeRange" onchange="this.selected" required id="timeRange">
                                 @if($selectedDay)
                                 @foreach ($selectedDay as $key => $day)
                                @if ($day->quota > 0)
                                @if ($key == 0)
                                <option value="13:00-16:00" selected>Bitte wählen Sie die Option</option>
                                @endif
-                               <option value="{{$day->time}}" class="bg-success text-white ">{{$day->time}}
-                                <span>letzte {{$day->quota}} Personen</span>
+                               <option value="{{$day->time}}" class="text-white ">{{$day->time}} /
+                                <span>letzte {{$day->quota}} "Tickets"</span>
                                  </option>
                                @else
                                <option value="{{$day->time}}"class="bg-danger text-white " disabled="true" >{{$day->time}}
-                                <span>letzte {{$day->quota}} Personen</span>
+                                <span>letzte {{$day->quota}} "Tickets"</span>
                                 </option>
                                @endif
                                 @endforeach

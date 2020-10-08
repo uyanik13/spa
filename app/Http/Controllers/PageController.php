@@ -446,7 +446,8 @@ class PageController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'phone' => 'required',
+            'phone' => 'required|unique:users',
+            'birth_date' => 'required|date|before:-18 years',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
@@ -455,12 +456,16 @@ class PageController extends Controller
             return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
 
+        $aboutData = [
+            'birth_date' => $request->birth_date,
+   
+        ];
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'about_data' => json_encode($request->birth_date),
+            'about_data' => json_encode($aboutData),
             'password' => bcrypt($request->password)
         ]);
 

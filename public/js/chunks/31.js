@@ -158,7 +158,26 @@ __webpack_require__.r(__webpack_exports__);
         _this.$acl.change(response.role); // this.showAlert(i18n.t('Success'), i18n.t('login_successfull'), 'icon-success', 'success')
 
 
-        _this.checkUser();
+        if (response) {
+          if (response.role === 'user') {
+            //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
+            return _this.showAlert(_i18n_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('Authorisation Error'), _i18n_i18n__WEBPACK_IMPORTED_MODULE_0__["default"].t('auth_error'), 'icon-alert-circle', 'warning');
+          } else if (response.role === 'admin') {
+            //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
+            return _this.$router.push({
+              name: 'admin.dashboard'
+            }).catch(function (error) {
+              console.info(error.message);
+            });
+          } else if (response.role === 'staff') {
+            //this.showAlert(i18n.t('Error'), i18n.t('you_are_logged_in'), 'icon-alert-circle', 'warning')
+            return _this.$router.push({
+              name: 'staff.dashboard'
+            }).catch(function (error) {
+              console.info(error.message);
+            });
+          }
+        }
       }).catch(function (error) {
         console.log(error);
 

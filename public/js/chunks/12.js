@@ -238,6 +238,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { _babel_runtime_cor
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -254,8 +263,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { _babel_runtime_cor
   data: function data() {
     return {
       calendarInfo: {
-        price: '',
-        kdv: ''
+        price: "",
+        kdv: "",
+        timeout_price: ""
       }
     };
   },
@@ -272,21 +282,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { _babel_runtime_cor
 
       var obj = (_obj = {}, _defineProperty(_obj, dataType, this[dataType]), _defineProperty(_obj, "type", dataType), _obj);
       console.log(obj);
-      this.$store.dispatch('custom/addItem', obj).then(function (response) {
+      this.$store.dispatch("custom/addItem", obj).then(function (response) {
         _this.$vs.notify({
-          title: 'Başarılı',
-          text: ' İçerik Başarıyla Eklendi',
-          iconPack: 'feather',
-          icon: 'icon-success',
-          color: 'success'
+          title: "Başarılı",
+          text: " İçerik Başarıyla Eklendi",
+          iconPack: "feather",
+          icon: "icon-success",
+          color: "success"
         });
       }).catch(function (error) {
         _this.$vs.notify({
-          title: 'Hata',
-          text: 'İçerik Eklenemedi.',
-          iconPack: 'feather',
-          icon: 'icon-alert-circle',
-          color: 'danger'
+          title: "Hata",
+          text: "İçerik Eklenemedi.",
+          iconPack: "feather",
+          icon: "icon-alert-circle",
+          color: "danger"
         });
       });
     }
@@ -299,9 +309,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { _babel_runtime_cor
   created: function created() {
     var _this2 = this;
 
-    this.$store.dispatch('custom/fetchItems').then(function (response) {
+    this.$store.dispatch("custom/fetchItems").then(function (response) {
       response.data.forEach(function (element) {
-        if (element.type === 'calendarI22nfo') {
+        if (element.type === "56") {
           _this2[element.type].push(JSON.parse(element.JsonData)[element.type]);
 
           _this2[element.type].splice(0, 1);
@@ -1619,7 +1629,7 @@ var render = function() {
         _c("div", { staticClass: "vx-row" }, [
           _c(
             "div",
-            { staticClass: "vx-col sm:w-1/2 lg:w-1/1 mb-2" },
+            { staticClass: "vx-col sm:w-1/3 lg:w-1/1 mb-2" },
             [
               _c("vs-input", {
                 staticClass: "mt-5 w-full",
@@ -1638,7 +1648,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "vx-col sm:w-1/2 lg:w-1/1 mb-2" },
+            { staticClass: "vx-col sm:w-1/3 lg:w-1/1 mb-2" },
             [
               _c("vs-input", {
                 staticClass: "mt-5 w-full",
@@ -1649,6 +1659,28 @@ var render = function() {
                     _vm.$set(_vm.calendarInfo, "kdv", $$v)
                   },
                   expression: "calendarInfo.kdv"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "vx-col sm:w-1/3 lg:w-1/1 mb-2" },
+            [
+              _c("vs-input", {
+                staticClass: "mt-5 w-full",
+                attrs: {
+                  label: _vm.$t("timeout_price"),
+                  placeholder: "ex= 18"
+                },
+                model: {
+                  value: _vm.calendarInfo.timeout_price,
+                  callback: function($$v) {
+                    _vm.$set(_vm.calendarInfo, "timeout_price", $$v)
+                  },
+                  expression: "calendarInfo.timeout_price"
                 }
               })
             ],

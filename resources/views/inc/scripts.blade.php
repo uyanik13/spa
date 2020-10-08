@@ -23,27 +23,34 @@
 <script type='text/javascript' src='/theme/js/custom.js'></script>
 <script type='text/javascript' src='/theme/js/main.js'></script>
 @php
-    $url ='';
-        if (isset($page->title)){
-        $url = $page->title;
-        }else{
-            $url=null;
-        }
+  $url ='';
+      if (isset($page->title)){
+      $url = $page->title;
+      }else{
+          $url=null;
+      }
 @endphp
 @if($url)
-    @if ($page->title === "checkout" | $page->title === "another-person-form")
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script>
-           $( function() {
-            $( "#datepicker" ).datepicker({
-              yearRange: "1920:2020",
-              changeMonth: true,
-              changeYear: true
-            });
-          } );
-        </script>
-        @endif
-        @endif
-        </body>
-        </html>
+  @if ($page->title === "checkout" | $page->title === "another-person-form" | $page->title === "login-register")
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <script>
+          $( function() {
+          $( "#datepicker" ).datepicker({
+            yearRange: "1920:2020",
+            changeMonth: true,
+            changeYear: true
+          });
+        } );
+      </script>
+      <script>
+          var overlay = document.querySelector(".registerFormOverlay");
+          var button = document.querySelector(".overlayRemover");
+          button.addEventListener('click', function () {
+            overlay.classList.toggle("hideRegisterOverlay");
+          })
+      </script>
+      @endif
+      @endif
+      </body>
+      </html>

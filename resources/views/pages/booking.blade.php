@@ -53,10 +53,10 @@
 
         <div id="targetModal" class="appointmentForm">
             <span class="close1" onclick="closeModal()">&times;</span>
-            <h2 class="text-center mb-4">
+            <h4 style="font-weight: bold" class="text-center mb-4">
                 Reservierungsformular
-            </h2>
-            <p class="text-center">Bitte wählen Sie die Reservierungsinformationen aus, um mit dem nächsten Schritt
+            </h4>
+            <p class="text-center" style="color: #fff">Bitte wählen Sie die Reservierungsinformationen aus, um mit dem nächsten Schritt
                 fortzufahren</p>
              @livewire('booking')
 

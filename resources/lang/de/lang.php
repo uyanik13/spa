@@ -74,7 +74,7 @@ return [
     'footer_welcome' => 'Willkommen bei AquaQuell Ihrem Wohlfühl Haus mit Tradition ',
     'booking_title' => 'Planen Sie jetzt Ihren Termin',
     'contacts' => 'Kontakt',
-    'please_login' => 'Bitte loggen Sie sich mit Ihren Zugangsdaten ein.',
+    'please_login' => 'Sind Sie bereits Kunde? Bitte einloggen',
     'brandname' => 'AquaQuell',
     'adresse' => 'EMPFÄNGER ADRESSE',
     'rechnungadresse' => 'RECHNUNGSADRESSE',

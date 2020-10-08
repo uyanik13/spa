@@ -49,6 +49,7 @@ class ApiAdminController extends ApiController
       $recurringPayments = [];
 
       foreach ($payments as $key => $payment) {
+
         $recurringPayments[$payment->user->id] = [
             'payment_count' =>  Payment::where('user_id',  $payment->user_id)->count(),
             'user_id' =>  $payment->user->id,
@@ -58,7 +59,7 @@ class ApiAdminController extends ApiController
             'paymentsAmount' =>  number_format(Payment::where('user_id',  $payment->user_id)->sum('amount'),2)
         ];
      }
-
+     
 
 
       $paymentsPaginated = Payment::orderBy('created_at','desc')->where('status','completed')->paginate(15);

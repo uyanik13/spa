@@ -2243,6 +2243,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -2257,7 +2258,9 @@ __webpack_require__.r(__webpack_exports__);
       colorx: '#ffffff',
       popupActive: false,
       orderId: '1',
-      AppointmentUsers: []
+      AppointmentUsers: [],
+      calendarInfo: [],
+      stayTime: ''
     };
   },
   computed: {
@@ -2277,12 +2280,14 @@ __webpack_require__.r(__webpack_exports__);
     diff_minutes: function diff_minutes(dt2, dt1) {
       var diff = (dt2.getTime() - dt1.getTime()) / 1000;
       diff /= 60;
-      return Math.abs(Math.round(diff)) + ' Minuten'; //return true;
+      this.stayTime = Math.abs(Math.round(diff));
+      return this.stayTime;
     },
-    diff_appointment: function diff_appointment(dt2, dt1, hours_between) {
-      var diff = (dt2.getTime() - dt1.getTime()) / 1000;
-      diff /= 60;
-      return Math.abs(Math.round(diff)) + ' Minuten'; //return true;
+    countStayTime: function countStayTime(stayTime) {
+      console.log(stayTime);
+      var time = stayTime - 180;
+      if (time < 0) return 0;
+      return time / 30 * this.calendarInfo.timeout_price; //return true;
     },
     fetchUsersAppointment: function fetchUsersAppointment() {
       var _this = this;
@@ -2345,8 +2350,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
+    var _this3 = this;
+
     //console.log(new Date(2020-10-01 07:16:15))
-    this.fetchUsersAppointment(); //console.log(this.fetchUsersAppointment())
+    this.fetchUsersAppointment();
+    this.$store.dispatch('custom/fetchItems').then(function (response) {
+      response.data.forEach(function (element) {
+        _this3.calendarInfo = JSON.parse(element.JsonData).calendarInfo;
+      });
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
 });
 
@@ -6871,25 +6885,27 @@ var render = function() {
                               new Date(appointment.user.login_date),
                               new Date(appointment.user.logout_date)
                             )
-                          ) + "\n                        "
+                          ) + "  Minuten\n                   "
                         ),
-                        _c("p", { staticClass: "text-black font-semibold" }, [
-                          _vm._v("Zeitüberschreitung: ")
-                        ]),
-                        _vm._v(
-                          " " +
-                            _vm._s(
-                              _vm.diff_appointment(
-                                new Date(
-                                  appointment.appointment_date.substr(0, 10) +
-                                    " " +
-                                    appointment.hours_between.substr(-5)
-                                ),
-                                new Date(appointment.user.logout_date),
-                                appointment.hours_between.substr(-5)
-                              )
-                            ) +
-                            "\n                        "
+                        _c(
+                          "p",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.countStayTime(_vm.stayTime) > 0,
+                                expression: "countStayTime(stayTime) > 0"
+                              }
+                            ],
+                            staticClass: "text-black font-semibold"
+                          },
+                          [
+                            _vm._v(
+                              "Ablaufbetrag: € " +
+                                _vm._s(_vm.countStayTime(_vm.stayTime))
+                            )
+                          ]
                         )
                       ]
                     )

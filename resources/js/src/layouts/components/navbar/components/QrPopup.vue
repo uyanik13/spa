@@ -40,6 +40,7 @@
 
                                   <vs-tab :label="$t('IDNummer')">
                                    <vs-input class="w-full mb-base"  icon-pack="feather" icon="icon-search" :label-placeholder="$t('appointment_id')" v-model="orderId"></vs-input>
+                               
                                   </vs-tab>
 
                                 </vs-tabs>
@@ -80,8 +81,8 @@
                         <div class="my-6" v-show="!appointment.user.isHere">
                         <p class="text-black font-semibold">eingeloggt: </p>{{ appointment.user.login_date }}
                         <p class="text-black font-semibold">Ausloggen: </p>{{ appointment.user.logout_date }}
-                        <p class="text-black font-semibold">Aufenthaltsdauer: </p>{{ diff_minutes( new Date(appointment.user.login_date), new Date(appointment.user.logout_date)) }}
-                        <p class="text-black font-semibold">Zeitüberschreitung: </p> {{ diff_appointment( new Date(appointment.appointment_date.substr(0,10)+ ' '+appointment.hours_between.substr(-5)), new Date(appointment.user.logout_date),appointment.hours_between.substr(-5)) }}
+                        <p class="text-black font-semibold">Aufenthaltsdauer: </p>{{ diff_minutes( new Date(appointment.user.login_date), new Date(appointment.user.logout_date)) }}  Minuten
+                   <p class="text-black font-semibold" v-show="countStayTime(stayTime) > 0">Ablaufbetrag: € {{ countStayTime(stayTime) }}</p> 
                         </div>
 
 
@@ -126,6 +127,9 @@ export default {
       popupActive: false,
       orderId: '1',
       AppointmentUsers : [],
+      calendarInfo : [],
+      stayTime: ''
+
 
     }
   },
@@ -148,14 +152,16 @@ export default {
       diff_minutes(dt2, dt1){
         var diff =(dt2.getTime() - dt1.getTime()) / 1000;
         diff /= 60;
-        return Math.abs(Math.round(diff)) + ' Minuten';
-        //return true;
+        this.stayTime = Math.abs(Math.round(diff)) ;
+        return this.stayTime;
     },
 
-      diff_appointment(dt2, dt1, hours_between){
-        var diff =(dt2.getTime() - dt1.getTime()) / 1000;
-        diff /= 60;
-        return Math.abs(Math.round(diff)) + ' Minuten';
+      countStayTime(stayTime){
+        console.log(stayTime)
+        let time = (stayTime-180);
+        if (time < 0) return 0;
+        return ( time/30 ) * this.calendarInfo.timeout_price
+       
         //return true;
     },
 
@@ -225,7 +231,13 @@ export default {
   created () {
     //console.log(new Date(2020-10-01 07:16:15))
     this.fetchUsersAppointment()
-      //console.log(this.fetchUsersAppointment())
+    this.$store.dispatch('custom/fetchItems')
+      .then((response) => {
+        response.data.forEach(element => {
+          this.calendarInfo = JSON.parse(element.JsonData).calendarInfo
+        })
+      })
+      .catch((error) => { console.log(error) })
   }
 
 }

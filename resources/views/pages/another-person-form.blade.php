@@ -95,7 +95,7 @@
                                                                     class="sc_form_item sc_form_field label_over">
                                                                     <label class="required"
                                                                         for="sc_form_Geburtsdatum">Geburtsdatum</label>
-                                                                        <input type = "text" id = "datepicker-1" name="birth_date" placeholder="DD / MM / JJJJ">
+                                                                        <input type = "text" id ="datepicker" name="birth_date" placeholder="DD / MM / JJJJ">
                                                                 </div>
                                                         </div>
                                                     </div>
@@ -131,7 +131,9 @@
                                                                     <input id="confirm" type="checkbox"
                                                                                   style="margin-right: 5px;" name="checkbox">
                                                                         Hiermit bestatige ich, die
-                                                                        Datenschutzhinweise gelesen und
+                                                                        <a href="/kvkk" onclick="window.open('/kvkk', 'newwindow',
+                                                                        'width=600,height=350');
+                                                                        return false;">Datenschutzhinweise</a> gelesen und
                                                                         akzeptiert zu haben. *
 
                                                                 </div>

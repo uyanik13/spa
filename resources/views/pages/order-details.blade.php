@@ -93,9 +93,9 @@ $temp = session()->get('appointment');
 
                                 <ul>
                                     <li><span class="reservationSpeciment"><i class="fa fa-building"></i>
-                                            Filiale:</span><span class="reservationSpecimentInfo">{{__('lang.brandname')}}</span></li>
+                                            Ort:</span><span class="reservationSpecimentInfo">{{__('lang.brandname')}}</span></li>
                                     <li><span class="reservationSpeciment"><i class="fa fa-calendar"></i>
-                                            Termin:</span><span class="reservationSpecimentInfo">
+                                            Ihre Buchung:</span><span class="reservationSpecimentInfo">
                                                 {{substr((json_decode(session()->get('appointment'),true)['dateInput']),0,21 ) }}
                                             {{session()->get('appointment')['timeRange']}}
                                               </span></li>

@@ -1,166 +1,194 @@
 @php
-    //dd(session()->forget('appointment'));
+//dd(session()->forget('appointment'));
 
 @endphp
 @guest
 <div class="page_content_wrap page_paddings_yes">
-    <div class="content_wrap">
-        <div class="content">
-            <article class="post_item post_item_single page">
-                <section class="post_content">
-                    <div class="sc_row row sc_row-fluid">
-                        <div class="column sc_column_container sc_col-sm-5"
-                             style="background-color: #a6d0cb; border-radius: 5px;">
-                            <div class="sc_column-inner ">
-                                <div class="wrapper">
-                                    <div
-                                        class="sc_section sc_section_block aligncenter max_width cu_width-770">
-                                        <div class="sc_section_inner">
-                                            <div class="sc_section_content_wrap">
-                                                <h2 class="sc_title sc_title_regular cu_mrg_5">
-                                                    <i class="fa fa-sign-in"></i> Login</h2>
-                                                <p>{{__('lang.please_login')}}</p>
-                                                <div id="sc_form_629_wrap" class="sc_form_wrap">
-                                                    <div id="sc_form_629"
-                                                         class="sc_form sc_form_style_form_3">
-                                                        <form action="{{route('calendar.login')}}" method="POST">
-                                                            @csrf
-                                                            <div class="sc_form_info">
-                                                                <div
-                                                                    class="sc_form_item sc_form_field label_over">
-                                                                    <label class="required"
-                                                                           for="sc_form_username">E-Mail
-                                                                        *</label>
-                                                                    <input id="sc_form_username"
-                                                                           type="email" name="email"
-                                                                           placeholder="E-Mail *"
-                                                                           style="background-color: #fff;">
-                                                                </div>
-                                                                <div
-                                                                    class="sc_form_item sc_form_field label_over">
-                                                                    <label class="required"
-                                                                           for="sc_form_email">Passwort
-                                                                        *</label>
-                                                                    <input id="sc_form_email" type="password"
-                                                                           name="password"
-                                                                           placeholder="Passwort *">
-                                                                </div>
-                                                                <a href="/"
-                                                                   style="color: #222; text-decoration: underline;">Passwort
-                                                                    vergessen</a>
-                                                            </div>
-                                                            <div class="sc_form_item sc_form_button"
-                                                                 style="text-align: center; margin-top: 1.4rem;">
-                                                                <button
-                                                                    type="submit"
-                                                                    class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup dark">
-                                                                    <div>
-                                                                        <span class="first">Anmeldung</span>
-                                                                        <span
-                                                                            class="second">Anmeldung</span>
-                                                                    </div>
-                                                                </button>
-                                                            </div>
-                                                            <div class="result sc_infobox"></div>
-                                                        </form>
-                                                       
-                                                    </div>
-                                                </div>
+<div class="content_wrap">
+<div class="content">
+<article class="post_item post_item_single page">
+<section class="post_content">
+<div class="sc_row row sc_row-fluid">
+    <div class="column sc_column_container sc_col-sm-5"
+            style="background-color: #a6d0cb; border-radius: 5px;">
+        <div class="sc_column-inner ">
+            <div class="wrapper">
+                <div
+                    class="sc_section sc_section_block aligncenter max_width cu_width-770">
+                    <div class="sc_section_inner">
+                        <div class="sc_section_content_wrap">
+                            <h2 class="sc_title sc_title_regular cu_mrg_5">
+                                <i class="fa fa-sign-in"></i> Login</h2>
+                            <p style="font-weight: bold; font-size: 16px; margin: 10px 0;">{{__('lang.please_login')}}</p>
+                            <div id="sc_form_629_wrap" class="sc_form_wrap">
+                                <div id="sc_form_629"
+                                        class="sc_form sc_form_style_form_3">
+                                    <form action="{{route('calendar.login')}}" method="POST">
+                                        @csrf
+                                        <div class="sc_form_info">
+                                            <div
+                                                class="sc_form_item sc_form_field label_over">
+                                                <label class="required"
+                                                        for="sc_form_username">E-Mail
+                                                    *</label>
+                                                <input id="sc_form_username"
+                                                        type="email" name="email"
+                                                        placeholder="E-Mail *"
+                                                        style="background-color: #fff;">
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="column sc_column_container sc_col-sm-1"></div>
-
-                        <div class="column sc_column_container sc_col-sm-6"
-                             style="background-color: #a6d0cb; border-radius: 5px;">
-                            <div class="sc_column-inner ">
-                                <div class="wrapper">
-                                    <div class="sc_section sc_section_block aligncenter max_width cu_width-770">
-                                        <div class="sc_section_inner">
-                                            <div class="sc_section_content_wrap">
-                                                <h2 class="sc_title sc_title_regular cu_mrg_5">
-                                                    <i class="fa fa-user-plus"></i> registrieren</h2>
-                                                <p>Wenn Sie kein Abonnement haben, können Sie es jetzt
-                                                    erstellen</p>
-                                                <div class="sc_form_wrap">
-                                                    <div class="sc_form sc_form_style_form_3">
-                                                        <form action="{{route('calendar.register')}}" method="POST">
-                                                            @csrf
-                                                            <div class="sc_form_info register-form">
-                                                                <div
-                                                                    class="sc_form_item sc_form_field label_over">
-                                                                    <label class="required"
-                                                                           for="sc_form_username">Vorname
-                                                                        Nachname</label>
-                                                                    <input required id="sc_form_username" type="text"
-                                                                           name="name"
-                                                                           placeholder="Vorname Nachname *"
-                                                                           style="background-color: #fff;">
-                                                                </div>
-                                                                <div
-                                                                    class="sc_form_item sc_form_field label_over">
-                                                                    <label  class="required"
-                                                                           for="sc_form_username">Telefon</label>
-                                                                    <input required id="sc_form_username" type="text"
-                                                                           name="phone"
-                                                                           placeholder="Telefon *"
-                                                                           style="background-color: #fff;">
-                                                                </div>
-                                                                <div
-                                                                    class="sc_form_item sc_form_field label_over">
-                                                                    <label class="required"
-                                                                           for="sc_form_username">E-Mail
-                                                                        *</label>
-                                                                    <input required id="sc_form_username"
-                                                                           type="email" name="email"
-                                                                           placeholder="E-Mail *"
-                                                                           style="background-color: #fff;">
-                                                                </div>
-
-                                                                <div
-                                                                    class="sc_form_item sc_form_field label_over">
-                                                                    <label class="required"
-                                                                           for="sc_form_email">Passwort
-                                                                        *</label>
-                                                                    <input required  id="sc_form_email" type="password"
-                                                                           name="password"
-                                                                           placeholder="Passwort *">
-                                                                </div>
-                                                            </div>
-                                                            <div class="sc_form_item sc_form_button"
-                                                                 style="text-align: center;">
-                                                                <button type="submit"
-                                                                        class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup dark">
-                                                                    <div>
-                                                                        <span class="first">Registrieren</span>
-                                                                        <span class="second">Registrieren</span>
-                                                                    </div>
-                                                                </button>
-                                                            </div>
-                                                            <div class="result sc_infobox"></div>
-                                                        </form>
-                                                    </div>
-                                                </div>
+                                            <div
+                                                class="sc_form_item sc_form_field label_over">
+                                                <label class="required"
+                                                        for="sc_form_email">Passwort
+                                                    *</label>
+                                                <input id="sc_form_email" type="password"
+                                                        name="password"
+                                                        placeholder="Passwort *"
+                                                        style="background-color: #fff; padding-left: 12px;">
                                             </div>
+                                            <a href="/"
+                                                style="color: #222; text-decoration: underline;">Passwort
+                                                vergessen</a>
                                         </div>
-                                    </div>
+                                        <div class="sc_form_item sc_form_button"
+                                                style="text-align: center; margin-top: 1.4rem;">
+                                            <button
+                                                type="submit"
+                                                class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup dark">
+                                                <div>
+                                                    <span class="first">Anmeldung</span>
+                                                    <span
+                                                        class="second">Anmeldung</span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="result sc_infobox"></div>
+                                    </form>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-            </article>
-            <section class="related_wrap related_wrap_empty"></section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="column sc_column_container sc_col-sm-1"></div>
+
+    <div class="column sc_column_container sc_col-sm-6"
+            style="background-color: #a6d0cb; border-radius: 5px;">
+            <div class="registerFormOverlay">
+                <h2 class="sc_title sc_title_regular cu_mrg_5">
+                                <i class="fa fa-user-plus"></i> Registrieren</h2>
+                <p style="font-weight: bold; font-size: 16px; text-align: center;">
+                    Sie haben noch keine Registrierung? Sie können jetzt auf die Schaltfläche klicken, um auf das Registrierungsformular zuzugreifen.
+                </p>
+                <div class="sc_form_item sc_form_button" style="text-align: center; margin-top: 1.4rem;">
+                                            <button type="submit" class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup dark overlayRemover">
+                                                <div>
+                                                    <span class="first">Jetzt anfangen</span>
+                                                    <span class="second">Jetzt anfangen</span>
+                                                </div>
+                                            </button>
+                                        </div>
+            </div>
+        <div class="sc_column-inner ">
+            <div class="wrapper">
+                <div class="sc_section sc_section_block aligncenter max_width cu_width-770">
+                    <div class="sc_section_inner">
+                        <div class="sc_section_content_wrap">
+                            <h2 class="sc_title sc_title_regular cu_mrg_5">
+                                <i class="fa fa-user-plus"></i> registrieren</h2>
+                            <p style="font-weight: bold; font-size: 16px; margin: 10px 0;">Wenn Sie kein Abonnement haben, können Sie es jetzt
+                                erstellen</p>
+                            <div class="sc_form_wrap">
+                                <div class="sc_form sc_form_style_form_3">
+                                    <form action="{{route('calendar.register')}}" method="POST">
+                                        @csrf
+                                        <div class="sc_form_info register-form">
+                                            <div
+                                                class="sc_form_item sc_form_field label_over">
+                                                <label class="required"
+                                                        for="sc_form_username">Vorname
+                                                    Nachname</label>
+                                                <input required id="sc_form_username" type="text"
+                                                        name="name"
+                                                        placeholder="Vorname Nachname *"
+                                                        style="background-color: #fff;">
+                                            </div>
+                                            <div
+                                                class="sc_form_item sc_form_field label_over">
+                                                <label  class="required"
+                                                        for="sc_form_username">Telefon</label>
+                                                <input required id="sc_form_username" type="text"
+                                                        name="phone"
+                                                        placeholder="Telefon *"
+                                                        style="background-color: #fff;">
+                                            </div>
+                                            <div
+                                                class="sc_form_item sc_form_field label_over">
+                                                <label class="required"
+                                                        for="sc_form_username">E-Mail
+                                                    *</label>
+                                                <input required id="sc_form_username"
+                                                        type="email" name="email"
+                                                        placeholder="E-Mail *"
+                                                        style="background-color: #fff;">
+                                            </div>
+
+                                                                                                        <div
+                                                class="sc_form_item sc_form_field label_over">
+                                                <label class="required"
+                                                        for="sc_form_date">Geburtsdatum
+                                                    *</label>
+                                                <input required  id="datepicker" type="text"
+                                                        name="birth_date"
+                                                        placeholder="Geburstdatum *"
+                                                        style="background-color: #fff;">
+                                            </div>
+
+                                            <div
+                                                class="sc_form_item sc_form_field label_over">
+                                                <label class="required"
+                                                        for="sc_form_email">Passwort
+                                                    *</label>
+                                                <input required  id="sc_form_email" type="password"
+                                                        name="password"
+                                                        placeholder="Passwort *"
+                                                        style="background-color: #fff;">
+                                            </div>
+                                        </div>
+                                        <div class="sc_form_item sc_form_button"
+                                                style="text-align: center;">
+                                            <button type="submit"
+                                                    class="sc_button sc_button_square sc_button_style_filled  sc_button_size_base buttonup dark">
+                                                <div>
+                                                    <span class="first">Registrieren</span>
+                                                    <span class="second">Registrieren</span>
+                                                </div>
+                                            </button>
+                                        </div>
+                                        <div class="result sc_infobox"></div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+</section>
+</article>
+<section class="related_wrap related_wrap_empty"></section>
+</div>
+</div>
+</div>
 @endguest
 @auth
-    <script >
-        window.location.href = "/booking";
-    </script>
-    @endauth
+<script >
+window.location.href = "/booking";
+</script>
+@endauth
