@@ -40,7 +40,7 @@
                   type="area" />
             </div>
 
-<vx-card>
+    <vx-card>
 
       <!-- TABLE ACTION ROW -->
       <div class="flex flex-wrap justify-between items-center">
@@ -74,31 +74,31 @@
         <!-- TABLE ACTION COL-2: SEARCH & EXPORT AS CSV -->
         <div class="flex flex-wrap items-center justify-between ag-grid-table-actions-right">
           <vs-input class="mb-4 md:mb-0 mr-4" v-model="searchQuery" @input="updateSearchQuery" placeholder="Search..." />
-          <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">Export as CSV</vs-button>
+             <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">{{$t('export_as_csv')}}</vs-button>
         </div>
       </div>
-      <ag-grid-vue
-        ref="agGridTable"
-        :gridOptions="gridOptions"
-        class="ag-theme-material w-100 my-4 ag-grid-table"
-        :columnDefs="columnDefs"
-        :defaultColDef="defaultColDef"
-        :rowData="paymentsPaginated"
-        rowSelection="multiple"
-        colResizeDefault="shift"
-        :animateRows="true"
-        :floatingFilter="true"
-        :pagination="true"
-        :paginationPageSize="paginationPageSize"
-        :suppressPaginationPanel="true"
-        :enableRtl="$vs.rtl">
-      </ag-grid-vue>
-      <vs-pagination
-        :total="totalPages"
-        :max="maxPageNumbers"
-        v-model="currentPage" />
+        <ag-grid-vue
+            ref="agGridTable"
+            :gridOptions="gridOptions"
+            class="ag-theme-material w-100 my-4 ag-grid-table"
+            :columnDefs="columnDefs"
+            :defaultColDef="defaultColDef"
+            :rowData="paymentsPaginated"
+            rowSelection="multiple"
+            colResizeDefault="shift"
+            :animateRows="true"
+            :floatingFilter="true"
+            :pagination="true"
+            :paginationPageSize="paginationPageSize"
+            :suppressPaginationPanel="true"
+            :enableRtl="$vs.rtl">
+        </ag-grid-vue>
+        <vs-pagination
+            :total="totalPages"
+            :max="maxPageNumbers"
+            v-model="currentPage" />
 
-    </vx-card>
+        </vx-card>
 
 
 
@@ -169,7 +169,7 @@ export default {
           headerName:  i18n.t('paymentDate'),
           field: 'created_at',
           filter: 'agNumberColumnFilter',
-          width: 175
+          width: 225
         }
       ],
 

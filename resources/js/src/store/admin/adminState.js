@@ -11,6 +11,7 @@ export default {
   activeUsers: [],
   staff: [],
   payments: [],
+  recurringPayments: [],
   orders: [],
   lastWeekPayments: [],
   lastMonthPayments: [],

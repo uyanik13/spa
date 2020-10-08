@@ -2243,10 +2243,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -6710,19 +6706,7 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "vs-tab",
-                        { attrs: { label: _vm.$t("Upload") } },
-                        [
-                          _c("qrcode-capture", {
-                            staticClass: "my-10",
-                            on: { decode: _vm.onDecode }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "vs-tab",
-                        { attrs: { label: _vm.$t("Manuel") } },
+                        { attrs: { label: _vm.$t("IDNummer") } },
                         [
                           _c("vs-input", {
                             staticClass: "w-full mb-base",

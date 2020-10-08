@@ -9,17 +9,7 @@
 
 <template>
     <div>
-        <div class="vx-row">
-
-             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-                <statistics-card-line
-                  icon="UserPlusIcon"
-                  :statistic="allUsersCount | k_formatter"
-                  :statisticTitle="$t('AllCustomers')"
-                  color="success"
-                  type="area" />
-            </div>
-
+        <div class="vx-row mt-8">
 
              <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
                 <statistics-card-line
@@ -41,16 +31,6 @@
                   color="warning"
                   type="area" />
             </div>
-             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-                <statistics-card-line
-                  v-if="lastYearPaymentsStatisticData()"
-                  icon="DollarSignIcon"
-                  :statistic="lastYearPaymentsAmount | k_formatter"
-                  :statisticTitle="$t('lastYearPayments')"
-                  :chartData="lastYearPaymentsStatisticData()"
-                  color="success"
-                  type="area" />
-            </div>
 
 
              <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
@@ -64,22 +44,80 @@
             </div>
 
 
+       <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+
+                <statistics-card-line
+                  icon="UserPlusIcon"
+                  :statistic="activeUsers.length | k_formatter"
+                  :statisticTitle="$t('activeUsers')"
+                  color="success"
+                  type="area" />
 
 
-        <div class="vx-col w-full md:w-2/5 mb-base">
-                <vx-card title="Revenue">
+            </div>
+
+
+      <!-- CARD 9: DISPATCHED ORDERS -->
+      <div class="vx-col w-full md:w-1/1 mb-base">
+        <vx-card :title="$t('recurringPayments')">
+          <div slot="no-body" class="mt-4">
+           <vs-table ref="table" :data="recurringPayments">
+
+        <template slot="thead">
+            <vs-th sort-key="user_email">{{$t('user_email')}}</vs-th>
+            <vs-th sort-key="user_phone">{{$t('user_phone')}}</vs-th>
+            <vs-th sort-key="user">{{$t('userName')}}</vs-th>
+            <vs-th sort-key="payment_count">{{$t('paymentCount')}}</vs-th>
+            <vs-th sort-key="payments">{{$t('allPaymentsAmount')}}</vs-th>
+        </template>
+
+
+          <tbody>
+            <vs-tr :key="indextr" v-for="(tr, indextr) in recurringPayments">
+              <vs-td>
+              <p class="product-name font-medium truncate">{{  tr.user_email }}</p>
+              </vs-td>
+              <vs-td>
+              <p class="product-name font-medium truncate">{{  tr.user_phone }}</p>
+              </vs-td>
+
+              <vs-td>
+                <p class="product-name font-medium truncate">{{tr.user_name  }}</p>
+              </vs-td>
+
+              <vs-td>
+                <p class="product-name font-medium truncate">{{ tr.payment_count }}</p>
+              </vs-td>
+              <vs-td>
+                <p class="product-name font-medium truncate">{{ tr.paymentsAmount }}</p>
+              </vs-td>
+
+            </vs-tr>
+          </tbody>
+
+    </vs-table>
+          </div>
+
+        </vx-card>
+      </div>
+
+
+
+
+        <div class="vx-col w-full md:w-1/1 mb-base">
+                <vx-card title="Monthly Revenue">
                     <!-- <template slot="actions">
                         <feather-icon icon="SettingsIcon" svgClasses="w-6 h-6 text-grey"></feather-icon>
                     </template> -->
                     <div slot="no-body" class="p-6 pb-0">
-                        <div class="flex" v-if="lastYearPaymentsStatisticData()">
+                        <div class="flex" v-if="lastMonthPaymentsAmount">
                             <div class="mr-6">
                                 <p class="mb-1 font-semibold">{{$t('thisMonth')}}</p>
-                                <p class="text-3xl text-success"><sup class="text-base mr-1">$</sup>{{ thisMonthPaymentsAmount.toLocaleString() }}</p>
+                                <p class="text-3xl text-success"><sup class="text-base mr-1">€</sup>{{ thisMonthPaymentsAmount.toLocaleString() }}</p>
                             </div>
                             <div>
                                  <p class="mb-1 font-semibold">{{$t('lastMonth')}}</p>
-                                <p class="text-3xl"><sup class="text-base mr-1">$</sup>{{ lastMonthPaymentsAmount.toLocaleString() }}</p>
+                                <p class="text-3xl"><sup class="text-base mr-1">€</sup>{{ lastMonthPaymentsAmount.toLocaleString() }}</p>
                             </div>
                         </div>
 
@@ -93,17 +131,35 @@
                 </vx-card>
             </div>
 
-<div class="vx-col w-full lg:w-1/3 lg:mt-0 mt-base">
 
-                <statistics-card-line
-                  icon="UserPlusIcon"
-                  :statistic="activeUsers.length | k_formatter"
-                  :statisticTitle="$t('activeUsers')"
-                  color="success"
-                  type="area" />
 
+        <div class="vx-col w-full md:w-1/1 mb-base">
+              <vx-card title="Yearly Revenue">
+                    <!-- <template slot="actions">
+                        <feather-icon icon="SettingsIcon" svgClasses="w-6 h-6 text-grey"></feather-icon>
+                    </template> -->
+                    <div slot="no-body" class="p-6 pb-0">
+                        <div class="flex" v-if="lastYearPaymentsStatisticData()">
+
+                              <div class="mr-6">
+                                <p class="mb-1 font-semibold">{{$t('thisYear')}}</p>
+                                <p class="text-3xl text-success"><sup class="text-base mr-1">€</sup>{{ lastYearPaymentsAmount.toLocaleString() }}</p>
+                            </div>
+
+                        </div>
+
+                         <vue-apex-charts
+                          type="line"
+                          height="266"
+                          :options="revenueComparisonLineYearly.chartOptions"
+                          :series="setDataForYearlySeries()" />
+
+                    </div>
                 </vx-card>
             </div>
+
+
+
 
 
         </div>
@@ -128,7 +184,9 @@ export default{
   },
   data () {
     return {
-        isMounted : false,
+
+      itemsPerPage: 5,
+      isMounted: false,
       settings: { // perfectscrollbar settings
         maxScrollbarLength: 60,
         wheelSpeed: .60
@@ -186,7 +244,80 @@ export default{
         axisTicks: {
           show: false
         },
-        categories: ['01', '05', '09', '13', '17', '21', '26', '31'],
+        categories: [],
+        axisBorder: {
+          show: false
+        }
+      },
+      yaxis: {
+        tickAmount: 5,
+        labels: {
+          style: {
+            cssClass: 'text-grey fill-current'
+          },
+          formatter (val) {
+            return val > 999 ? `${(val / 1000).toFixed(1)}k` : val
+          }
+        }
+      },
+      tooltip: {
+        x: { show: false }
+      }
+    }
+  },
+  revenueComparisonLineYearly: {
+    chartOptions: {
+      chart: {
+        toolbar: { show: false },
+        dropShadow: {
+          enabled: true,
+          top: 5,
+          left: 0,
+          blur: 4,
+          opacity: 0.10
+        }
+      },
+      stroke: {
+        curve: 'smooth',
+        dashArray: [0, 8],
+        width: [4, 2]
+      },
+      grid: {
+        borderColor: '#e7e7e7'
+      },
+      legend: {
+        show: false
+      },
+      colors: ['#F97794', '#b8c2cc'],
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'dark',
+          inverseColors: false,
+          gradientToColors: ['#7367F0', '#b8c2cc'],
+          shadeIntensity: 1,
+          type: 'horizontal',
+          opacityFrom: 1,
+          opacityTo: 1,
+          stops: [0, 100, 100, 100]
+        }
+      },
+      markers: {
+        size: 0,
+        hover: {
+          size: 5
+        }
+      },
+      xaxis: {
+        labels: {
+          style: {
+            cssClass: 'text-grey fill-current'
+          }
+        },
+        axisTicks: {
+          show: false
+        },
+        categories: [],
         axisBorder: {
           show: false
         }
@@ -270,6 +401,9 @@ export default{
     averageWeeklySalesRevenue () {
       return this.$store.state.admin.averageWeeklySalesRevenue
     },
+    recurringPayments () {
+      return this.$store.state.admin.recurringPayments
+    },
       activeUsers () {
       return this.$store.state.admin.activeUsers
     },
@@ -305,9 +439,17 @@ export default{
     },
 
     setDataForMonthlySeries () {
+        this.revenueComparisonLine.chartOptions.xaxis.categories = this.$store.getters['admin/chartDataForLastMonthPaymentsDates']
         return  [
          {name : i18n.t('lastMonth'), data : this.$store.getters['admin/chartDataForLastMonthPayments']},
          {name : i18n.t('thisMonth'), data : this.$store.getters['admin/chartDataForThisMonthPayments']},
+         ]
+    },
+    setDataForYearlySeries () {
+        this.revenueComparisonLineYearly.chartOptions.xaxis.categories = this.$store.getters['admin/chartDataForLastYearPaymentsDates']
+        return  [
+         {name : i18n.t('lastYear'), data : this.$store.getters['admin/chartDataForLastYearPayments']},
+
          ]
     },
     countriesSet() {

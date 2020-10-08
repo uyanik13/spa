@@ -19,6 +19,7 @@ export default {
           commit('SET_STAFF', response.data.staff)
           commit('SET_ORDERS', response.data.orders)
           commit('SET_PAYMENTS', response.data.payments)
+          commit('SET_RECURRING_PAYMENTS', response.data.recurringPayments)
           commit('SET_PAYMENTS_PAGINATED', response.data.paymentsPaginated)
           commit('SET_LAST_YEAR_PAYMENTS', response.data.lastYearPayments)
           commit('SET_LAST_WEEK_PAYMENTS', response.data.lastWeekPayments)

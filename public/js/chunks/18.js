@@ -553,10 +553,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -1654,46 +1650,13 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  _vm._s(_vm.format_date(tr.appointment_date))
+                                  _vm._s(tr.appointment_date.substr(0, 10)) +
+                                    " / " +
+                                    _vm._s(tr.hours_between)
                                 )
                               ]
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "vs-td",
-                            { staticClass: "whitespace-no-wrap" },
-                            [
-                              _c("feather-icon", {
-                                attrs: {
-                                  icon: "EyeIcon",
-                                  svgClasses:
-                                    "w-7 h-7 hover:text-primary stroke-current"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.editData(tr)
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("feather-icon", {
-                                staticClass: "ml-2",
-                                attrs: {
-                                  icon: "TrashIcon",
-                                  svgClasses:
-                                    "w-7 h-7 hover:text-danger stroke-current"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    $event.stopPropagation()
-                                    return _vm.deleteData(tr.id)
-                                  }
-                                }
-                              })
-                            ],
-                            1
-                          )
+                          ])
                         ],
                         1
                       )
@@ -1755,9 +1718,7 @@ var render = function() {
               _vm._v(" "),
               _c("vs-th", { attrs: { "sort-key": "message" } }, [
                 _vm._v(_vm._s(_vm.$t("appointmendDate")))
-              ]),
-              _vm._v(" "),
-              _c("vs-th", [_vm._v(_vm._s(_vm.$t("action")))])
+              ])
             ],
             1
           )

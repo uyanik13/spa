@@ -45,6 +45,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63,8 +69,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
-    allUsersCount: function allUsersCount() {
-      return this.$store.getters['user/allUsersCount'];
+    activeUsers: function activeUsers() {
+      return this.$store.state.admin.activeUsers;
     }
   },
   methods: {},
@@ -77,6 +83,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.$store.dispatch('user/fetchUsers');
+    this.$store.dispatch('admin/fetchStaffItems');
   }
 });
 
@@ -149,15 +156,13 @@ var render = function() {
   return _c("div", { staticClass: "vx-row" }, [
     _c(
       "div",
-      {
-        staticClass: "vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base"
-      },
+      { staticClass: "vx-col w-full lg:w-1/3 lg:mt-0 mt-base" },
       [
         _c("statistics-card-line", {
           attrs: {
             icon: "UserPlusIcon",
-            statistic: _vm._f("k_formatter")(_vm.allUsersCount),
-            statisticTitle: _vm.$t("AllCustomers"),
+            statistic: _vm._f("k_formatter")(_vm.activeUsers.length),
+            statisticTitle: _vm.$t("activeUsers"),
             color: "success",
             type: "area"
           }

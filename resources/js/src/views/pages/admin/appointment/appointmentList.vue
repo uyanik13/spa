@@ -39,7 +39,7 @@
         <vs-th sort-key="email">{{$t('email')}}</vs-th>
         <vs-th sort-key="phone">{{$t('phone')}}</vs-th>
         <vs-th sort-key="message">{{$t('appointmendDate')}}</vs-th>
-        <vs-th>{{$t('action')}}</vs-th>
+
       </template>
 
         <template slot-scope="{data}">
@@ -64,7 +64,7 @@
 
 
               <vs-td>
-                <p class="product-name font-medium truncate">{{ format_date(tr.appointment_date) }}</p>
+                <p class="product-name font-medium truncate">{{ tr.appointment_date.substr(0,10)}} / {{ tr.hours_between}}</p>
               </vs-td>
 
 <!--              <vs-td>-->
@@ -72,10 +72,6 @@
 <!--              </vs-td>-->
 
 
-              <vs-td class="whitespace-no-wrap">
-                <feather-icon  icon="EyeIcon" svgClasses="w-7 h-7 hover:text-primary stroke-current" @click="editData(tr)" />
-                <feather-icon  icon="TrashIcon" svgClasses="w-7 h-7 hover:text-danger stroke-current" class="ml-2" @click.stop="deleteData(tr.id)" />
-              </vs-td>
 
             </vs-tr>
           </tbody>

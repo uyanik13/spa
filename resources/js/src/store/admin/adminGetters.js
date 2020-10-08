@@ -13,7 +13,9 @@ export default {
   chartDataForPayments: (state) =>  state.payments.flatMap(payment => payment['amount']),
   chartDataForLastWeekPayments: (state) =>  state.lastWeekPayments.flatMap(payment => payment['amount']),
   chartDataForLastMonthPayments: (state) =>  state.lastMonthPayments.flatMap(payment => payment['amount']),
+  chartDataForLastMonthPaymentsDates: (state) =>  state.lastMonthPayments.flatMap(payment => payment['created_at']),
   chartDataForLastYearPayments: (state) =>  state.lastYearPayments.flatMap(payment => payment['amount']),
+  chartDataForLastYearPaymentsDates: (state) =>  state.lastYearPayments.flatMap(payment => payment['created_at']),
   chartDataForThisMonthPayments: (state) =>  state.thisMonthPayments.flatMap(payment => payment['amount']),
 
 

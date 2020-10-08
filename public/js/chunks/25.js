@@ -358,7 +358,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { _babel_runtime_cor
         headerName: _i18n_i18n__WEBPACK_IMPORTED_MODULE_2__["default"].t('paymentDate'),
         field: 'created_at',
         filter: 'agNumberColumnFilter',
-        width: 175
+        width: 225
       }]
     };
   },
@@ -873,7 +873,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Export as CSV")]
+                    [_vm._v(_vm._s(_vm.$t("export_as_csv")))]
                   )
                 ],
                 1

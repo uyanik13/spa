@@ -351,40 +351,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1399,106 +1365,23 @@ var render = function() {
             ),
             _vm._v(" "),
             _c(
-              "vs-dropdown",
+              "div",
               {
-                staticClass: "cursor-pointer",
-                attrs: { "vs-trigger-click": "" }
+                staticClass:
+                  "flex flex-wrap items-center justify-between ag-grid-table-actions-right"
               },
               [
                 _c(
-                  "div",
+                  "vs-button",
                   {
-                    staticClass:
-                      "p-3 shadow-drop rounded-lg d-theme-dark-light-bg cursor-pointer flex items-end justify-center text-lg font-medium w-32"
+                    staticClass: "mb-4 md:mb-0",
+                    on: {
+                      click: function($event) {
+                        return _vm.gridApi.exportDataAsCsv()
+                      }
+                    }
                   },
-                  [
-                    _c("span", { staticClass: "mr-2 leading-none" }, [
-                      _vm._v(_vm._s(_vm.$t("Actions")))
-                    ]),
-                    _vm._v(" "),
-                    _c("feather-icon", {
-                      attrs: { icon: "ChevronDownIcon", svgClasses: "h-4 w-4" }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "vs-dropdown-menu",
-                  [
-                    _c("vs-dropdown-item", [
-                      _c(
-                        "span",
-                        { staticClass: "flex items-center" },
-                        [
-                          _c("feather-icon", {
-                            staticClass: "mr-2",
-                            attrs: { icon: "TrashIcon", svgClasses: "h-4 w-4" },
-                            on: {
-                              click: function($event) {
-                                return _vm.deleteRecords()
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v(_vm._s(_vm.$t("Delete")) + "<")])
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("vs-dropdown-item", [
-                      _c(
-                        "span",
-                        { staticClass: "flex items-center" },
-                        [
-                          _c("feather-icon", {
-                            staticClass: "mr-2",
-                            attrs: {
-                              icon: "ArchiveIcon",
-                              svgClasses: "h-4 w-4"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v(_vm._s(_vm.$t("Archive")))])
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("vs-dropdown-item", [
-                      _c(
-                        "span",
-                        { staticClass: "flex items-center" },
-                        [
-                          _c("feather-icon", {
-                            staticClass: "mr-2",
-                            attrs: { icon: "FileIcon", svgClasses: "h-4 w-4" }
-                          }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v(_vm._s(_vm.$t("Print")))])
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("vs-dropdown-item", [
-                      _c(
-                        "span",
-                        { staticClass: "flex items-center" },
-                        [
-                          _c("feather-icon", {
-                            staticClass: "mr-2",
-                            attrs: { icon: "SaveIcon", svgClasses: "h-4 w-4" }
-                          }),
-                          _vm._v(" "),
-                          _c("span", [_vm._v(_vm._s(_vm.$t("Export")))])
-                        ],
-                        1
-                      )
-                    ])
-                  ],
-                  1
+                  [_vm._v(_vm._s(_vm.$t("export_as_csv")))]
                 )
               ],
               1

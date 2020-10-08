@@ -51,44 +51,10 @@
           <feather-icon icon="PlusIcon" svgClasses="h-4 w-4" />
           <span class="ml-2 text-base text-primary">{{$t('add_new')}}</span>
         </div>
-          <!-- ACTION - DROPDOWN -->
-          <vs-dropdown vs-trigger-click class="cursor-pointer">
-            <div class="p-3 shadow-drop rounded-lg d-theme-dark-light-bg cursor-pointer flex items-end justify-center text-lg font-medium w-32">
-              <span class="mr-2 leading-none">{{$t('Actions')}}</span>
-              <feather-icon icon="ChevronDownIcon" svgClasses="h-4 w-4" />
-            </div>
-            <vs-dropdown-menu>
+        <div class="flex flex-wrap items-center justify-between ag-grid-table-actions-right">
 
-              <vs-dropdown-item>
-                <span class="flex items-center">
-                  <feather-icon icon="TrashIcon" @click="deleteRecords()" svgClasses="h-4 w-4" class="mr-2" />
-                  <span>{{$t('Delete')}}<</span>
-                </span>
-              </vs-dropdown-item>
-
-              <vs-dropdown-item>
-                <span class="flex items-center">
-                  <feather-icon icon="ArchiveIcon" svgClasses="h-4 w-4" class="mr-2" />
-                  <span>{{$t('Archive')}}</span>
-                </span>
-              </vs-dropdown-item>
-
-              <vs-dropdown-item>
-                <span class="flex items-center">
-                  <feather-icon icon="FileIcon" svgClasses="h-4 w-4" class="mr-2" />
-                  <span>{{$t('Print')}}</span>
-                </span>
-              </vs-dropdown-item>
-
-              <vs-dropdown-item>
-                <span class="flex items-center">
-                  <feather-icon icon="SaveIcon" svgClasses="h-4 w-4" class="mr-2" />
-                  <span>{{$t('Export')}}</span>
-                </span>
-              </vs-dropdown-item>
-
-            </vs-dropdown-menu>
-          </vs-dropdown>
+          <vs-button class="mb-4 md:mb-0" @click="gridApi.exportDataAsCsv()">{{$t('export_as_csv')}}</vs-button>
+        </div>
       </div>
 
 

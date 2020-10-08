@@ -42,6 +42,10 @@ export default {
     state.payments = itemData
   },
 
+  SET_RECURRING_PAYMENTS (state, itemData) {
+    state.recurringPayments = itemData
+  },
+
   SET_LAST_YEAR_PAYMENTS (state, itemData) {
     state.lastYearPayments = itemData
   },

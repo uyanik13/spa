@@ -167,6 +167,62 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -181,6 +237,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   },
   data: function data() {
     return {
+      itemsPerPage: 5,
       isMounted: false,
       settings: {
         // perfectscrollbar settings
@@ -241,7 +298,84 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
             axisTicks: {
               show: false
             },
-            categories: ['01', '05', '09', '13', '17', '21', '26', '31'],
+            categories: [],
+            axisBorder: {
+              show: false
+            }
+          },
+          yaxis: {
+            tickAmount: 5,
+            labels: {
+              style: {
+                cssClass: 'text-grey fill-current'
+              },
+              formatter: function formatter(val) {
+                return val > 999 ? "".concat((val / 1000).toFixed(1), "k") : val;
+              }
+            }
+          },
+          tooltip: {
+            x: {
+              show: false
+            }
+          }
+        }
+      },
+      revenueComparisonLineYearly: {
+        chartOptions: {
+          chart: {
+            toolbar: {
+              show: false
+            },
+            dropShadow: {
+              enabled: true,
+              top: 5,
+              left: 0,
+              blur: 4,
+              opacity: 0.10
+            }
+          },
+          stroke: {
+            curve: 'smooth',
+            dashArray: [0, 8],
+            width: [4, 2]
+          },
+          grid: {
+            borderColor: '#e7e7e7'
+          },
+          legend: {
+            show: false
+          },
+          colors: ['#F97794', '#b8c2cc'],
+          fill: {
+            type: 'gradient',
+            gradient: {
+              shade: 'dark',
+              inverseColors: false,
+              gradientToColors: ['#7367F0', '#b8c2cc'],
+              shadeIntensity: 1,
+              type: 'horizontal',
+              opacityFrom: 1,
+              opacityTo: 1,
+              stops: [0, 100, 100, 100]
+            }
+          },
+          markers: {
+            size: 0,
+            hover: {
+              size: 5
+            }
+          },
+          xaxis: {
+            labels: {
+              style: {
+                cssClass: 'text-grey fill-current'
+              }
+            },
+            axisTicks: {
+              show: false
+            },
+            categories: [],
             axisBorder: {
               show: false
             }
@@ -331,6 +465,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
     averageWeeklySalesRevenue: function averageWeeklySalesRevenue() {
       return this.$store.state.admin.averageWeeklySalesRevenue;
     },
+    recurringPayments: function recurringPayments() {
+      return this.$store.state.admin.recurringPayments;
+    },
     activeUsers: function activeUsers() {
       return this.$store.state.admin.activeUsers;
     }
@@ -373,12 +510,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
       }];
     },
     setDataForMonthlySeries: function setDataForMonthlySeries() {
+      this.revenueComparisonLine.chartOptions.xaxis.categories = this.$store.getters['admin/chartDataForLastMonthPaymentsDates'];
       return [{
         name: _i18n_i18n__WEBPACK_IMPORTED_MODULE_6__["default"].t('lastMonth'),
         data: this.$store.getters['admin/chartDataForLastMonthPayments']
       }, {
         name: _i18n_i18n__WEBPACK_IMPORTED_MODULE_6__["default"].t('thisMonth'),
         data: this.$store.getters['admin/chartDataForThisMonthPayments']
+      }];
+    },
+    setDataForYearlySeries: function setDataForYearlySeries() {
+      this.revenueComparisonLineYearly.chartOptions.xaxis.categories = this.$store.getters['admin/chartDataForLastYearPaymentsDates'];
+      return [{
+        name: _i18n_i18n__WEBPACK_IMPORTED_MODULE_6__["default"].t('lastYear'),
+        data: this.$store.getters['admin/chartDataForLastYearPayments']
       }];
     },
     countriesSet: function countriesSet() {
@@ -568,27 +713,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "vx-row" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base"
-        },
-        [
-          _c("statistics-card-line", {
-            attrs: {
-              icon: "UserPlusIcon",
-              statistic: _vm._f("k_formatter")(_vm.allUsersCount),
-              statisticTitle: _vm.$t("AllCustomers"),
-              color: "success",
-              type: "area"
-            }
-          })
-        ],
-        1
-      ),
-      _vm._v(" "),
+    _c("div", { staticClass: "vx-row mt-8" }, [
       _c(
         "div",
         {
@@ -642,29 +767,6 @@ var render = function() {
             "vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base"
         },
         [
-          _vm.lastYearPaymentsStatisticData()
-            ? _c("statistics-card-line", {
-                attrs: {
-                  icon: "DollarSignIcon",
-                  statistic: _vm._f("k_formatter")(_vm.lastYearPaymentsAmount),
-                  statisticTitle: _vm.$t("lastYearPayments"),
-                  chartData: _vm.lastYearPaymentsStatisticData(),
-                  color: "success",
-                  type: "area"
-                }
-              })
-            : _vm._e()
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base"
-        },
-        [
           _c("statistics-card-line", {
             attrs: {
               icon: "DollarSignIcon",
@@ -684,9 +786,153 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "vx-col w-full md:w-2/5 mb-base" },
+        {
+          staticClass:
+            "vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base"
+        },
         [
-          _c("vx-card", { attrs: { title: "Revenue" } }, [
+          _c("statistics-card-line", {
+            attrs: {
+              icon: "UserPlusIcon",
+              statistic: _vm._f("k_formatter")(_vm.activeUsers.length),
+              statisticTitle: _vm.$t("activeUsers"),
+              color: "success",
+              type: "area"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "vx-col w-full md:w-1/1 mb-base" },
+        [
+          _c("vx-card", { attrs: { title: _vm.$t("recurringPayments") } }, [
+            _c(
+              "div",
+              {
+                staticClass: "mt-4",
+                attrs: { slot: "no-body" },
+                slot: "no-body"
+              },
+              [
+                _c(
+                  "vs-table",
+                  { ref: "table", attrs: { data: _vm.recurringPayments } },
+                  [
+                    _c(
+                      "template",
+                      { slot: "thead" },
+                      [
+                        _c("vs-th", { attrs: { "sort-key": "user_email" } }, [
+                          _vm._v(_vm._s(_vm.$t("user_email")))
+                        ]),
+                        _vm._v(" "),
+                        _c("vs-th", { attrs: { "sort-key": "user_phone" } }, [
+                          _vm._v(_vm._s(_vm.$t("user_phone")))
+                        ]),
+                        _vm._v(" "),
+                        _c("vs-th", { attrs: { "sort-key": "user" } }, [
+                          _vm._v(_vm._s(_vm.$t("userName")))
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "vs-th",
+                          { attrs: { "sort-key": "payment_count" } },
+                          [_vm._v(_vm._s(_vm.$t("paymentCount")))]
+                        ),
+                        _vm._v(" "),
+                        _c("vs-th", { attrs: { "sort-key": "payments" } }, [
+                          _vm._v(_vm._s(_vm.$t("allPaymentsAmount")))
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "tbody",
+                      _vm._l(_vm.recurringPayments, function(tr, indextr) {
+                        return _c(
+                          "vs-tr",
+                          { key: indextr },
+                          [
+                            _c("vs-td", [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "product-name font-medium truncate"
+                                },
+                                [_vm._v(_vm._s(tr.user_email))]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("vs-td", [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "product-name font-medium truncate"
+                                },
+                                [_vm._v(_vm._s(tr.user_phone))]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("vs-td", [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "product-name font-medium truncate"
+                                },
+                                [_vm._v(_vm._s(tr.user_name))]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("vs-td", [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "product-name font-medium truncate"
+                                },
+                                [_vm._v(_vm._s(tr.payment_count))]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("vs-td", [
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "product-name font-medium truncate"
+                                },
+                                [_vm._v(_vm._s(tr.paymentsAmount))]
+                              )
+                            ])
+                          ],
+                          1
+                        )
+                      }),
+                      1
+                    )
+                  ],
+                  2
+                )
+              ],
+              1
+            )
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "vx-col w-full md:w-1/1 mb-base" },
+        [
+          _c("vx-card", { attrs: { title: "Monthly Revenue" } }, [
             _c(
               "div",
               {
@@ -695,7 +941,7 @@ var render = function() {
                 slot: "no-body"
               },
               [
-                _vm.lastYearPaymentsStatisticData()
+                _vm.lastMonthPaymentsAmount
                   ? _c("div", { staticClass: "flex" }, [
                       _c("div", { staticClass: "mr-6" }, [
                         _c("p", { staticClass: "mb-1 font-semibold" }, [
@@ -704,7 +950,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", { staticClass: "text-3xl text-success" }, [
                           _c("sup", { staticClass: "text-base mr-1" }, [
-                            _vm._v("$")
+                            _vm._v("€")
                           ]),
                           _vm._v(
                             _vm._s(_vm.thisMonthPaymentsAmount.toLocaleString())
@@ -719,7 +965,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("p", { staticClass: "text-3xl" }, [
                           _c("sup", { staticClass: "text-base mr-1" }, [
-                            _vm._v("$")
+                            _vm._v("€")
                           ]),
                           _vm._v(
                             _vm._s(_vm.lastMonthPaymentsAmount.toLocaleString())
@@ -747,17 +993,48 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "vx-col w-full lg:w-1/3 lg:mt-0 mt-base" },
+        { staticClass: "vx-col w-full md:w-1/1 mb-base" },
         [
-          _c("statistics-card-line", {
-            attrs: {
-              icon: "UserPlusIcon",
-              statistic: _vm._f("k_formatter")(_vm.activeUsers.length),
-              statisticTitle: _vm.$t("activeUsers"),
-              color: "success",
-              type: "area"
-            }
-          })
+          _c("vx-card", { attrs: { title: "Yearly Revenue" } }, [
+            _c(
+              "div",
+              {
+                staticClass: "p-6 pb-0",
+                attrs: { slot: "no-body" },
+                slot: "no-body"
+              },
+              [
+                _vm.lastYearPaymentsStatisticData()
+                  ? _c("div", { staticClass: "flex" }, [
+                      _c("div", { staticClass: "mr-6" }, [
+                        _c("p", { staticClass: "mb-1 font-semibold" }, [
+                          _vm._v(_vm._s(_vm.$t("thisYear")))
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "text-3xl text-success" }, [
+                          _c("sup", { staticClass: "text-base mr-1" }, [
+                            _vm._v("€")
+                          ]),
+                          _vm._v(
+                            _vm._s(_vm.lastYearPaymentsAmount.toLocaleString())
+                          )
+                        ])
+                      ])
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("vue-apex-charts", {
+                  attrs: {
+                    type: "line",
+                    height: "266",
+                    options: _vm.revenueComparisonLineYearly.chartOptions,
+                    series: _vm.setDataForYearlySeries()
+                  }
+                })
+              ],
+              1
+            )
+          ])
         ],
         1
       )

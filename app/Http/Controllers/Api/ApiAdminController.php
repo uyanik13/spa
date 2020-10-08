@@ -41,9 +41,25 @@ class ApiAdminController extends ApiController
 
       $activeUsers = User::where('isHere',1)->orderBy('created_at','desc')->get();
 
+
       $staff = User::where('role','staff')->orderBy('created_at','desc')->get();
 
       $payments = Payment::orderBy('created_at','desc')->where('status','completed')->get();
+
+      $recurringPayments = [];
+
+      foreach ($payments as $key => $payment) {
+        $recurringPayments[$payment->user->id] = [
+            'payment_count' =>  Payment::where('user_id',  $payment->user_id)->count(),
+            'user_id' =>  $payment->user->id,
+            'user_email' =>  $payment->user->email,
+            'user_phone' =>  $payment->user->phone,
+            'user_name' =>  $payment->user->name,
+            'paymentsAmount' =>  number_format(Payment::where('user_id',  $payment->user_id)->sum('amount'),2)
+        ];
+     }
+
+
 
       $paymentsPaginated = Payment::orderBy('created_at','desc')->where('status','completed')->paginate(15);
 
@@ -71,6 +87,7 @@ class ApiAdminController extends ApiController
           'staff' => $staff,
           'orders' => $orders,
           'payments' => $payments,
+          'recurringPayments' => $recurringPayments,
           'paymentsPaginated' => $paymentsPaginated,
           'lastYearPayments' => $lastYearPayments,
           'lastWeekPayments' => $lastWeekPayments,
@@ -87,7 +104,7 @@ class ApiAdminController extends ApiController
       public function staff(Request $request)
     {
 
-      if ($this->user->role !== 'staff') {
+      if ($this->user->role !== 'staff' && $this->user->role !== 'admin') {
         return $this->responseUnauthorized();
       }
 

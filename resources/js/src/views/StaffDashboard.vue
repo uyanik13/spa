@@ -11,14 +11,20 @@
 
         <div class="vx-row">
 
-             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+            <div class="vx-col w-full lg:w-1/3 lg:mt-0 mt-base">
+
                 <statistics-card-line
                   icon="UserPlusIcon"
-                  :statistic="allUsersCount | k_formatter"
-                  :statisticTitle="$t('AllCustomers')"
+                  :statistic="activeUsers.length | k_formatter"
+                  :statisticTitle="$t('activeUsers')"
                   color="success"
                   type="area" />
+
+                </vx-card>
             </div>
+
+
+        </div>
 
 
         </div>
@@ -48,8 +54,9 @@ export default{
      }
   },
   computed: {
-    allUsersCount () {
-      return this.$store.getters['user/allUsersCount']
+
+     activeUsers () {
+      return this.$store.state.admin.activeUsers
     },
 
 
@@ -68,6 +75,8 @@ export default{
   },
   created () {
     this.$store.dispatch('user/fetchUsers')
+    this.$store.dispatch('admin/fetchStaffItems')
+
 
 
   }

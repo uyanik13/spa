@@ -95695,6 +95695,7 @@ __webpack_require__.r(__webpack_exports__);
         commit('SET_STAFF', response.data.staff);
         commit('SET_ORDERS', response.data.orders);
         commit('SET_PAYMENTS', response.data.payments);
+        commit('SET_RECURRING_PAYMENTS', response.data.recurringPayments);
         commit('SET_PAYMENTS_PAGINATED', response.data.paymentsPaginated);
         commit('SET_LAST_YEAR_PAYMENTS', response.data.lastYearPayments);
         commit('SET_LAST_WEEK_PAYMENTS', response.data.lastWeekPayments);
@@ -95806,9 +95807,19 @@ __webpack_require__.r(__webpack_exports__);
       return payment['amount'];
     });
   },
+  chartDataForLastMonthPaymentsDates: function chartDataForLastMonthPaymentsDates(state) {
+    return state.lastMonthPayments.flatMap(function (payment) {
+      return payment['created_at'];
+    });
+  },
   chartDataForLastYearPayments: function chartDataForLastYearPayments(state) {
     return state.lastYearPayments.flatMap(function (payment) {
       return payment['amount'];
+    });
+  },
+  chartDataForLastYearPaymentsDates: function chartDataForLastYearPaymentsDates(state) {
+    return state.lastYearPayments.flatMap(function (payment) {
+      return payment['created_at'];
     });
   },
   chartDataForThisMonthPayments: function chartDataForThisMonthPayments(state) {
@@ -95966,6 +95977,9 @@ __webpack_require__.r(__webpack_exports__);
   SET_PAYMENTS: function SET_PAYMENTS(state, itemData) {
     state.payments = itemData;
   },
+  SET_RECURRING_PAYMENTS: function SET_RECURRING_PAYMENTS(state, itemData) {
+    state.recurringPayments = itemData;
+  },
   SET_LAST_YEAR_PAYMENTS: function SET_LAST_YEAR_PAYMENTS(state, itemData) {
     state.lastYearPayments = itemData;
   },
@@ -96101,6 +96115,7 @@ __webpack_require__.r(__webpack_exports__);
   activeUsers: [],
   staff: [],
   payments: [],
+  recurringPayments: [],
   orders: [],
   lastWeekPayments: [],
   lastMonthPayments: [],

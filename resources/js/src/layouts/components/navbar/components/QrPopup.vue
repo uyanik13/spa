@@ -38,11 +38,7 @@
                                     <qrcode-stream @decode="onDecode"></qrcode-stream>
                                   </vs-tab>
 
-                                  <vs-tab :label="$t('Upload')">
-                                   <qrcode-capture @decode="onDecode" class="my-10"></qrcode-capture>
-                                  </vs-tab>
-
-                                  <vs-tab :label="$t('Manuel')">
+                                  <vs-tab :label="$t('IDNummer')">
                                    <vs-input class="w-full mb-base"  icon-pack="feather" icon="icon-search" :label-placeholder="$t('appointment_id')" v-model="orderId"></vs-input>
                                   </vs-tab>
 
