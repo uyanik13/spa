@@ -6910,8 +6910,11 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: !appointment.user.isHere,
-                                  expression: "!appointment.user.isHere"
+                                  value:
+                                    !appointment.user.isHere &&
+                                    !appointment.user.login_date,
+                                  expression:
+                                    "!appointment.user.isHere && !appointment.user.login_date "
                                 }
                               ],
                               staticClass: "my-6"
