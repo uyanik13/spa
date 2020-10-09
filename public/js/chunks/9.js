@@ -6766,7 +6766,7 @@ var render = function() {
                           _c(
                             "vs-button",
                             { on: { click: _vm.fetchUsersAppointment } },
-                            [_vm._v("dedneendnedjke")]
+                            [_vm._v("Redeem ID")]
                           )
                         ],
                         1
@@ -6910,8 +6910,11 @@ var render = function() {
                                 {
                                   name: "show",
                                   rawName: "v-show",
-                                  value: !appointment.user.isHere,
-                                  expression: "!appointment.user.isHere"
+                                  value:
+                                    !appointment.user.isHere &&
+                                    appointment.user.inAppointment,
+                                  expression:
+                                    "!appointment.user.isHere && appointment.user.inAppointment"
                                 }
                               ],
                               staticClass: "my-6"

@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('subscribed')->default('0');
             $table->boolean('isHere')->default('0');
+            $table->boolean('inAppointment')->default('0');
             $table->timestamp('login_date')->nullable();
             $table->timestamp('logout_date')->nullable();
             $table->enum('role', ['admin','user','staff'])->default('user');

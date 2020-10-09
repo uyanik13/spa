@@ -44,7 +44,7 @@
                   v-model="orderId"
                 ></vs-input>
                 <vs-button @click="fetchUsersAppointment"
-                  >dedneendnedjke</vs-button
+                  >Redeem ID</vs-button
                 >
               </vs-tab>
             </vs-tabs>
@@ -103,7 +103,7 @@
                   {{ $t("clientHasLeft") }}
                 </vs-button>
 
-                <div class="my-6" v-show="!appointment.user.isHere">
+                <div class="my-6" v-show="!appointment.user.isHere && appointment.user.inAppointment">
                   <p class="text-black font-semibold">eingeloggt:</p>
                   {{ appointment.user.login_date }}
                   <p class="text-black font-semibold">Ausloggen:</p>
