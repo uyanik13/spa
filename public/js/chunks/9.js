@@ -2295,11 +2295,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     diff_minutes: function diff_minutes(dt2, dt1) {
-      if (this.stopLoop) return;
       var diff = (dt2.getTime() - dt1.getTime()) / 1000;
       diff /= 60;
       this.stayTime = Math.abs(Math.round(diff));
-      this.stopLoop = false;
       return this.stayTime;
     },
     countStayTime: function countStayTime(stayTime) {
