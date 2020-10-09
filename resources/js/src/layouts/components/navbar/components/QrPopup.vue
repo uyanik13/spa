@@ -103,7 +103,7 @@
                   {{ $t("clientHasLeft") }}
                 </vs-button>
 
-                <div class="my-6" v-show="!appointment.user.isHere && !appointment.user.login_date ">
+                <div class="my-6" v-show="!appointment.user.isHere">
                   <p class="text-black font-semibold">eingeloggt:</p>
                   {{ appointment.user.login_date }}
                   <p class="text-black font-semibold">Ausloggen:</p>
