@@ -2259,7 +2259,7 @@ __webpack_require__.r(__webpack_exports__);
       popupActive: false,
       orderId: '1',
       AppointmentUsers: [],
-      calendarInfo: [],
+      calendarInfo: {},
       stayTime: ''
     };
   },
@@ -2357,7 +2357,7 @@ __webpack_require__.r(__webpack_exports__);
     this.fetchUsersAppointment();
     this.$store.dispatch('custom/fetchItems').then(function (response) {
       response.data.forEach(function (element) {
-        _this3.calendarInfo = JSON.parse(element.JsonData).calendarInfo;
+        if (element.type === 'calendarInfo') _this3.calendarInfo = JSON.parse(element.JsonData).calendarInfo;
       });
     }).catch(function (error) {
       console.log(error);

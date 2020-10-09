@@ -40,7 +40,7 @@
 
                                   <vs-tab :label="$t('IDNummer')">
                                    <vs-input class="w-full mb-base"  icon-pack="feather" icon="icon-search" :label-placeholder="$t('appointment_id')" v-model="orderId"></vs-input>
-                               
+
                                   </vs-tab>
 
                                 </vs-tabs>
@@ -82,7 +82,7 @@
                         <p class="text-black font-semibold">eingeloggt: </p>{{ appointment.user.login_date }}
                         <p class="text-black font-semibold">Ausloggen: </p>{{ appointment.user.logout_date }}
                         <p class="text-black font-semibold">Aufenthaltsdauer: </p>{{ diff_minutes( new Date(appointment.user.login_date), new Date(appointment.user.logout_date)) }}  Minuten
-                   <p class="text-black font-semibold" v-show="countStayTime(stayTime) > 0">Ablaufbetrag: € {{ countStayTime(stayTime) }}</p> 
+                   <p class="text-black font-semibold" v-show="countStayTime(stayTime) > 0">Ablaufbetrag: € {{ countStayTime(stayTime) }}</p>
                         </div>
 
 
@@ -127,7 +127,7 @@ export default {
       popupActive: false,
       orderId: '1',
       AppointmentUsers : [],
-      calendarInfo : [],
+      calendarInfo : {},
       stayTime: ''
 
 
@@ -162,7 +162,7 @@ export default {
         let time = (stayTime-180);
         if (time < 0) return 0;
         return ( time/30 ) * this.calendarInfo.timeout_price
-       
+
         //return true;
     },
 
@@ -235,7 +235,7 @@ export default {
     this.$store.dispatch('custom/fetchItems')
       .then((response) => {
         response.data.forEach(element => {
-          this.calendarInfo = JSON.parse(element.JsonData).calendarInfo
+         if(element.type === 'calendarInfo') this.calendarInfo = JSON.parse(element.JsonData).calendarInfo
         })
       })
       .catch((error) => { console.log(error) })
