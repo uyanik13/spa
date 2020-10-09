@@ -96808,7 +96808,14 @@ __webpack_require__.r(__webpack_exports__);
   Author: Pixinvent
   Author URL: https://www.dijitalreklam.org
 ==========================================================================================*/
-/* harmony default export */ __webpack_exports__["default"] = ({// getItem: state => (productId) => state.products.find((product) => product.id == productId),
+/* harmony default export */ __webpack_exports__["default"] = ({
+  userAppointments: function userAppointments(state) {
+    return function (appID) {
+      return state.formList.filter(function (form) {
+        return form.appointment_id === appID;
+      });
+    };
+  }
 });
 
 /***/ }),
@@ -98626,9 +98633,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuesax__WEBPACK_IMPORTED_MODULE_1
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\ugur_\Desktop\PROJECTS\SPA\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\Users\ugur_\Desktop\PROJECTS\SPA\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\Users\ugur_\Desktop\PROJECTS\SPA\resources\assets\css\main.css */"./resources/assets/css/main.css");
+__webpack_require__(/*! C:\Users\ylmzb\Desktop\spa\spa\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\ylmzb\Desktop\spa\spa\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\ylmzb\Desktop\spa\spa\resources\assets\css\main.css */"./resources/assets/css/main.css");
 
 
 /***/ })

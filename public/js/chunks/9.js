@@ -2244,6 +2244,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2255,39 +2279,36 @@ __webpack_require__.r(__webpack_exports__);
   props: {},
   data: function data() {
     return {
-      colorx: '#ffffff',
+      colorx: "#ffffff",
       popupActive: false,
-      orderId: '1',
+      stopLoop: true,
+      orderId: "1",
       AppointmentUsers: [],
       calendarInfo: {},
-      stayTime: ''
+      stayTime: ""
     };
   },
   computed: {
     activeUser: function activeUser() {
-      return js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get('user') ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get('user')) : null;
-    }
-  },
-  watch: {
-    orderId: function orderId(appointmentID) {
-      if (appointmentID) {
-        this.orderId = appointmentID;
-        return setTimeout(this.fetchUsersAppointment(), 2000);
-      }
+      return js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get("user") ? JSON.parse(js_cookie__WEBPACK_IMPORTED_MODULE_3___default.a.get("user")) : null;
     }
   },
   methods: {
     diff_minutes: function diff_minutes(dt2, dt1) {
+      if (this.stopLoop) return;
       var diff = (dt2.getTime() - dt1.getTime()) / 1000;
       diff /= 60;
       this.stayTime = Math.abs(Math.round(diff));
+      this.stopLoop = false;
       return this.stayTime;
     },
     countStayTime: function countStayTime(stayTime) {
       console.log("calendarInfo : ");
-      console.log(this.calendarInfo.timeout_price);
+      if (this.stopLoop) return; //console.log(this.calendarInfo.timeout_price)
+
       var time = stayTime - 180;
       if (time < 0) return 0;
+      this.stopLoop = false;
       return time / 30 * this.calendarInfo.timeout_price; //return true;
     },
     fetchUsersAppointment: function fetchUsersAppointment() {
@@ -2312,23 +2333,23 @@ __webpack_require__.r(__webpack_exports__);
         id: userId,
         isHere: type
       };
-      this.$store.dispatch('user/updateUser', payload).then(function (response) {
+      this.$store.dispatch("user/updateUser", payload).then(function (response) {
         _this2.$vs.notify({
-          title: 'Başarılı',
-          text: 'Değişiklikler Başarıyla Düzenlendi',
-          iconPack: 'feather',
-          icon: 'icon-success',
-          color: 'success'
+          title: "Başarılı",
+          text: "Değişiklikler Başarıyla Düzenlendi",
+          iconPack: "feather",
+          icon: "icon-success",
+          color: "success"
         });
 
         _this2.fetchUsersAppointment();
       }).catch(function (error) {
         _this2.$vs.notify({
-          title: 'Hata',
-          text: 'Değişiklikler Kaydedilemedi.',
-          iconPack: 'feather',
-          icon: 'icon-alert-circle',
-          color: 'danger'
+          title: "Hata",
+          text: "Değişiklikler Kaydedilemedi.",
+          iconPack: "feather",
+          icon: "icon-alert-circle",
+          color: "danger"
         });
       });
     },
@@ -2336,7 +2357,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$vs.notify({
         title: title,
         text: text,
-        iconPack: 'feather',
+        iconPack: "feather",
         icon: icon,
         color: color
       });
@@ -2355,9 +2376,9 @@ __webpack_require__.r(__webpack_exports__);
 
     //console.log(new Date(2020-10-01 07:16:15))
     this.fetchUsersAppointment();
-    this.$store.dispatch('custom/fetchItems').then(function (response) {
+    this.$store.dispatch("custom/fetchItems").then(function (response) {
       response.data.forEach(function (element) {
-        if (element.type === 'calendarInfo') _this3.calendarInfo = JSON.parse(element.JsonData).calendarInfo;
+        if (element.type === "calendarInfo") _this3.calendarInfo = JSON.parse(element.JsonData).calendarInfo;
       });
     }).catch(function (error) {
       console.log(error);
@@ -6668,7 +6689,7 @@ var render = function() {
                 _vm.activeUser.role === "admin" ||
                 _vm.activeUser.role === "staff",
               expression:
-                "activeUser.role === 'admin' || activeUser.role === 'staff' "
+                "activeUser.role === 'admin' || activeUser.role === 'staff'"
             }
           ],
           staticClass: "mb-4 ml-8 shadow-lg",
@@ -6683,7 +6704,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("\n            " + _vm._s(_vm.$t("readQRCode")) + "\n ")]
+        [_vm._v("\n    " + _vm._s(_vm.$t("readQRCode")) + "\n  ")]
       ),
       _vm._v(" "),
       _c(
@@ -6737,7 +6758,13 @@ var render = function() {
                               },
                               expression: "orderId"
                             }
-                          })
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "vs-button",
+                            { on: { click: _vm.fetchUsersAppointment } },
+                            [_vm._v("dedneendnedjke")]
+                          )
                         ],
                         1
                       )
@@ -6751,170 +6778,209 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "vx-col w-full sm:w-1/2 lg:w-1/2 " },
-              _vm._l(_vm.AppointmentUsers, function(appointment, index) {
-                return _c(
+              {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.AppointmentUsers.length,
+                    expression: "AppointmentUsers.length"
+                  }
+                ]
+              },
+              [
+                _c(
                   "div",
-                  { key: index, staticClass: "my-6" },
+                  { staticClass: "vx-col w-full sm:w-1/2 lg:w-1/2 " },
                   [
-                    _c("h5", { staticClass: "mb-2" }, [
-                      _vm._v("Ticket/Kundeninformationen")
-                    ]),
-                    _vm._v(" "),
-                    _c("h6", { staticClass: "mb-2" }, [
-                      _vm._v(_vm._s(appointment.name))
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "text-black" }, [
-                      _vm._v("TickedId:" + _vm._s(appointment.appointment_id))
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "text-black" }, [
-                      _vm._v(
-                        "Datum:" +
-                          _vm._s(appointment.appointment_date.substr(0, 10))
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "text-black" }, [
-                      _vm._v(
-                        "Uhrzeit bis: " + _vm._s(appointment.hours_between)
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "text-black" }, [
-                      _vm._v(
-                        "Dauerkartenbesitzer: " +
-                          _vm._s(
-                            appointment.user
-                              ? appointment.user.subscribed
-                                ? "Ja"
-                                : "Nine"
-                              : ""
+                    _vm._l(_vm.AppointmentUsers, function(appointment, index) {
+                      return _c(
+                        "div",
+                        { key: appointment.user.id, staticClass: "my-6" },
+                        [
+                          _c("h5", { staticClass: "mb-2" }, [
+                            _vm._v("Ticket/Kundeninformationen")
+                          ]),
+                          _vm._v(" "),
+                          _c("h6", { staticClass: "mb-2" }, [
+                            _vm._v(_vm._s(appointment.name))
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-black" }, [
+                            _vm._v(
+                              "\n                TickedId:" +
+                                _vm._s(appointment.appointment_id) +
+                                "\n              "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-black" }, [
+                            _vm._v(
+                              "\n                Datum:" +
+                                _vm._s(
+                                  appointment.appointment_date.substr(0, 10)
+                                ) +
+                                "\n              "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-black" }, [
+                            _vm._v(
+                              "\n                Uhrzeit bis: " +
+                                _vm._s(appointment.hours_between) +
+                                "\n              "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "text-black" }, [
+                            _vm._v(
+                              "\n                Dauerkartenbesitzer:\n                " +
+                                _vm._s(
+                                  appointment.user
+                                    ? appointment.user.subscribed
+                                      ? "Ja"
+                                      : "Nine"
+                                    : ""
+                                ) +
+                                "\n              "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          !appointment.user.isHere
+                            ? _c(
+                                "vs-button",
+                                {
+                                  staticClass: "mt-6 mr-5",
+                                  attrs: {
+                                    type: "gradient",
+                                    color: "#7367F0",
+                                    "gradient-color-secondary": "#BA300B"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.clientCameOrLeft(
+                                        appointment.user_id,
+                                        1
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(_vm.$t("clientCame")) +
+                                      "\n              "
+                                  )
+                                ]
+                              )
+                            : _c(
+                                "vs-button",
+                                {
+                                  staticClass: "mt-6 mr-5",
+                                  attrs: {
+                                    type: "gradient",
+                                    color: "#7367F0",
+                                    "gradient-color-secondary": "#BA300B"
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.clientCameOrLeft(
+                                        appointment.user_id,
+                                        0
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                " +
+                                      _vm._s(_vm.$t("clientHasLeft")) +
+                                      "\n              "
+                                  )
+                                ]
+                              ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value: !appointment.user.isHere,
+                                  expression: "!appointment.user.isHere"
+                                }
+                              ],
+                              staticClass: "my-6"
+                            },
+                            [
+                              _c(
+                                "p",
+                                { staticClass: "text-black font-semibold" },
+                                [_vm._v("eingeloggt:")]
+                              ),
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(appointment.user.login_date) +
+                                  "\n                "
+                              ),
+                              _c(
+                                "p",
+                                { staticClass: "text-black font-semibold" },
+                                [_vm._v("Ausloggen:")]
+                              ),
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(appointment.user.logout_date) +
+                                  "\n                "
+                              ),
+                              _c(
+                                "p",
+                                { staticClass: "text-black font-semibold" },
+                                [_vm._v("Aufenthaltsdauer:")]
+                              ),
+                              _vm._v(
+                                "\n                " +
+                                  _vm._s(
+                                    _vm.diff_minutes(
+                                      new Date(appointment.user.login_date),
+                                      new Date(appointment.user.logout_date)
+                                    )
+                                  ) +
+                                  "\n                Minuten\n                "
+                              ),
+                              _c(
+                                "p",
+                                {
+                                  directives: [
+                                    {
+                                      name: "show",
+                                      rawName: "v-show",
+                                      value:
+                                        _vm.countStayTime(_vm.stayTime) > 0,
+                                      expression: "countStayTime(stayTime) > 0"
+                                    }
+                                  ],
+                                  staticClass: "text-black font-semibold"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                  Ablaufbetrag: € " +
+                                      _vm._s(_vm.countStayTime(_vm.stayTime)) +
+                                      "\n                "
+                                  )
+                                ]
+                              )
+                            ]
                           )
-                      )
-                    ]),
-                    _vm._v(" "),
-                    !appointment.user.isHere
-                      ? _c(
-                          "vs-button",
-                          {
-                            staticClass: "mt-6 mr-5",
-                            attrs: {
-                              type: "gradient",
-                              color: "#7367F0",
-                              "gradient-color-secondary": "#BA300B"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.clientCameOrLeft(
-                                  appointment.user_id,
-                                  1
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.$t("clientCame")) +
-                                "\n                           "
-                            )
-                          ]
-                        )
-                      : _c(
-                          "vs-button",
-                          {
-                            staticClass: "mt-6 mr-5",
-                            attrs: {
-                              type: "gradient",
-                              color: "#7367F0",
-                              "gradient-color-secondary": "#BA300B"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.clientCameOrLeft(
-                                  appointment.user_id,
-                                  0
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    " +
-                                _vm._s(_vm.$t("clientHasLeft")) +
-                                "\n                           "
-                            )
-                          ]
-                        ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: !appointment.user.isHere,
-                            expression: "!appointment.user.isHere"
-                          }
                         ],
-                        staticClass: "my-6"
-                      },
-                      [
-                        _c("p", { staticClass: "text-black font-semibold" }, [
-                          _vm._v("eingeloggt: ")
-                        ]),
-                        _vm._v(
-                          _vm._s(appointment.user.login_date) +
-                            "\n                        "
-                        ),
-                        _c("p", { staticClass: "text-black font-semibold" }, [
-                          _vm._v("Ausloggen: ")
-                        ]),
-                        _vm._v(
-                          _vm._s(appointment.user.logout_date) +
-                            "\n                        "
-                        ),
-                        _c("p", { staticClass: "text-black font-semibold" }, [
-                          _vm._v("Aufenthaltsdauer: ")
-                        ]),
-                        _vm._v(
-                          _vm._s(
-                            _vm.diff_minutes(
-                              new Date(appointment.user.login_date),
-                              new Date(appointment.user.logout_date)
-                            )
-                          ) + "  Minuten\n                   "
-                        ),
-                        _c(
-                          "p",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: _vm.countStayTime(_vm.stayTime) > 0,
-                                expression: "countStayTime(stayTime) > 0"
-                              }
-                            ],
-                            staticClass: "text-black font-semibold"
-                          },
-                          [
-                            _vm._v(
-                              "Ablaufbetrag: € " +
-                                _vm._s(_vm.countStayTime(_vm.stayTime))
-                            )
-                          ]
-                        )
-                      ]
-                    )
+                        1
+                      )
+                    })
                   ],
-                  1
+                  2
                 )
-              }),
-              0
+              ]
             )
           ])
         ]

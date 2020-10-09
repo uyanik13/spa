@@ -84,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
 
       /*
         This property is created for fetching latest data from API when tab is changed
-         Please check it's watcher
+          Please check it's watcher
       */
       activeTab: 0
     };
@@ -667,10 +667,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0A%24acl.not.check('isAdmin')&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0A%24acl.not.check('isAdmin')& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0D%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0D%0A%24acl.not.check('isAdmin')&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0D%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0D%0A%24acl.not.check('isAdmin')& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1400,7 +1400,7 @@ module.exports = "/images/qr.png?df1716c17106c79d29d1c0316ed7bc7c";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _UserEdit_vue_vue_type_template_id_10817558_v_if_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserEdit.vue?vue&type=template&id=10817558&v-if=%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0A%24acl.not.check('isAdmin')& */ "./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0A%24acl.not.check('isAdmin')&");
+/* harmony import */ var _UserEdit_vue_vue_type_template_id_10817558_v_if_0D_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0D_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserEdit.vue?vue&type=template&id=10817558&v-if=%0D%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0D%0A%24acl.not.check('isAdmin')& */ "./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0D%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0D%0A%24acl.not.check('isAdmin')&");
 /* harmony import */ var _UserEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserEdit.vue?vue&type=script&lang=js& */ "./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -1412,8 +1412,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _UserEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _UserEdit_vue_vue_type_template_id_10817558_v_if_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _UserEdit_vue_vue_type_template_id_10817558_v_if_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _UserEdit_vue_vue_type_template_id_10817558_v_if_0D_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0D_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserEdit_vue_vue_type_template_id_10817558_v_if_0D_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0D_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1442,19 +1442,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0A%24acl.not.check('isAdmin')&":
-/*!************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0A%24acl.not.check('isAdmin')& ***!
-  \************************************************************************************************************************************************************************************************/
+/***/ "./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0D%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0D%0A%24acl.not.check('isAdmin')&":
+/*!******************************************************************************************************************************************************************************************************!*\
+  !*** ./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0D%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0D%0A%24acl.not.check('isAdmin')& ***!
+  \******************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserEdit_vue_vue_type_template_id_10817558_v_if_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserEdit.vue?vue&type=template&id=10817558&v-if=%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0A%24acl.not.check('isAdmin')& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0A%24acl.not.check('isAdmin')&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserEdit_vue_vue_type_template_id_10817558_v_if_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserEdit_vue_vue_type_template_id_10817558_v_if_0D_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0D_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserEdit.vue?vue&type=template&id=10817558&v-if=%0D%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0D%0A%24acl.not.check('isAdmin')& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/src/views/pages/admin/users/user-edit/UserEdit.vue?vue&type=template&id=10817558&v-if=%0D%0Aimport%20*%20as%20%24acl%20from%20'vuecode.js'%3B%0D%0A%24acl.not.check('isAdmin')&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserEdit_vue_vue_type_template_id_10817558_v_if_0D_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0D_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserEdit_vue_vue_type_template_id_10817558_v_if_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserEdit_vue_vue_type_template_id_10817558_v_if_0D_0Aimport_20_20as_20_24acl_20from_20_vuecode_js_3B_0D_0A_24acl_not_check_isAdmin___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -9,5 +9,5 @@
 
 
 export default {
-  // getItem: state => (productId) => state.products.find((product) => product.id == productId),
+  userAppointments: (state) => (appID) => state.formList.filter((form) => form.appointment_id === appID),
 }
