@@ -28,7 +28,7 @@
       :active.sync="popupActive"
     >
       <div class="vx-row pt-10 pl-5">
-        <div class="vx-col w-full sm:w-1/2 lg:w-1/2 ">
+        <div class="vx-col w-full sm:w-1/1 lg:w-1/2 ">
           <div class="my-6">
             <vs-tabs>
               <vs-tab :label="$t('camera')">
@@ -43,7 +43,9 @@
                   :label-placeholder="$t('appointment_id')"
                   v-model="orderId"
                 ></vs-input>
-                <vs-button @click="fetchUsersAppointment">dedneendnedjke</vs-button> 
+                <vs-button @click="fetchUsersAppointment"
+                  >dedneendnedjke</vs-button
+                >
               </vs-tab>
             </vs-tabs>
           </div>
@@ -51,12 +53,12 @@
 
         <!-- CONTENT CARD - PROGRESS BAR/GOAL -->
         <div v-show="AppointmentUsers.length">
-          <div class="vx-col w-full sm:w-1/2 lg:w-1/2 ">
+          <div class="vx-col w-full sm:w-1/1 lg:w-1/2 ">
             <template>
               <div
                 class="my-6"
                 v-for="(appointment, index) in AppointmentUsers"
-                :key="appointment.user.id"
+                :key="index"
               >
                 <h5 class="mb-2">Ticket/Kundeninformationen</h5>
                 <h6 class="mb-2">{{ appointment.name }}</h6>
@@ -106,19 +108,22 @@
                   {{ appointment.user.login_date }}
                   <p class="text-black font-semibold">Ausloggen:</p>
                   {{ appointment.user.logout_date }}
-                  <p class="text-black font-semibold">Aufenthaltsdauer:</p>
+                  <p class="text-black font-semibold" >Aufenthaltsdauer:</p>
                   {{
                     diff_minutes(
                       new Date(appointment.user.login_date),
-                      new Date(appointment.user.logout_date)
+                      new Date(appointment.user.logout_date),
+                      index
                     )
                   }}
-                  Minuten
+                  Minuten 
                   <p
                     class="text-black font-semibold"
-                    v-show="countStayTime(stayTime) > 0">
-                    Ablaufbetrag: € {{ countStayTime(stayTime) }}
+                    
+                  >
+                    Ablaufbetrag: € {{ countStayTime(appointment.stayTime) }}
                   </p>
+                  <vs-divider></vs-divider>
                 </div>
               </div>
             </template>
@@ -158,22 +163,23 @@ export default {
   },
 
   methods: {
-    diff_minutes(dt2, dt1) {
+    diff_minutes(dt2, dt1,index) {
       var diff = (dt2.getTime() - dt1.getTime()) / 1000;
       diff /= 60;
-      this.stayTime = Math.abs(Math.round(diff));
-      return this.stayTime;
+      this.AppointmentUsers[index].stayTime = Math.abs(Math.round(diff));
+      return this.AppointmentUsers[index].stayTime
+      
     },
 
     countStayTime(stayTime) {
-      console.log("calendarInfo : ");
-      if(this.stopLoop) return
+      console.log('stay',stayTime);
       //console.log(this.calendarInfo.timeout_price)
       let time = stayTime - 180;
       if (time < 0) return 0;
-      this.stopLoop = false
-      return (time / 30) * this.calendarInfo.timeout_price;
-
+      //let timediff = (time / 30) < 30 ? 0 :  (time / 30) 
+      let timediff = (time / 30) 
+      return timediff * this.calendarInfo.timeout_price 
+    
       //return true;
     },
 
@@ -208,6 +214,7 @@ export default {
             icon: "icon-success",
             color: "success"
           });
+
           this.fetchUsersAppointment();
         })
         .catch(error => {
@@ -241,7 +248,7 @@ export default {
 
   created() {
     //console.log(new Date(2020-10-01 07:16:15))
-    this.fetchUsersAppointment();
+    //this.fetchUsersAppointment();
     this.$store
       .dispatch("custom/fetchItems")
       .then(response => {

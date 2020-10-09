@@ -145,19 +145,19 @@
                                                                     </div>
                                                                 </td>
                                                                 <td>
-                                                                    {{number_format($subtotal,2)}}€
+                                                                    {{number_format($subtotal,2)/count($orders)}}€
                                                                 </td>
                                                                 <td>
-                                                                     {{count($orders)}}
+                                                                    1
                                                                 </td>
                                                                 <td>
-                                                                    {{ number_format($total,2)}}€
+                                                                    {{ number_format($total,2)/count($orders)}}€
                                                                 </td>
                                                                 <td>
-                                                                    <a class="pDelete"
+                                                                    {{-- <a class="pDelete"
                                                                        onclick="deleteOrder({{$order->id}})">
                                                                         <i class="fa fa-close"></i>
-                                                                    </a>
+                                                                    </a> --}}
                                                                 </td>
                                                                 <script>
 

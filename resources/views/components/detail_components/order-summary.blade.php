@@ -73,7 +73,7 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>
-                                                                                {{number_format($subtotal,2)}}€
+                                                                                {{number_format($subtotal,2)/count($orders)}}€
                                                                             </td>
                                                                             <td>
                                                                                 1

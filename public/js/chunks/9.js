@@ -2268,6 +2268,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2294,20 +2299,20 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    diff_minutes: function diff_minutes(dt2, dt1) {
+    diff_minutes: function diff_minutes(dt2, dt1, index) {
       var diff = (dt2.getTime() - dt1.getTime()) / 1000;
       diff /= 60;
-      this.stayTime = Math.abs(Math.round(diff));
-      return this.stayTime;
+      this.AppointmentUsers[index].stayTime = Math.abs(Math.round(diff));
+      return this.AppointmentUsers[index].stayTime;
     },
     countStayTime: function countStayTime(stayTime) {
-      console.log("calendarInfo : ");
-      if (this.stopLoop) return; //console.log(this.calendarInfo.timeout_price)
+      console.log('stay', stayTime); //console.log(this.calendarInfo.timeout_price)
 
       var time = stayTime - 180;
-      if (time < 0) return 0;
-      this.stopLoop = false;
-      return time / 30 * this.calendarInfo.timeout_price; //return true;
+      if (time < 0) return 0; //let timediff = (time / 30) < 30 ? 0 :  (time / 30) 
+
+      var timediff = time / 30;
+      return timediff * this.calendarInfo.timeout_price; //return true;
     },
     fetchUsersAppointment: function fetchUsersAppointment() {
       var _this = this;
@@ -2373,7 +2378,7 @@ __webpack_require__.r(__webpack_exports__);
     var _this3 = this;
 
     //console.log(new Date(2020-10-01 07:16:15))
-    this.fetchUsersAppointment();
+    //this.fetchUsersAppointment();
     this.$store.dispatch("custom/fetchItems").then(function (response) {
       response.data.forEach(function (element) {
         if (element.type === "calendarInfo") _this3.calendarInfo = JSON.parse(element.JsonData).calendarInfo;
@@ -6723,7 +6728,7 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "vx-row pt-10 pl-5" }, [
-            _c("div", { staticClass: "vx-col w-full sm:w-1/2 lg:w-1/2 " }, [
+            _c("div", { staticClass: "vx-col w-full sm:w-1/1 lg:w-1/2 " }, [
               _c(
                 "div",
                 { staticClass: "my-6" },
@@ -6789,12 +6794,12 @@ var render = function() {
               [
                 _c(
                   "div",
-                  { staticClass: "vx-col w-full sm:w-1/2 lg:w-1/2 " },
+                  { staticClass: "vx-col w-full sm:w-1/1 lg:w-1/2 " },
                   [
                     _vm._l(_vm.AppointmentUsers, function(appointment, index) {
                       return _c(
                         "div",
-                        { key: appointment.user.id, staticClass: "my-6" },
+                        { key: index, staticClass: "my-6" },
                         [
                           _c("h5", { staticClass: "mb-2" }, [
                             _vm._v("Ticket/Kundeninformationen")
@@ -6942,34 +6947,29 @@ var render = function() {
                                   _vm._s(
                                     _vm.diff_minutes(
                                       new Date(appointment.user.login_date),
-                                      new Date(appointment.user.logout_date)
+                                      new Date(appointment.user.logout_date),
+                                      index
                                     )
                                   ) +
-                                  "\n                Minuten\n                "
+                                  "\n                Minuten \n                "
                               ),
                               _c(
                                 "p",
-                                {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value:
-                                        _vm.countStayTime(_vm.stayTime) > 0,
-                                      expression: "countStayTime(stayTime) > 0"
-                                    }
-                                  ],
-                                  staticClass: "text-black font-semibold"
-                                },
+                                { staticClass: "text-black font-semibold" },
                                 [
                                   _vm._v(
                                     "\n                  Ablaufbetrag: € " +
-                                      _vm._s(_vm.countStayTime(_vm.stayTime)) +
+                                      _vm._s(
+                                        _vm.countStayTime(appointment.stayTime)
+                                      ) +
                                       "\n                "
                                   )
                                 ]
-                              )
-                            ]
+                              ),
+                              _vm._v(" "),
+                              _c("vs-divider")
+                            ],
+                            1
                           )
                         ],
                         1
